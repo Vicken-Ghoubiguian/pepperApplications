@@ -1,0 +1,147 @@
+topic: ~vc_iremocon()
+language: jpj
+
+#-----------------------------------------------------------
+# 家電連携ボイスコマンド
+#-----------------------------------------------------------
+concept:(vc_iremocon_000) ["アイリモコン"]
+concept:(vc_iremocon_001) ["テレビ{を}つけて"]
+concept:(vc_iremocon_002) ["テレビ{を}[消して けして]"]
+concept:(vc_iremocon_003) ["エアコン{を}つけて"]
+concept:(vc_iremocon_004) ["[暖房 だんぼう だんぼー]{を}つけて"]
+concept:(vc_iremocon_005) ["[冷房 れいぼう れーぼー]{を}つけて"]
+concept:(vc_iremocon_006) ["[エアコン 暖房 だんぼう だんぼー 冷房 れいぼう れーぼー]{を}[消して けして 止めて とめて]"]
+concept:(vc_iremocon_007) ["[明かり あかり 照明 しょーめー しょうめい 電気 でんき]{を}つけて"]
+concept:(vc_iremocon_008) ["[明かり あかり 照明 しょーめー しょうめい 電気 でんき]{を}[消して けして]"]
+concept:(vc_iremocon_009) ["{かでん}[全部 ぜんぶ]つけて"]
+concept:(vc_iremocon_010) ["{かでん}[全部 ぜんぶ]消して"]
+concept:(vc_iremocon_011) ["いっちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_012) ["にちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_013) ["さんちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_014) ["よんちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_015) ["ごちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_016) ["ろくちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_017) ["ななちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_018) ["はっちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_019) ["きゅうちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_020) ["じゅっちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_021) ["じゅういっちゃん{ねる ねるにして にして}"]
+concept:(vc_iremocon_022) ["じゅうにちゃん{ねる ねるにして にして}"]
+#-----------------------------------------------------------
+
+#-----------------------------------------------------------
+# 家電連携応答ボイス
+#-----------------------------------------------------------
+concept:(vc_iremocon_response) ["\rspd=107\\vct=148\はイッ！"]
+
+#-----------------------------------------------------------
+# 家電連携応答
+#-----------------------------------------------------------
+u: (~vc_iremocon_000)
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/roboapp_launch
+
+u: (~vc_iremocon_001)
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_pwr_on
+
+u: (~vc_iremocon_002)
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_pwr_off
+
+u: (~vc_iremocon_003)
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/aircon_pwr_on
+
+u: (~vc_iremocon_004)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/aircon_heater_on
+
+u: (~vc_iremocon_005)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/aircon_cooler_on
+
+u: (~vc_iremocon_006)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/aircon_pwr_off
+
+u: (~vc_iremocon_007)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/light_pwr_on
+
+u: (~vc_iremocon_008)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/light_pwr_off
+
+u: (~vc_iremocon_009)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/everything_pwr_on
+
+u: (~vc_iremocon_010)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/everything_pwr_off
+
+u: (~vc_iremocon_011)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_1
+
+u: (~vc_iremocon_012)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_2
+
+u: (~vc_iremocon_013)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_3
+
+u: (~vc_iremocon_014)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_4
+
+u: (~vc_iremocon_015)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_5
+
+u: (~vc_iremocon_016)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_6
+
+u: (~vc_iremocon_017)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_7
+
+u: (~vc_iremocon_018)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_8
+
+u: (~vc_iremocon_019)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_9
+
+u: (~vc_iremocon_020)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_10
+
+u: (~vc_iremocon_021)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_11
+
+u: (~vc_iremocon_022)    
+    ~vc_iremocon_response
+    $iRemoconBehavior=sbr_30100_iremocon_for_pepper/input/tv_ch_12
+
+# 10秒間聞き取れなかった場合：ボイスコマンドの聞き取りキャンセル
+u: (e:Dialog/NotSpeaking10)
+ 
+    # CGMY
+    $B2C/LaunchCgmy="0_-1"
+    $DialogReflex/UnengagedReaction="RobotName"
+    $onStopped
+    
+# ボイスコマンド以外を認識した場合
+u: (e:Dialog/NotUnderstood3)
+
+    # CGMY
+    $B2C/LaunchCgmy="0_-1"
+    $DialogReflex/UnengagedReaction="RobotName"
+    $onStopped
+    
