@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.4.3" uuid="walk_this_way-553cea">
+ <names>
+  <name lang="en_US">walk this way</name>
+  <name lang="fr_FR">walk this way</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Dance ''Walk this way'', based on the music  song by ''Aerosmtih''. http://www.youtube.com/watch?v=4B_UYYPb-Gk&#xd;
+Duration: 84 seconds.&#xd;
+&#xd;
+Required space around the robot: Small.&#xd;
+The robot doesn't translate in any axes, arms movement only.</description>
+  <description lang="fr_FR">Danse "Walk this way", basé sur la chanson du même titre du groupe Aéorosmith.&#xd;
+http://www.youtube.com/watch?v=4B_UYYPb-Gk&#xd;
+Durée: 84 secondes&#xd;
+&#xd;
+Espace requis autour du robot: Réduit.&#xd;
+Le robot ne se déplace sur aucun axe, mouvements de bras uniquement.</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">walk this way</name>
+    <name lang="fr_FR">walk this way</name>
+   </names>
+   <descriptions>
+    <description lang="en_US">Dance ''Walk this way'', based on the music  song by ''Aerosmtih''. http://www.youtube.com/watch?v=4B_UYYPb-Gk&#xd;
+Duration: 84 seconds.&#xd;
+&#xd;
+Required space around the robot: Small.&#xd;
+The robot doesn't translate in any axes, arms movement only.</description>
+    <description lang="fr_FR">Danse "Walk this way", basé sur la chanson du même titre du groupe Aéorosmith.&#xd;
+http://www.youtube.com/watch?v=4B_UYYPb-Gk&#xd;
+Durée: 84 secondes&#xd;
+&#xd;
+Espace requis autour du robot: Réduit.&#xd;
+Le robot ne se déplace sur aucun axe, mouvements de bras uniquement.</description>
+   </descriptions>
+   <triggerSentences>
+    <sentence lang="fr_FR">dance aéro smis</sentence>
+    <sentence lang="fr_FR">aéro smis</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="1.20.0" maxVersion="0.0.0"/>
+  <robotRequirement model="JULIETTE_Y20"/>
+ </requirements>
+</package>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.1" uuid="jgangnamstyle-d7ea26">
+ <names>
+  <name lang="en_US">Gangnam Style</name>
+  <name lang="fr_FR">Gangnam Style</name>
+  <name lang="ja_JP">江南スタイル</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Dance "Gangnam Style, based on the song by "PSY". &#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=9bZkp7q19f0&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+Duration: 90 seconds</description>
+  <description lang="fr_FR">Danse "Gangnam Style, basée sur la chanson de "PSY". &#xd;&#xd;
+&#xd;&#xd;
+&#xd;&#xd;
+&#xd;&#xd;
+http://www.youtube.com/watch?v=9bZkp7q19f0&#xd;&#xd;
+&#xd;&#xd;
+&#xd;&#xd;
+&#xd;&#xd;
+Durée: 90 secondes&#xd;&#xd;
+&#xd;&#xd;
+</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">J Gangnam Style</name>
+    <name lang="fr_FR">J Gangnam Style</name>
+   </names>
+   <tags>
+    <tag lang="en_US">dance</tag>
+    <tag lang="fr_FR">danse</tag>
+    <tag lang="ja_JP">ダンス</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">gangnam style</sentence>
+    <sentence lang="fr_FR">dance gangnam style</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="dance_jgangnamstyle">
+   <topic language="en_US" path="dance_jgangnamstyle/dance_jgangnamstyle_enu.top"/>
+   <topic language="fr_FR" path="dance_jgangnamstyle/dance_jgangnamstyle_frf.top"/>
+   <topic language="ja_JP" path="dance_jgangnamstyle/dance_jgangnamstyle_jpj.top"/>
+  </dialogContent>
+  <dialogContent typeVersion="1.0" topicName="dance_jgangnamstyle&#xd;">
+   <topic language="en_US" path="dance_jgangnamstyle/dance_jgangnamstyle_enu.top"/>
+   <topic language="fr_FR" path="dance_jgangnamstyle/dance_jgangnamstyle_frf.top"/>
+   <topic language="ja_JP" path="dance_jgangnamstyle/dance_jgangnamstyle_jpj.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.0.0" maxVersion="2"/>
+  <robotRequirement model="JULIETTE_Y20"/>
+ </requirements>
+</package>

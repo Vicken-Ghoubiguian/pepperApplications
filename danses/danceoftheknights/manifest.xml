@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.3" uuid="danceoftheknights-169092">
+ <names>
+  <name lang="de_DE">Dance of the Knights</name>
+  <name lang="de_DE-x-scrald">Dance of the Knights</name>
+  <name lang="en_US">Dance of the Knights</name>
+  <name lang="en_US-x-scrald">Dance of the Knights</name>
+  <name lang="es_ES">Dance of the Knights</name>
+  <name lang="es_ES-x-scrald">Dance of the Knights</name>
+  <name lang="fr_FR">Danse des chevaliers</name>
+  <name lang="fr_FR-x-scrald">Danse des chevaliers</name>
+  <name lang="it_IT">Dance of the Knights</name>
+  <name lang="it_IT-x-scrald">Dance of the Knights</name>
+  <name lang="ja_JP">騎士たちの踊り</name>
+  <name lang="ja_JP-x-scrald">騎士たちの踊り</name>
+ </names>
+ <descriptions>
+  <description lang="de_DE">/</description>
+  <description lang="de_DE-x-scrald">/</description>
+  <description lang="en_US">Dance of the knights, based on a modified version of the classical music from the ballet "Romeo and Juliet", composed by Sergei Prokofiev.&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+Duration 69 sec</description>
+  <description lang="en_US-x-scrald">Dance of the knights, based on a modified version of the classical music from the ballet "Romeo and Juliet", composed by Sergei Prokofiev.&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+Duration 69 sec</description>
+  <description lang="es_ES">/</description>
+  <description lang="es_ES-x-scrald">/</description>
+  <description lang="fr_FR">/</description>
+  <description lang="fr_FR-x-scrald">/</description>
+  <description lang="it_IT">/</description>
+  <description lang="it_IT-x-scrald">/</description>
+  <description lang="ja_JP">/</description>
+  <description lang="ja_JP-x-scrald">/</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>de_DE</language>
+  <language>es_ES</language>
+  <language>it_IT</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>de_DE</language>
+  <language>es_ES</language>
+  <language>it_IT</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">dance of the knights</name>
+    <name lang="en_US-x-scrald">dance of the knights</name>
+    <name lang="fr_FR">dance of the knights</name>
+    <name lang="fr_FR-x-scrald">dance of the knights</name>
+    <name lang="ja_JP">dance of the knights</name>
+    <name lang="ja_JP-x-scrald">dance of the knights</name>
+   </names>
+   <tags>
+    <tag lang="en_US">dance</tag>
+    <tag lang="fr_FR">danse</tag>
+    <tag lang="ja_JP">ダンス</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">dance de la rose</sentence>
+    <sentence lang="fr_FR">la rose</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="dance_danceoftheknights">
+   <topic language="en_US" path="dance_danceoftheknights/dance_danceoftheknights_enu.top"/>
+   <topic language="fr_FR" path="dance_danceoftheknights/dance_danceoftheknights_frf.top"/>
+   <topic language="ja_JP" path="dance_danceoftheknights/dance_danceoftheknights_jpj.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.0" maxVersion="2.5"/>
+  <robotRequirement model="JULIETTE_Y20"/>
+ </requirements>
+</package>

@@ -1,0 +1,44 @@
+topic: ~la_bamba ^noPick()
+language: enu
+
+include:lexicon_enu.top
+
+
+proposal: %check_preferences
+^deactivate(confirm)
+[
+"%b2b I'm sorry, I was asked to dance only for showtime. If you wait a bit, maybe you can see me dance later on."
+"%b2c ^play(Eng_Ava_Yeah_pitch_120.0) Of course! $start_dance=1"
+]
+
+u:(
+[
+"{"[can could would] you"} {please} ["show {me us him her them}" dance]"
+"   [
+    "[can could would] [I we he she they] {please}"
+    "[I we they] ~wanna"
+    "{please} let [me us they]"
+    ]
+[watch see "{"{take have} a"} look at"]"
+]
+La Bamba)
+^gotoReactivate(check_preferences)
+
+
+proposal:%confirm
+["Can I dance the La Bamba? " "You want to see the La Bamba?"]
+    u1:([~confirmation dance])
+    ^gotoReactivate(check_preferences)
+
+    u1:(~negation)
+    Ok, let me know if you want to see it later! ^releaseFocus
+    
+    u1:(["other one" "another [dance one]"])
+    Ok, tell me which dance you prefer. ^releaseFocus
+    
+    u1:(["[wait "give me"] {"a moment" "a sec" "a second"}" "not {right} now"])
+    Sure! When you're ready, just say, dance! ^stayInScope
+
+
+recover:
+u:(La Bamba) ^gotoReactivate(confirm)

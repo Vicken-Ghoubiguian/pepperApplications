@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.6" uuid="la_bamba-2bcabb">
+ <names>
+  <name lang="en_US">La Bamba</name>
+  <name lang="en_US-x-scrald">La Bamba</name>
+  <name lang="fr_FR">La Bamba</name>
+  <name lang="fr_FR-x-scrald">La Bamba</name>
+  <name lang="ja_JP">La Bamba</name>
+  <name lang="ja_JP-x-scrald">La Bamba</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Dance La Bamba, based on the music by Ritchie Valens.&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+Duration: 46 seconds&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+Required space : medium&#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+Rotation: Full Rotation&#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+Translation: Every translation (  least 2 meter free area around the robot )</description>
+  <description lang="en_US-x-scrald">Dance La Bamba, based on the music by Ritchie Valens.&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+Duration: 46 seconds&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+Required space : medium&#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+Rotation: Full Rotation&#xd;&#xd;&#xd;&#xd;
+ &#xd;&#xd;&#xd;&#xd;
+Translation: Every translation (  least 2 meter free area around the robot )</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>es_ES</language>
+  <language>it_IT</language>
+  <language>de_DE</language>
+  <language>zh_CN</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>es_ES</language>
+  <language>it_IT</language>
+  <language>de_DE</language>
+  <language>zh_CN</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Labamba</name>
+    <name lang="en_US-x-scrald">Labamba</name>
+   </names>
+   <tags>
+    <tag lang="en_US">dance</tag>
+    <tag lang="fr_FR">danse</tag>
+    <tag lang="ja_JP">ダンス</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">dance la bamba</sentence>
+    <sentence lang="fr_FR">la bamba</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="dance_la_bamba">
+   <topic language="en_US" path="dance_la_bamba/dance_la_bamba_enu.top"/>
+   <topic language="fr_FR" path="dance_la_bamba/dance_la_bamba_frf.top"/>
+   <topic language="ja_JP" path="dance_la_bamba/dance_la_bamba_jpj.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="1.22" maxVersion="1.22"/>
+  <naoqiRequirement minVersion="2.0" maxVersion="2"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+</package>

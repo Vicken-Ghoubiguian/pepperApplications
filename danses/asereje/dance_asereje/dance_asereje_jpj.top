@@ -1,0 +1,41 @@
+topic: ~asereje ^noPick()
+language: jpj
+
+include:lexicon_jpj.top
+
+
+proposal: %check_preferences
+^deactivate(confirm)
+[
+"%b2b すみません、ダンスはショータイムの時にしか披露できないんです。"
+"%b2c ^play(Emo_Yeah) 喜んで！　$start_dance=1"
+]
+
+u:(アセレへ　["{を} [おどって　おどれ　躍って 踊れ　踊りな]" "{の} [踊りみせて おどりみせて　だんすみせて　ダンスみせて　ダンスを見せて　ダンス見せて　ダンスやって　ダンスやれ　ダンス見たい　踊り見せて　踊りみせて　おどりみせて　ダンスが見たい　だんすがみたい]"])
+^play(Emo_Woop woop) ^gotoReactivate(check_preferences)
+
+proposal:%confirm
+アセレへ のダンスお見せしましょうか？
+
+    #yes
+    u1:([それで　見せて　オッケー　見てみる　見たい　見る　"拝見[させてもらう　させていただく　させていただきます　させてもらうとしようか　させてもらおう]" はい　"もちろん{~desu}"　どうぞ　お願いします　お願い　始めてください　始めてちょうだい　始めて　いいよ　いいですよ])
+    ^gotoReactivate(check_preferences)
+
+    #no
+    u1:([いいえの方　いいえ　結構　駄目　嫌です　嫌だ　結構です　止めてください　やらないでください　やらないでちょうだい　やらないで　始めないで　やめてちょうだい　やめて　"よくない{~desu}" いらない　"見たくない{~desu}" "時間がない"])
+    そうですか、残念！^releaseFocus
+
+    #ambiguous no
+    u1:(_["大丈夫{~desu}"　いいです　いいよ])
+    $1 というのは、はいの方ですか？いいえの方ですか？^stayInScope
+
+    #other
+    u1:([他 他にはない　それ以外　違うの　違うやつ　別のやつ　別の])
+    どのダンスが見たいですか？^releaseFocus
+
+    #wait
+    u1:([ちょっと待ってください　ちょっとまってよ　ちょっと待って　待ってください])
+    ゆっくりでいいですからね！準備が出来たら言ってください。^stayInScope
+
+recover:
+u:( アセレへ ) ^gotoReactivate(confirm)

@@ -1,0 +1,28 @@
+<html>
+<head>
+  <meta name="viewport" content="width=1280, user-scalable=no" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #bg_image {
+      opacity: 0.0;
+      transition: opacity 1s ease-in-out;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<script type="text/javascript">
+  pageLoaded = function() {
+    document.getElementById("image_container").style.visibility="visible";
+    document.getElementById("bg_image").style.opacity = 1;
+  };
+</script>
+<body  onload="pageLoaded()">
+  <div style="margin:auto; text-align:center;height:100%;border:0px solid red;visibility:hidden;" id="image_container">
+    <img id="bg_image" src="image.jpg" style="vertical-align: middle;opacity: 0.0;">
+  </div>
+</body>	   
+</html>

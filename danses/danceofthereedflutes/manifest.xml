@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.5" uuid="danceofthereedflutes-93ba8f">
+ <names>
+  <name lang="en_US">Nuts Cracker</name>
+  <name lang="en_US-x-scrald">Nuts Cracker</name>
+  <name lang="fr_FR">casse noisette</name>
+  <name lang="fr_FR-x-scrald">casse noisette</name>
+  <name lang="ja_JP">くるみ割り人形</name>
+  <name lang="ja_JP-x-scrald">くるみ割り人形</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">"Dance of the Reed Flutes" based on the music by Tchaikovsky.&#xd;&#xd;&#xd;
+Video of the original ballet :&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+https://www.youtube.com/watch?v=yaJTKW0G3rc&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+￼&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+Duration: 94 seconds&#xd;&#xd;&#xd;
+Required room: Big&#xd;&#xd;&#xd;
+Provide at least a 3 meter free area around the robot.</description>
+  <description lang="en_US-x-scrald">"Dance of the Reed Flutes" based on the music by Tchaikovsky.&#xd;&#xd;&#xd;
+Video of the original ballet :&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+https://www.youtube.com/watch?v=yaJTKW0G3rc&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+￼&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;
+Duration: 94 seconds&#xd;&#xd;&#xd;
+Required room: Big&#xd;&#xd;&#xd;
+Provide at least a 3 meter free area around the robot.</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>de_DE</language>
+  <language>it_IT</language>
+  <language>es_ES</language>
+  <language>zh_CN</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>de_DE</language>
+  <language>it_IT</language>
+  <language>es_ES</language>
+  <language>zh_CN</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Dance of the Reed Flutes</name>
+    <name lang="en_US-x-scrald">Dance of the Reed Flutes</name>
+    <name lang="fr_FR">casse noisette danse des mirlitons</name>
+    <name lang="fr_FR-x-scrald">casse noisette danse des mirlitons</name>
+    <name lang="ja_JP">くるみ割り人形</name>
+    <name lang="ja_JP-x-scrald">くるみ割り人形</name>
+   </names>
+   <descriptions>
+    <description lang="en_US">Dance of the Reed Flutes</description>
+    <description lang="en_US-x-scrald">Dance of the Reed Flutes</description>
+   </descriptions>
+   <tags>
+    <tag lang="en_US">dance</tag>
+    <tag lang="fr_FR">danse</tag>
+    <tag lang="ja_JP">ダンス</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">dance casse noisettes</sentence>
+    <sentence lang="fr_FR">casse noisette</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="dance_danceofthereedflutes">
+   <topic language="en_US" path="dance_danceofthereedflutes/dance_danceofthereedflutes_enu.top"/>
+   <topic language="fr_FR" path="dance_danceofthereedflutes/dance_danceofthereedflutes_frf.top"/>
+   <topic language="ja_JP" path="dance_danceofthereedflutes/dance_danceofthereedflutes_jpj.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.0" maxVersion="2.7"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+</package>

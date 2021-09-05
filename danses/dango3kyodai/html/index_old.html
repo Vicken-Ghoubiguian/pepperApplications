@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport"
+	      content="target-densitydpi=device-dpi, 
+		           width=device-width
+				   initial-scale = 1,
+				   minimum-scale = 1,
+				   maximum-scale = 1" />
+	<style>
+	
+	html, body, #center_wrapper {
+	   background-color: white;
+	   height:100%;
+	   width: 100%;
+	   margin: 0;
+	   padding: 0;
+	   border: 0;
+	}
+	#center_wrapper td {
+	   vertical-align: middle;
+	   text-align: center;
+	}
+	
+	table, tr, td, img, div {
+	   margin: 0;
+	   padding: 0;
+	   border: 0;
+	}
+	#bg_image {
+		opacity: 0.0;
+		transition: opacity 1s ease-in-out;
+		vertical-align: middle;
+	}
+
+	</style>
+</head>
+<body onload="pageLoaded()">
+   <table id="center_wrapper">
+      <tr>
+	      <!-- You can edit the image shown as a splash screen -->
+         <td><img id="bg_image" src="image.jpg" alt="" /></td>
+      </tr>
+   </table>
+
+   <script type="text/javascript">
+   		pageLoaded = function() {
+   			document.getElementById("bg_image").style.opacity = 1;
+   		};
+   </script>
+</body>
+</html>

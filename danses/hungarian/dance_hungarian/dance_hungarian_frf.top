@@ -1,0 +1,34 @@
+topic: ~hungarian ^noPick()
+language: frf
+
+include:lexicon_frf.top
+
+
+proposal: %check_preferences
+^deactivate(confirm)
+[
+"%b2b Désolé, je ne peux pas danser, on m'a demandé de ne le faire que pour les show."
+"%b2c ^play(Emo_Yeah) Bien sur! $start_dance=1"
+]
+
+u:([danse fais montre-moi] Hungarian Dance) ^gotoReactivate(check_preferences)
+
+u:(~vb_ask_pouvoir [danser faire "me montrer"] Hungarian Dance) ^gotoReactivate(check_preferences)
+
+proposal: %confirm
+["Je peux danser Hungarian Dance ?" "Tu veux bien que je danse Hungarian Dance ?" "Je peux faire Hungarian Dance ?" "Tu veux me voir danser Hungarian Dance ?"]
+    u1:([~confirmation danse])
+    ^gotoReactivate(check_preferences)
+
+    u1:(~negation)
+    Ok, n'hésite pas à me le redemander si tu as envie de me voir danser plus tard! ^releaseFocus
+
+    u1:(["une autre" "danse autre chose"])
+    Ok, dis-moi quelle danse tu veux. ^releaseFocus
+
+    u1:(["attends {"un peu"}" "pas [maintenant "tout de suite"]"])
+    ^play(Emo_Laughsmall) Pas de problème, dis moi, danse, quand tu seras prêt! ^stayInScope
+
+
+recover:
+u:(Hungarian Dance) ^gotoReactivate(confirm)

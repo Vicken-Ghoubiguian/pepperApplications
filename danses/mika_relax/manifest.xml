@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.4" uuid="mika_relax-2c3b38">
+ <names>
+  <name lang="en_US">Mika's Relax</name>
+  <name lang="en_US-x-scrald">Mika's Relax</name>
+  <name lang="fr_FR">Mika Relax</name>
+  <name lang="fr_FR-x-scrald">Mika Relax</name>
+  <name lang="ja_JP">Mika Relax</name>
+  <name lang="ja_JP-x-scrald">Mika Relax</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Dance "Relax", based on the music by Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Duration : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Space requirement : Small&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Full rotations</description>
+  <description lang="en_US-x-scrald">Dance "Relax", based on the music by Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Duration : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Space requirement : Small&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Full rotations</description>
+  <description lang="fr_FR">Danse "Relax", basée sur la musique de Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Durée : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Espace Requis : petit&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Rotations complètes</description>
+  <description lang="fr_FR-x-scrald">Danse "Relax", basée sur la musique de Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Durée : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Espace Requis : petit&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Rotations complètes</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>it_IT</language>
+  <language>de_DE</language>
+  <language>es_ES</language>
+  <language>zh_CN</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>it_IT</language>
+  <language>de_DE</language>
+  <language>es_ES</language>
+  <language>zh_CN</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Mika's Relax</name>
+    <name lang="en_US-x-scrald">Mika's Relax</name>
+    <name lang="fr_FR">mika_Relax</name>
+    <name lang="fr_FR-x-scrald">mika_Relax</name>
+   </names>
+   <descriptions>
+    <description lang="en_US">Dance "Relax", based on the music by Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Duration : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Space requirement : Small&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Full rotations</description>
+    <description lang="en_US-x-scrald">Dance "Relax", based on the music by Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Duration : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Space requirement : Small&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Full rotations</description>
+    <description lang="fr_FR">Danse "Relax", basée sur la musique de Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Durée : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Espace Requis : petit&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Rotations complètes</description>
+    <description lang="fr_FR-x-scrald">Danse "Relax", basée sur la musique de Mika : Relax&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+http://www.youtube.com/watch?v=RVmG_d3HKBA&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Durée : 90 sec&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Espace Requis : petit&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
+Rotations complètes</description>
+   </descriptions>
+   <tags>
+    <tag lang="en_US">dance</tag>
+    <tag lang="fr_FR">danse</tag>
+    <tag lang="ja_JP">ダンス</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">dance relax</sentence>
+    <sentence lang="fr_FR">dance mika</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="dance_mika_relax">
+   <topic language="en_US" path="dance_mika_relax_enu.top"/>
+   <topic language="fr_FR" path="dance_mika_relax_frf.top"/>
+   <topic language="ja_JP" path="dance_mika_relax_jpj.top"/>
+  </dialogContent>
+  <dialogContent typeVersion="1.0" topicName="dance_mika_relax">
+   <topic language="en_US" path="dance_mika_relax/dance_mika_relax_enu.top"/>
+   <topic language="fr_FR" path="dance_mika_relax/dance_mika_relax_frf.top"/>
+   <topic language="ja_JP" path="dance_mika_relax/dance_mika_relax_jpj.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.0.0" maxVersion="2.7"/>
+  <robotRequirement minBodyVersion="0.0.0" maxHeadVersion="0.0.0" maxBodyVersion="0.0.0" minHeadVersion="0.0.0" model="JULIETTE_Y20"/>
+ </requirements>
+</package>

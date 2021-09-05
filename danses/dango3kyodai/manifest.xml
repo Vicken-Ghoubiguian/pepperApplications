@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.0.2" uuid="dango3kyodai-2e833b">
+ <names>
+  <name lang="en_US">Dango 3 Kyodai</name>
+  <name lang="en_US-x-scrald">Dango 3 Kyodai</name>
+  <name lang="fr_FR">Dango 3 Kyodai</name>
+  <name lang="fr_FR-x-scrald">Dango 3 Kyodai</name>
+  <name lang="ja_JP"> だんご3兄弟</name>
+  <name lang="ja_JP-x-scrald"> だんご3兄弟</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Dance Dango sankyo dai, based on the music by Kentaro Hayami.&#xd;&#xd;
+&#xd;&#xd;
+Duration: 50 seconds&#xd;&#xd;
+ &#xd;&#xd;
+ &#xd;&#xd;
+Required space : medium&#xd;&#xd;
+ &#xd;&#xd;
+Rotation: Full Rotation&#xd;&#xd;
+ &#xd;&#xd;
+Translation: Every translation (  least 2 meter free area around the robot )</description>
+  <description lang="en_US-x-scrald">Dance Dango sankyo dai, based on the music by Kentaro Hayami.&#xd;&#xd;
+&#xd;&#xd;
+Duration: 50 seconds&#xd;&#xd;
+ &#xd;&#xd;
+ &#xd;&#xd;
+Required space : medium&#xd;&#xd;
+ &#xd;&#xd;
+Rotation: Full Rotation&#xd;&#xd;
+ &#xd;&#xd;
+Translation: Every translation (  least 2 meter free area around the robot )</description>
+  <description lang="fr_FR">Dango  san kyôda, basée sur la musique de Kentarô Hayami&#xd;&#xd;
+&#xd;&#xd;
+Durée : 50 secondes&#xd;&#xd;
+&#xd;&#xd;
+Espace requis : moyen&#xd;&#xd;
+&#xd;&#xd;
+Rotations complètes&#xd;&#xd;
+&#xd;&#xd;
+Garder environ 2 mètres autour du robot</description>
+  <description lang="fr_FR-x-scrald">Dango  san kyôda, basée sur la musique de Kentarô Hayami&#xd;&#xd;
+&#xd;&#xd;
+Durée : 50 secondes&#xd;&#xd;
+&#xd;&#xd;
+Espace requis : moyen&#xd;&#xd;
+&#xd;&#xd;
+Rotations complètes&#xd;&#xd;
+&#xd;&#xd;
+Garder environ 2 mètres autour du robot</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <tags>
+    <tag lang="en_US">dance</tag>
+    <tag lang="fr_FR">danse</tag>
+    <tag lang="ja_JP">ダンス</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">dance dango</sentence>
+    <sentence lang="fr_FR">dango dango</sentence>
+   </triggerSentences>
+   <loadingResponses/>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="dance_dango3kyodai">
+   <topic language="en_US" path="dance_dango3kyodai/dance_dango3kyodai_enu.top"/>
+   <topic language="fr_FR" path="dance_dango3kyodai/dance_dango3kyodai_frf.top"/>
+   <topic language="ja_JP" path="dance_dango3kyodai/dance_dango3kyodai_jpj.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.0" maxVersion="2.7"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+</package>
