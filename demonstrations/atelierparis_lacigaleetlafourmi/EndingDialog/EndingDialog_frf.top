@@ -1,0 +1,12 @@
+topic: ~EndingDialog()
+language: frf
+
+include:lexicon_frf.top
+
+u:(e:onStart) ^mode(disabled) Merci \pau=1500\
+
+u:( [Bravo Félicitations cool ~happy_user] ) $saluteAgain=1
+
+u:(e:Dialog/NotUnderstood2) $quitApplication=1
+
+u:(e:Dialog/NotSpeaking5) $quitApplication=1

@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="0.0.16" uuid="come-here-d135be">
+ <names>
+  <name lang="en_US">Come Here</name>
+  <name lang="en_US-x-scrald">Come Here</name>
+  <name lang="fr_FR">Viens là</name>
+  <name lang="fr_FR-x-scrald">Viens là</name>
+  <name lang="ja_JP">こっちおいで</name>
+  <name lang="ja_JP-x-scrald">こっちおいで</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">With this application, Pepper will come to you whenever you call him! If you move, Pepper will follow you around and stay close to you.
+Make sure you go where Pepper can follow you: always choose a safe and clear path otherwise Pepper could bump into tables and chairs when trying to stay near you and represent a risk for himself and/or his environment.</description>
+  <description lang="en_US-x-scrald">With this application, Pepper will come to you whenever you call him! If you move, Pepper will follow you around and stay close to you.
+Make sure you go where Pepper can follow you: always choose a safe and clear path otherwise Pepper could bump into tables and chairs when trying to stay near you and represent a risk for himself and/or his environment.</description>
+  <description lang="fr_FR">Avec cette application Pepper viendra jusqu'à vous chaque fois que vous l'appelerez. Si vous bouger Pepper vous suivra et restera proche de vous.
+Assurez-vous que vous allez où Pepper peut vous suivre: choisissez toujours un chemin sûr et clair sinon Pepper pourrait heurter les tables et les chaises en essayant de rester proche de chez vous et cela peut représenter un risque pour lui-même et / ou son environnement.</description>
+  <description lang="fr_FR-x-scrald">Avec cette application Pepper viendra jusqu'à vous chaque fois que vous l'appelerez. Si vous bouger Pepper vous suivra et restera proche de vous.
+Assurez-vous que vous allez où Pepper peut vous suivre: choisissez toujours un chemin sûr et clair sinon Pepper pourrait heurter les tables et les chaises en essayant de rester proche de chez vous et cela peut représenter un risque pour lui-même et / ou son environnement.</description>
+  <description lang="ja_JP">本ロボアプリをご利用になることで、Pepperを呼ぶとそばまで移動してくれます。利用者が移動すれば、Pepperもそのまま着いてきます。
+移動する場合は、Pepperの移動範囲内であることにご注意ください。利用者に着いて回ろうとし、テーブルやイスなどといった障害物に衝突すると、Pepper本体および周囲に危険が及ぶ恐れがあります。</description>
+  <description lang="ja_JP-x-scrald">本ロボアプリをご利用になることで、Pepperを呼ぶとそばまで移動してくれます。利用者が移動すれば、Pepperもそのまま着いてきます。
+移動する場合は、Pepperの移動範囲内であることにご注意ください。利用者に着いて回ろうとし、テーブルやイスなどといった障害物に衝突すると、Pepper本体および周囲に危険が及ぶ恐れがあります。</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>ja_JP</language>
+  <language>fr_FR</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>ja_JP</language>
+  <language>fr_FR</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="interactive/come-here">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <triggerSentences>
+    <sentence lang="en_US">Come here</sentence>
+    <sentence lang="en_US">Pepper come here</sentence>
+    <sentence lang="en_US">Come with me</sentence>
+    <sentence lang="en_US">Come here Pepper</sentence>
+    <sentence lang="en_US-x-scrald">Come here</sentence>
+    <sentence lang="en_US-x-scrald">Pepper come here</sentence>
+    <sentence lang="en_US-x-scrald">Come with me</sentence>
+    <sentence lang="en_US-x-scrald">Come here Pepper</sentence>
+    <sentence lang="fr_FR">Viens là</sentence>
+    <sentence lang="fr_FR">Pepper viens là</sentence>
+    <sentence lang="fr_FR">Viens avec moi</sentence>
+    <sentence lang="fr_FR">Viens là Pepper</sentence>
+    <sentence lang="fr_FR-x-scrald">Viens là</sentence>
+    <sentence lang="fr_FR-x-scrald">Pepper viens là</sentence>
+    <sentence lang="fr_FR-x-scrald">Viens avec moi</sentence>
+    <sentence lang="fr_FR-x-scrald">Viens là Pepper</sentence>
+    <sentence lang="ja_JP">こっちおいで</sentence>
+    <sentence lang="ja_JP-x-scrald">こっちおいで</sentence>
+   </triggerSentences>
+   <loadingResponses>
+    <sentence lang="en_US">Okay, I come closer.</sentence>
+    <sentence lang="en_US-x-scrald">Okay, I come closer.</sentence>
+    <sentence lang="fr_FR">Okay, j'arrive</sentence>
+    <sentence lang="fr_FR-x-scrald">Okay, j'arrive</sentence>
+    <sentence lang="ja_JP">\vct=150\\rspd=110\はーい、\vct=150\いま行きますねーー</sentence>
+    <sentence lang="ja_JP-x-scrald">\vct=150\\rspd=110\はーい、\vct=150\いま行きますねーー</sentence>
+   </loadingResponses>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/CantFindHuman/cant_1">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/no-human</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/CantFindHuman/cant_2">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/no-human</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/IFindYou/find_1">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/find-human</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/IFindYou/find_2">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/find-human</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/WhatCanIdoForYou/help_1">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/can-help</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/WhatCanIdoForYou/help_2">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/can-help</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/MovingTowards/movingtowards_1">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/moving-towards</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/MovingTowards/movingtowards_2">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/moving-towards</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <behaviorContent path="animations/Pepper/Stand/MovingTowards/movingtowards_3">
+   <nature></nature>
+   <tags>
+    <tag lang="en_US">comeHere/moving-towards</tag>
+   </tags>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent topicName="collaborative_dialog_comehere" typeVersion="1.0">
+   <topic path="dialogs/collaborative_dialog_comehere/collaborative_dialog_comehere_enu.top" language="en_US"/>
+   <topic path="dialogs/collaborative_dialog_comehere/collaborative_dialog_comehere_frf.top" language="fr_FR"/>
+   <topic path="dialogs/collaborative_dialog_comehere/collaborative_dialog_comehere_jpj.top" language="ja_JP"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement maxVersion="2.4" minVersion="2.3"/>
+  <robotRequirement model="JULIETTE_Y20"/>
+ </requirements>
+</package>

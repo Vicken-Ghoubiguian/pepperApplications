@@ -1,0 +1,6 @@
+topic: ~Exit()
+language: spe
+
+concept:(myexit)["terminado" "dejar"]
+
+u:(~myexit) Ok. $onStopped=1

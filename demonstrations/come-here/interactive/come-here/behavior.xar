@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Come Here" id="4" localization="-1" tooltip="This box makes the robot track people with different modes." x="659" y="101">
+                            <bitmap>media/images/box/interaction/target_face.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+import qi
+import almath
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+        # Proxies
+        try:
+            self.tracker = ALProxy("ALTracker")
+            self.memory = ALProxy("ALMemory")
+            self.motion = ALProxy( "ALMotion" )
+            self.dialog = ALProxy("ALDialog")
+            self.frameManager = ALProxy("ALFrameManager")
+            self.proxyIssue = False
+        except:
+            self.proxyIssue = True
+
+        # Init variables
+        self.distanceX = 0.4
+        self.distanceY = 0.0
+        self.angleWz = 0.0
+        self.thresholdX = 0.3
+        self.thresholdY = 0.2
+        self.thresholdWz = 0.4
+        self.speed = 0.4
+        self.acceleration = 0.25
+        self.engagementDistance = 3.5
+        self.subscribeDone = False
+        self.isRunning = False
+        self.followTask = None
+        self.timeOutCantFindTask = None
+        self.hasTarget = False
+        self.animManager = None
+        self.usingDialog = False
+        self.hasReached = False
+        self.nbTriesBeforeStop = 3
+        self.nbTriesCurrent = 0
+        self.nbMoveFailed = 0
+        self.targetLostFuture = None
+        self.targetDetectedFuture = None
+
+        # Animations
+        self.animationsTags   = {
+            "CanHelp":
+                "comeHere/can-help",
+            "CantFindHuman":
+                "comeHere/no-human",
+            "FindHuman":
+                "comeHere/find-human",
+            "MovingTowards":
+                "comeHere/moving-towards"
+        }
+
+        # Periodic tasks
+        self.followTask = qi.PeriodicTask()
+        self.followTask.setCallback(self.followTarget)
+        self.followTask.setUsPeriod(15000000) # Check every 15sec
+
+        self.timeOutCantFindTask = qi.PeriodicTask()
+        self.timeOutCantFindTask.setCallback(self.timeOutFindTarget)
+        self.timeOutCantFindTask.setUsPeriod(10000000) # Check every 10sec
+
+        self.movingTowardsTask = qi.PeriodicTask()
+        self.movingTowardsTask.setCallback(self.movingTowards)
+        self.movingTowardsTask.setUsPeriod(3000000) # Check every 3sec
+
+    def onLoad(self):
+        behaviorPath = self.frameManager.getBehaviorPath(self.behaviorId)
+        self.topicPath = behaviorPath + self.getParameter('TopicPath')
+        self.topic = ""
+
+    def onUnload(self):
+        self.unsubscribeToEvents()
+
+        # Reset variables
+        if self.isRunning:
+            self.isRunning = False
+            self.cantReach = False
+            self.hasTarget = False
+            self.hasReached = False
+            self.nbTriesCurrent = 0
+            self.nbMoveFailed = 0
+
+        self.proxyIssue = False
+
+        # Stop periodic tasks
+        self.stopFollowTask()
+        self.stopFindTargetTask()
+        self.stopMovingTowardsTask()
+
+        # Stop futures
+        self.stopTargetLostFuture()
+        self.stopTargetDetectedFuture()
+
+        # Unload topic
+        if self.usingDialog:
+            self.dialog.unloadTopic(self.topic)
+            self.usingDialog = False
+
+    def onInput_onStart(self):
+        # Get missing proxies
+        try:
+            self.animManager = ALProxy("CCAnimationManagerComeHere")
+        except:
+            self.animManager = None
+
+        try:
+            self.awareness = ALProxy('ALBasicAwareness')
+        except:
+            self.awareness = None
+
+        if self.dialog:
+            self.dialog.setAnimatedSpeechConfiguration(0)
+
+        # Topic
+        self.setTopic(self.topicPath)
+
+        # Some proxies issues? Leave the app
+        if self.proxyIssue or self.animManager == None or self.awareness == None:
+            self.callDialogTag(self.proxyIssueTag)
+            return self.onStopped()
+
+        # Check if trap is open
+        if self.memory.getData("BatteryTrapIsOpen"):
+            self.callDialogTag(self.trapOpenTag)
+            return self.onStopped()
+
+        # Get parameters
+        self.distanceX = self.getParameter("Distance X (m)")
+        self.thresholdX = self.getParameter("Threshold X (m)")
+        self.distanceY = self.getParameter("Distance Y (m)")
+        self.thresholdY = self.getParameter("Threshold Y (m)")
+        self.angleWz = self.getParameter("Theta (rad)")
+        self.thresholdWz = self.getParameter("Threshold Theta (rad)")
+        self.speed = self.getParameter("Speed")
+        self.acceleration = self.getParameter("Acceleration")
+        self.engagementDistance = self.getParameter("EngagementDistance")
+
+        # Prepare BA
+        self.awareness.setParameter("MoveDistanceX", -self.distanceX)
+        self.awareness.setParameter("MoveDistanceY", self.distanceY)
+        self.awareness.setParameter("MoveAngleTheta", self.angleWz)
+        self.awareness.setParameter("MoveThresholdX", self.thresholdX)
+        self.awareness.setParameter("MoveThresholdY", self.thresholdY)
+        self.awareness.setParameter("MoveThresholdTheta", self.thresholdWz)
+        self.awareness.setParameter("MaxDistanceFullyEngaged", self.engagementDistance)
+        self.tracker.setMoveConfig([["MaxVelXY", self.speed],["MaxAccXY", self.acceleration]])
+
+        self.awareness.setEngagementMode("FullyEngaged")
+        self.awareness.setTrackingMode("Move")
+
+        self.subscribeToEvents()
+
+        self.isRunning = True
+
+        # Someone is in the list, so we have a target
+        if not self.isPeopleListEmpty():
+            self.onTargetDetected()
+        # Our list is empty... so let's move 1m forward to try to get someone
+        else:
+            self.motion.moveTo(1.0, 0.0, 0.0)
+
+            # If we have someone now, give feedback to user
+            if not self.isPeopleListEmpty():
+                self.onTargetDetected()
+            else:
+                # Force robot to think he has a target
+                self.hasTarget = True
+                self.onTargetLost()
+
+    def onInput_onStop(self):
+        self.onStopped()
+        self.onUnload()
+
+    def subscribeToEvents(self):
+        self.memory.subscribeToEvent("ALTracker/TargetReached", self.getName(), "onTargetReached")
+        self.memory.subscribeToEvent("ALBasicAwareness/HumanTracked", self.getName(), "onHumanTracked")
+        self.memory.subscribeToEvent("ALMotion/MoveFailed", self.getName(), "onMoveFailed")
+        self.subscribeDone = True
+
+    def unsubscribeToEvents(self):
+        if self.subscribeDone:
+            self.memory.unsubscribeToEvent("ALTracker/TargetReached", self.getName())
+            self.memory.unsubscribeToEvent("ALBasicAwareness/HumanTracked", self.getName())
+            self.memory.unsubscribeToEvent("ALMotion/MoveFailed", self.getName())
+            self.subscribeDone = False
+
+    def onTargetLost(self):
+        if self.hasTarget:
+
+            self.hasTarget = False
+            self.nbMoveFailed = 0
+            self.targetLostFuture = None
+
+            self.stopTargetDetectedFuture()
+
+            # Manage periodic tasks
+            self.stopFollowTask()
+            self.stopMovingTowardsTask()
+            self.startFindTargetTask()
+
+    def onTargetDetected(self):
+        if not self.hasTarget:
+
+            self.hasTarget = True
+            self.nbMoveFailed = 0
+            self.targetDetectedFuture = None
+
+            self.stopTargetLostFuture()
+
+            self.stopFindTargetTask()
+            self.playAnimation("FindHuman", True)
+            self.callDialogTag(self.detectionTag)
+            self.startFollowTask()
+            self.startMovingTowardsTask()
+
+    def onHumanTracked(self, eventName, value):
+        # Use future, to avoid detection glitches (id, no id, id, no id, etc.).
+        # The future will call the method when the delay is reached.
+        # If the opposite event is raised, the future is canceled.
+
+        # Robot has lost target
+        if value == -1:
+            self.stopTargetDetectedFuture()
+            self.startTargetLostFuture()
+        # Robot has detected a target
+        else:
+            self.stopTargetLostFuture()
+            self.startTargetDetectedFuture()
+
+    def onTargetReached(self):
+        # We have reached our target, we can stop now
+        if not self.hasReached:
+            self.hasReached = True
+
+            self.stopFollowTask()
+            self.stopFindTargetTask()
+            self.stopMovingTowardsTask()
+
+            self.playAnimation("CanHelp", True)
+            self.callDialogTag(self.successTag)
+
+            self.onStopped()
+
+    def onMoveFailed(self):
+        self.nbMoveFailed += 1
+        if self.nbMoveFailed > 15:
+            if not self.isPeopleListEmpty():
+                self.onTargetReached()
+
+
+    def timeOutFindTarget(self):
+        if self.nbTriesCurrent >= self.nbTriesBeforeStop:
+            self.noMoreTarget()
+        else:
+            self.playAnimation("CantFindHuman", True)
+            self.callDialogTag(self.noTargetTag)
+
+        self.nbTriesCurrent += 1
+
+    def followTarget(self):
+        self.nbMoveFailed = 0
+
+    def movingTowards(self):
+        self.playAnimation("MovingTowards", True)
+
+    def noMoreTarget(self):
+        # We haven't seen someone, even after x sec, so stop the app
+        self.callDialogTag(self.stopTag)
+        self.onStopped()
+
+    def playAnimation(self, animTag, async):
+        """ Play a random animation via its tag."""
+        if self.animManager != None:
+            tag = self.animationsTags[animTag]
+            return self.animManager.runAnimationByTag("come-here", tag, async)
+        else:
+            self.log("no animation manager, can't play animation")
+
+    def setTopic(self, path):
+        try:
+            self.topic = self.dialog.loadTopic(path)
+            self.usingDialog = True
+            self.setDialogTags()
+        except:
+            self.usingDialog = False
+
+    def setDialogTags(self):
+        self.noTargetTag = "COMEHERE_NO_TARGET"
+        self.successTag = "COMEHERE_SUCCESS"
+        self.stopTag = "COMEHERE_STOP"
+        self.detectionTag = "COMEHERE_DETECTION"
+        self.trapOpenTag = "COMEHERE_TRAP_OPEN"
+        self.proxyIssueTag = "COMEHERE_PROXY_ISSUE"
+
+    def callDialogTag(self, tag):
+        if self.usingDialog:
+            self.dialog.gotoTag(tag, self.topic)
+
+    def isPeopleListEmpty(self):
+        try:
+            people = self.memory.getData("PeoplePerception/PeopleList")
+        except:
+            return True
+
+        # No more people?
+        if people == [] or people == None:
+            return True
+
+        return False
+
+    def isStuckByObstacles(self):
+        if not self.isPeopleListEmpty():
+            if self.nbMoveFailed > 15:
+                self.nbMoveFailed = 0
+                return True
+
+        return False
+
+    def startFollowTask(self):
+        self.followTask.start(True)
+
+    def stopFollowTask(self):
+        self.followTask.stop()
+        self.nbTriesCurrent = 0
+
+    def startFindTargetTask(self):
+        self.timeOutCantFindTask.start(True)
+
+    def stopFindTargetTask(self):
+        self.timeOutCantFindTask.stop()
+        self.nbTriesCurrent = 0
+
+    def startMovingTowardsTask(self):
+        self.movingTowardsTask.start(True)
+
+    def stopMovingTowardsTask(self):
+        self.movingTowardsTask.stop()
+
+    def stopTargetLostFuture(self):
+        if self.targetLostFuture != None and self.targetLostFuture.isRunning():
+            self.log("stop target lost future")
+            self.targetLostFuture.cancel()
+            self.targetLostFuture = None
+
+    def stopTargetDetectedFuture(self):
+        if self.targetDetectedFuture != None and self.targetDetectedFuture.isRunning():
+            self.log("stop target detected future")
+            self.targetDetectedFuture.cancel()
+            self.targetDetectedFuture = None
+
+    def startTargetLostFuture(self):
+        if self.targetLostFuture == None:
+            self.log("start target lost future")
+            self.targetLostFuture = qi.async( self.onTargetLost, delay = 5000000)
+
+    def startTargetDetectedFuture(self):
+        if self.targetDetectedFuture == None:
+            self.log("start target detected future")
+            self.targetDetectedFuture = qi.async( self.onTargetDetected, delay = 2000000)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Parameter name="Distance X (m)" inherits_from_parent="0" content_type="2" value="0.4" default_value="0.3" min="0.01" max="5" tooltip="Distance on X axis the robot will try to maintain from its target in move modes." id="5" />
+                            <Parameter name="Threshold X (m)" inherits_from_parent="0" content_type="2" value="0.3" default_value="0.1" min="0.01" max="1" tooltip="Threshold above which the robot will move to track its target in move modes." id="6" />
+                            <Parameter name="Distance Y (m)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-5" max="5" tooltip="Distance on Y axis the robot will try to maintain from its target in move modes." id="7" />
+                            <Parameter name="Threshold Y (m)" inherits_from_parent="0" content_type="2" value="0.2" default_value="0.1" min="0.01" max="1" tooltip="Threshold above which the robot will move to track its target in move modes." id="8" />
+                            <Parameter name="Theta (rad)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-3.14" max="3.14" tooltip="Wz angle of the vector robot-target the robot will try to maintain in move modes." id="9" />
+                            <Parameter name="Threshold Theta (rad)" inherits_from_parent="0" content_type="2" value="0.4" default_value="0.3" min="0.01" max="3.14" tooltip="Threshold of the angle of the vector robot-target above which the robot will move to track its target in move modes." id="10" />
+                            <Parameter name="TopicPath" inherits_from_parent="0" content_type="4" value="/../../dialogs/interactive_dialog_feedbacks/interactive_dialog_feedbacks.dlg" default_value="" tooltip="" id="11" />
+                            <Parameter name="Speed" inherits_from_parent="0" content_type="2" value="0.4" default_value="0.25" min="0.15" max="0.55" tooltip="" id="12" />
+                            <Parameter name="Acceleration" inherits_from_parent="0" content_type="2" value="0.25" default_value="0.3" min="0.1" max="0.35" tooltip="" id="13" />
+                            <Parameter name="EngagementDistance" inherits_from_parent="0" content_type="2" value="3.5" default_value="2" min="1" max="3.5" tooltip="" id="14" />
+                        </Box>
+                        <Box name="Service Register" id="6" localization="8" tooltip="" x="319" y="92">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.memory = ALProxy("ALMemory")
+
+        self.session = self.memory.session()
+
+        self.appendPath()
+        try:
+            self.addToolsService()
+        except:
+            self.log("CCToolsComeHere has not been registered.")
+        try:
+            self.addAnimManager()
+        except:
+            self.log("service register: CCAnimationManagerComeHere has not been registered.")
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        try:
+            self.memory.getData("ComeHere/UserId")
+        except:
+            self.memory.raiseEvent("ComeHere/UserId", "")
+
+        self.onStopped() #activate the output of the box
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box
+
+    def appendPath(self):
+        # add library folder to sys.path
+        import sys, os
+        packagePath = self.getPackagePath().rsplit("/", 1)[0]
+        libPath = os.path.join(packagePath, "lib/")
+        sys.path.append(libPath)
+
+    def addToolsService(self):
+        # declare service id
+        self.toolsServiceId = None
+
+        # is service already registered?
+        registeredServices = [service["name"] for service in self.session.services()]
+
+        if "CCToolsComeHere" not in registeredServices:
+            # import library
+            import cctools_comehere
+            reload(cctools_comehere)
+
+            # register service
+            tools = cctools_comehere.CCToolsComeHere(self.session)
+
+            self.toolsServiceId = self.session.registerService("CCToolsComeHere", tools)
+
+        # get service
+        self.tools = self.session.service("CCToolsComeHere")
+
+    def addAnimManager(self):
+        # declare service id
+        self.animManagerId = None
+
+        # is service already registered?
+        registeredServices = [service["name"] for service in self.session.services()]
+
+        if "CCAnimationManagerComeHere" not in registeredServices:
+            # import library
+            import ccanimationmanager_comehere
+            reload(ccanimationmanager_comehere)
+
+            # register service
+            manager = ccanimationmanager_comehere.CCAnimationManagerComeHere(self.session)
+
+            if not manager:
+                self.log("AnimationManager does not work on virtual robot.")
+                return
+
+            self.animManagerId = self.session.registerService("CCAnimationManagerComeHere", manager)
+
+        # get service
+        self.animManager = self.session.service("CCAnimationManagerComeHere")
+
+    def getPackagePath(self):
+        import re
+        framemanager = ALProxy('ALFrameManager')
+        path = framemanager.getBehaviorPath(self.behaviorId)
+        regex = re.compile("(?P<packagePath>.*)(?=%s)" % self.getBehaviorRelativePath())
+        return regex.search(path).group('packagePath')
+
+    def getUID(self):
+        import re
+        framemanager = ALProxy('ALFrameManager')
+        path = framemanager.getBehaviorPath(self.behaviorId)
+        regex = re.compile("(?<=/PackageManager/apps/)(?P<uid>.*)(?=/.*)")
+        return regex.search(path).group('uid')
+
+    def getBehaviorRelativePath(self):
+        import re
+        framemanager = ALProxy('ALFrameManager')
+        path = framemanager.getBehaviorPath(self.behaviorId)
+        regex = re.compile("(?<=/PackageManager/apps/%s)(?P<relativePath>.*)" % self.getUID())
+        return regex.search(path).group('relativePath')]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Link inputowner="0" indexofinput="4" outputowner="4" indexofoutput="4" />
+                        <Link inputowner="4" indexofinput="2" outputowner="6" indexofoutput="4" />
+                        <Link inputowner="6" indexofinput="2" outputowner="0" indexofoutput="2" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

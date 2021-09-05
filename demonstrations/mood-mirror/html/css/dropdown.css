@@ -1,0 +1,137 @@
+
+/****** dropdown-select *******/
+
+.wrap-dd {
+}
+
+.wrap-dd-select {
+    /* Size and position */
+    position: relative;
+    border: 1px solid #ccc;
+    width: 30%;
+    height: 36px;
+    background: #fafafa url("../img/icon-select.png") no-repeat 95% 50%;
+    /*overflow-x: hidden;*/
+    display: inline-block;
+
+    cursor: pointer;
+    outline: none;
+    padding: 5px;
+    /* Font settings */
+    font-family:'DINRegular';
+    font-size: 30px;
+    line-height: 36px;
+    color: #999999;
+    text-align: left;
+}
+.wrap-dd-select.countrycode{
+    width: 80px;
+}
+
+.wrap-dd-select .dropdown,
+.wrap-dd-select .droptop,
+.wrap-dd-select .minwidth,
+.wrap-dd .dropdown,
+.wrap-dd .droptop {
+    /* Size & position */
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+
+    /* Styles */
+    background: #fafafa;
+    list-style: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-height: 200px;
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wrap-dd-select .dropdown li.is_select,
+.wrap-dd-select .droptop li.is_select,
+.wrap-dd-select .minwidth li.is_select,
+.wrap-dd .dropdown li.is_select,
+.wrap-dd .droptop li.is_select {
+    /*padding: 2px 0;*/
+    background: #e6e8ea;
+}
+
+.wrap-dd-select .dropdown li a,
+.wrap-dd-select .droptop li a,
+.wrap-dd-select .minwidth li a,
+.wrap-dd .dropdown li a,
+.wrap-dd .droptop li a {
+    display: block;
+    text-decoration: none;
+    font-family:'DINRegular';
+    text-align:'left';
+    font-size: 30px;
+    line-height: 44px;
+    color: #999999;
+}
+
+.wrap-dd-select .dropdown li i,
+.wrap-dd-select .droptop li i,
+.wrap-dd-select .minwidth li i,
+.wrap-dd .dropdown li i,
+.wrap-dd .droptop li i {
+    float: right;
+    color: inherit;
+}
+
+/* Hover state */
+
+.wrap-dd-select .dropdown li:hover a,
+.wrap-dd-select .droptop li:hover a,
+.wrap-dd-select .minwidth li:hover a,
+.wrap-dd .dropdown li:hover a,
+.wrap-dd .droptop li:hover a {
+    background: #F3F3F3;
+}
+
+
+.wrap-dd-select.active .dropdown,
+.wrap-dd-select.active .droptop,
+.wrap-dd-select.active .minwidth,
+.wrap-dd.active .dropdown,
+.wrap-dd.active .droptop {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.wrap-dd-select .droptop,
+.wrap-dd .droptop {
+    /* Size & position */
+    z-index: 10;
+    top: 50px;
+    right: 0;
+    left: 0;
+    bottom:auto;
+}
+
+.wrap-dd-select .minwidth{
+    z-index: 10;
+    top: 50px;
+    right: 0px;
+    left: auto;
+    bottom:auto;
+}
+.wrap-dd-select .droptop li a,
+.wrap-dd-select .minwidth li a,
+.wrap-dd .droptop li a {
+    min-width: 300px;
+}
+
+.wrap-dd .droptop {
+    /* Size & position */
+    z-index: 10;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom:auto;
+}

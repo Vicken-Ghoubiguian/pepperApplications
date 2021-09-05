@@ -1,0 +1,16 @@
+topic: ~collaborative_dialog_comehere()
+language: jpj
+
+concept:(come_here) 
+    ^first[
+        "$BatteryTrapIsOpen==true \vct=80\ \rspd=80\うーーん、\vct=100\ \rspd=100\充電ハッチが開いているので、動けないんです"
+        "^first[
+            "$ALRecharge/ConnectedToChargingStation==1 \vct=80\ \rspd=80\うーーん、\vct=100\ \rspd=100\いま、充電ちゅうなので、\vct=110\ \rspd=100\動けないんです"
+            "^switchFocus(come-here/interactive/come-here)"
+            ]"
+        ]
+
+u:([
+    "ペッパーこっち[きて{ください} {に}おいで]"
+]) 
+~come_here

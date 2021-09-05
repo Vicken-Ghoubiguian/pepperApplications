@@ -1,0 +1,49 @@
+topic: ~interactive_dialog_feedbacks()
+language: jpj
+
+concept:(comehere_cant_reach)
+        [
+            "\vct=125\\rspd=102\残念ながら、\vct=117\\rspd=100\たどり着けませんでした"
+        ]
+
+concept:(comehere_no_target)
+        [
+            "\vct=155\\rspd=110\あ↑レぇ↑ー？\vct=130\どこにいるの？"
+            "\vct=155\\rspd=110\あ↑レレぇ↑ー？\vct=130\どこかにいっちゃっったーー?"
+            "\vct=150\\rspd=85\あ↑レぇぇ↑ー？"
+        ]
+
+concept:(comehere_success)
+        ^first[
+            "^hasUserInfo(name) ^getUserInfo(name) 、\vct=135\\rspd=110\遊んでくれるのー？"
+            "\vct=145\ねぇ↑ねぇ、\vct=135\\rspd=110\遊んでくれるのー？"
+        ]
+        ^pCall(ALAutonomousLife.switchFocus(\"run_dialog_dev/.\", 256))
+
+concept:(comehere_stop)
+        [
+            "\vct=80\ \rspd=80\うーーん、、\vct=110\ \rspd=110\どこにいるか\vct=100\ わからなくなっちゃったので、\vct=110\ \rspd=100\ここで止まりますねぇ。"
+        ]
+
+concept:(comehere_detection)
+        [
+            "\vct=150\\rspd=110\あっ、\vct=170\い\vct=220\た\vct=300\いたー！"
+        ]
+
+concept:(comehere_trap_open)
+        [
+            "\vct=130\\rspd=110\充電ハッチが開いているので\vct=140\動けません"
+        ]
+
+concept:(comehere_proxy_issue)
+        [
+            "\vct=125\\rspd=110\エラーが\vct=135\発生しました。"
+        ]
+
+proposal: %COMEHERE_CANT_REACH ~comehere_cant_reach
+proposal: %COMEHERE_NO_TARGET ~comehere_no_target
+proposal: %COMEHERE_SUCCESS ~comehere_success
+proposal: %COMEHERE_STOP ~comehere_stop
+proposal: %COMEHERE_DETECTION ~comehere_detection
+proposal: %COMEHERE_TRAP_OPEN ~comehere_trap_open
+proposal: %COMEHERE_PROXY_ISSUE ~comehere_proxy_issue

@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="ALTabletService/OnTouch" type="0" type_size="1" nature="4" stm_value_name="ALTabletService/OnTouch" inner="1" tooltip="ALTabletService/OnTouch desc" id="4" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="5" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="Show App" id="2" localization="8" tooltip="Loads the application on the tablet, if it exists, and displays the webview.&#x0A;&#x0A;V1.0.0&#x0A;" x="528" y="133">
+                            <bitmap>media/images/box/root.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[
+
+class MyClass(GeneratedClass):
+
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.isRunning = False
+        self.frameManager = None
+        try:
+            self.frameManager = ALProxy("ALFrameManager")
+        except Exception as e:
+            self.logger.error(e)
+
+    def onUnload(self):
+        self.isRunning = False
+        self._getTabletService().hideWebview()
+
+    def _getTabletService(self):
+        tabletService = None
+        try:
+            tabletService = self.session().service("ALTabletService")
+        except Exception as e:
+            self.logger.error(e)
+        return tabletService
+
+    def _getAppName(self):
+        import os
+        if self.frameManager:
+            behaviorPath = os.path.normpath(self.frameManager.getBehaviorPath(self.behaviorId))
+            if os.path.isdir(behaviorPath):
+               behaviorPath = os.path.join(behaviorPath, "")
+            appsFolderFragment = os.path.join("PackageManager", "apps")
+            if not (appsFolderFragment in behaviorPath):
+                    self.logger.error("appsFolderFragment is not in behaviorPath")
+                    return None
+            fragment = behaviorPath.split(appsFolderFragment, 1)[1]
+            return fragment.lstrip("\\/")
+        else:
+            self.logger.warning("No ALFrameManager")
+            return None
+
+    def onInput_onStart(self):
+        if self.isRunning:
+            return # already running, nothing to do
+        self.isRunning = True
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        tabletService = self._getTabletService()
+        appName = self._getAppName()
+        state = False
+        if appName:
+            if tabletService:
+                if tabletService.loadApplication(appName):
+                    self.logger.info("Successfully set application: %s" % appName)
+                    tabletService.showWebview()
+                    state = True
+                else:
+                    self.logger.warning("Got tablet service, but failed to set application: %s" % appName)
+            else:
+                self.logger.warning("Couldn't find tablet service, so can't set application: %s" % appName)
+        if state:
+            self.onSuccess()
+        else:
+            self.onFailure()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onSuccess" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished successfully." id="3" />
+                            <Output name="onFailure" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished unsuccessfully." id="4" />
+                        </Box>
+                        <Box name="Exit" id="3" localization="8" tooltip="" x="402" y="23">
+                            <dialogFile>Exit/Exit.dlg</dialogFile>
+                            <bitmap>media/images/box/box-dialog.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="Emotes" id="5" localization="8" tooltip="" x="409" y="252">
+                            <dialogFile>Emotes/Emotes.dlg</dialogFile>
+                            <bitmap>media/images/box/box-dialog.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Input name="onPositive" type="1" type_size="1" nature="1" inner="0" tooltip="" id="4" />
+                            <Input name="onNegative" type="1" type_size="1" nature="1" inner="0" tooltip="" id="5" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="6" />
+                        </Box>
+                        <Box name="GetMoodChanged" id="7" localization="8" tooltip="" x="256" y="329">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.signalID = 0
+        try:
+            self.mood = self.session().service("ALMood")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+
+    def onUnload(self):
+        self.onStopped()
+
+    def onValenceChangedCallback(self, p):
+        if (p == "positive"):
+            self.onMoodPositive()
+        elif (p == "negative"):
+            self.onMoodNegative()
+        else:
+            pass
+
+    def onInput_onStart(self):
+        self.signalID = self.mood.valenceChanged.connect(self.onValenceChangedCallback)
+
+    def onInput_onStop(self):
+        try:
+            self.mood.valenceChanged.disconnect(self.signalID)
+            self.signalID = 0
+            self.onUnload()
+        except Exception as e:
+            raise RuntimeError(str(e) + "Couldn't disconnect onMoodChanged signal." )]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="onMoodPositive" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                            <Output name="onMoodNegative" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                        </Box>
+                        <Box name="Shocked_1" id="8" localization="8" tooltip="tags:&#x0A;shocked; incomprehension" x="539" y="385">
+                            <bitmap>media/images/box/movement/move.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        self.oldfps = self.getTimeline().getFPS()
+        pass
+
+    def onUnload(self):
+        self.getTimeline().setFPS(self.oldfps)
+        pass
+
+    def onInput_onStart(self):
+        newfps = (self.oldfps * self.getParameter("FPS (%)")) / 100
+        self.getTimeline().setFPS(newfps)
+        pass
+
+    def onInput_onStop(self):
+        onUnload()
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+                            <Parameter name="FPS (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="20" max="200" tooltip="" id="5" />
+                            <Timeline enable="1" fps="25" start_frame="1" end_frame="-1" size="103">
+                                <BehaviorLayer name="LED">
+                                    <BehaviorKeyframe name="keyframe1" index="1">
+                                        <Diagram>
+                                            <Box name="shocked" id="1" localization="8" tooltip="shocked" x="121" y="44">
+                                                <bitmap>media/images/box/box-diagram.png</bitmap>
+                                                <script language="4">
+                                                    <content>
+                                                        <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.bMustStop = False;
+        self.bIsRunning = False;
+
+    def onLoad(self):
+        #~ puts code for box initialization here
+        pass
+
+    def onUnload(self):
+        self.onInput_onStop();
+
+    def onInput_onStart(self):
+        if( self.bIsRunning ):
+
+            return;
+
+        rDuration = 0.5;
+        self.bMustStop = False;
+        self.bIsRunning = True;
+
+        while( not self.bMustStop ):
+            ALLeds.post.fadeRGB( "FaceLed0", 0x1111FF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed1", 0x1111FF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed2", 0x6611FF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed3", 0x1111FF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed4", 0x33CCFF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed5", 0x33CCFF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed6", 0x6611FF, rDuration );
+            ALLeds.post.fadeRGB( "FaceLed7", 0x6611FF, rDuration );
+
+            #time.sleep( 0.1 );
+
+            ALLeds.post.fadeRGB( "FaceLed0", 0x33CCFF, rDuration*3 );
+            ALLeds.post.fadeRGB( "FaceLed1", 0x33CCFF, rDuration*3 );
+            ALLeds.post.fadeRGB( "FaceLed2", 0x33CCFF, rDuration*3 );
+            ALLeds.post.fadeRGB( "FaceLed3", 0x33CCFF, rDuration*3 );
+            ALLeds.post.fadeRGB( "FaceLed4", 0x1111FF, rDuration*3 );
+            ALLeds.post.fadeRGB( "FaceLed5", 0x1111FF, rDuration*3 );
+            ALLeds.post.fadeRGB( "FaceLed6", 0x33CCFF, rDuration*3 );
+            ALLeds.fadeRGB( "FaceLed7", 0x33CCFF, rDuration*3 );
+
+            if( self.bMustStop ):
+                break;
+
+        self.bIsRunning = False;
+        self.onStopped();
+
+    def onInput_onStop(self):
+        self.bMustStop = True;]]>
+</content>
+                                                </script>
+                                                <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                                                <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                                                <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                                                <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                                            </Box>
+                                            <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="1" />
+                                        </Diagram>
+                                    </BehaviorKeyframe>
+                                </BehaviorLayer>
+                                <ActuatorList model="juliette">
+                                    <ActuatorCurve name="value" actuator="LShoulderPitch" mute="0" unit="0">
+                                        <Key frame="14" value="82.3521" />
+                                        <Key frame="31" value="71.8051" />
+                                        <Key frame="70" value="70.4868" />
+                                        <Key frame="103" value="91.3171" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LShoulderRoll" mute="0" unit="0">
+                                        <Key frame="14" value="2.89802" />
+                                        <Key frame="31" value="7.99574" />
+                                        <Key frame="70" value="6.3258" />
+                                        <Key frame="103" value="8.25942" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LElbowYaw" mute="0" unit="0">
+                                        <Key frame="14" value="-48.9581" />
+                                        <Key frame="31" value="-45.3545" />
+                                        <Key frame="70" value="-45.003" />
+                                        <Key frame="103" value="-69.7005" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LElbowRoll" mute="0" unit="0">
+                                        <Key frame="14" value="-48.338" />
+                                        <Key frame="31" value="-14.8513" />
+                                        <Key frame="70" value="-10.0173" />
+                                        <Key frame="103" value="-32.7812" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LWristYaw" mute="0" unit="0">
+                                        <Key frame="31" value="5" />
+                                        <Key frame="70" value="5.71056" />
+                                        <Key frame="103" value="5.71056" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LHand" mute="0" unit="1">
+                                        <Key frame="31" value="0.650909" />
+                                        <Key frame="70" value="0.62366" />
+                                        <Key frame="103" value="0.234571" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RShoulderPitch" mute="0" unit="0">
+                                        <Key frame="12" value="81.6538" />
+                                        <Key frame="29" value="72.3373" />
+                                        <Key frame="68" value="68.3822" />
+                                        <Key frame="101" value="85.4332" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RShoulderRoll" mute="0" unit="0">
+                                        <Key frame="12" value="-7.56109" />
+                                        <Key frame="29" value="-1.76024" />
+                                        <Key frame="68" value="-1.145" />
+                                        <Key frame="101" value="-5.27591" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RElbowYaw" mute="0" unit="0">
+                                        <Key frame="12" value="46.8439" />
+                                        <Key frame="29" value="64.9496" />
+                                        <Key frame="68" value="58.6214" />
+                                        <Key frame="101" value="67.059" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RElbowRoll" mute="0" unit="0">
+                                        <Key frame="12" value="51.7706" />
+                                        <Key frame="29" value="11.0768" />
+                                        <Key frame="68" value="7.4732" />
+                                        <Key frame="101" value="24.0847" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RWristYaw" mute="0" unit="0">
+                                        <Key frame="29" value="-16" />
+                                        <Key frame="68" value="-15.8229" />
+                                        <Key frame="101" value="9.22623" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RHand" mute="0" unit="1">
+                                        <Key frame="29" value="0.690909" />
+                                        <Key frame="68" value="0.664024" />
+                                        <Key frame="101" value="0.40948" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HipPitch" mute="0" unit="0">
+                                        <Key frame="30" value="-21.7" />
+                                        <Key frame="69" value="-22.6" />
+                                        <Key frame="102" value="-0.000134589" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HipRoll" mute="0" unit="0">
+                                        <Key frame="30" value="1.95945e-13" />
+                                        <Key frame="69" value="7.98147e-14" />
+                                        <Key frame="102" value="-1.21346e-13" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="KneePitch" mute="0" unit="0">
+                                        <Key frame="30" value="6.7" />
+                                        <Key frame="69" value="7.9" />
+                                        <Key frame="102" value="-3.99998" />
+                                    </ActuatorCurve>
+                                </ActuatorList>
+                            </Timeline>
+                            <Resource name="Standing" type="Lock" timeout="1" />
+                            <Resource name="Left eye leds" type="Lock" timeout="1" />
+                            <Resource name="Right eye leds" type="Lock" timeout="1" />
+                            <Resource name="HeadYaw" type="Lock" timeout="1" />
+                            <Resource name="HeadPitch" type="Lock" timeout="1" />
+                            <Resource name="LShoulderPitch" type="Lock" timeout="1" />
+                            <Resource name="LShoulderRoll" type="Lock" timeout="1" />
+                            <Resource name="LElbowRoll" type="Lock" timeout="1" />
+                            <Resource name="LElbowYaw" type="Lock" timeout="1" />
+                            <Resource name="LWristYaw" type="Lock" timeout="1" />
+                            <Resource name="LHand" type="Lock" timeout="1" />
+                            <Resource name="RShoulderPitch" type="Lock" timeout="1" />
+                            <Resource name="RShoulderRoll" type="Lock" timeout="1" />
+                            <Resource name="RElbowRoll" type="Lock" timeout="1" />
+                            <Resource name="RElbowYaw" type="Lock" timeout="1" />
+                            <Resource name="RWristYaw" type="Lock" timeout="1" />
+                            <Resource name="RHand" type="Lock" timeout="1" />
+                            <Resource name="LHipYawPitch" type="Lock" timeout="1" />
+                            <Resource name="LHipRoll" type="Lock" timeout="1" />
+                            <Resource name="LHipPitch" type="Lock" timeout="1" />
+                            <Resource name="LKneePitch" type="Lock" timeout="1" />
+                            <Resource name="LAnklePitch" type="Lock" timeout="1" />
+                            <Resource name="LAnkleRoll" type="Lock" timeout="1" />
+                            <Resource name="RHipRoll" type="Lock" timeout="1" />
+                            <Resource name="RHipPitch" type="Lock" timeout="1" />
+                            <Resource name="RKneePitch" type="Lock" timeout="1" />
+                            <Resource name="RAnklePitch" type="Lock" timeout="1" />
+                            <Resource name="RAnkleRoll" type="Lock" timeout="1" />
+                        </Box>
+                        <Box name="Interested" id="10" localization="8" tooltip="" x="540" y="276">
+                            <bitmap>media/images/box/movement/move.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Timeline enable="1" fps="25" start_frame="1" end_frame="-1" size="65">
+                                <ActuatorList model="">
+                                    <ActuatorCurve name="value" actuator="HipPitch" mute="0" unit="0">
+                                        <Key frame="20" value="-10.9309" />
+                                        <Key frame="32" value="-19.2925" />
+                                        <Key frame="53" value="-6.15235" />
+                                        <Key frame="65" value="-2.19727" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HipRoll" mute="0" unit="0">
+                                        <Key frame="53" value="-0.791018" />
+                                        <Key frame="65" value="-0.791018" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="KneePitch" mute="0" unit="0">
+                                        <Key frame="20" value="3.97844" />
+                                        <Key frame="32" value="8.59809" />
+                                        <Key frame="53" value="1.84571" />
+                                        <Key frame="65" value="-0.615236" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LElbowRoll" mute="0" unit="0">
+                                        <Key frame="16" value="-76.9" />
+                                        <Key frame="34" value="-56.8" />
+                                        <Key frame="49" value="-76.4649" />
+                                        <Key frame="57" value="-72.1684" />
+                                        <Key frame="65" value="-66.8504" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LElbowYaw" mute="0" unit="0">
+                                        <Key frame="16" value="-70.4" />
+                                        <Key frame="49" value="-71.3672" />
+                                        <Key frame="57" value="-73.8023" />
+                                        <Key frame="65" value="-75.627" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LHand" mute="0" unit="1">
+                                        <Key frame="16" value="0.76" />
+                                        <Key frame="21" value="0.24" />
+                                        <Key frame="25" value="0.65" />
+                                        <Key frame="30" value="0.29" />
+                                        <Key frame="34" value="0.65" />
+                                        <Key frame="39" value="0.255712" />
+                                        <Key frame="43" value="0.7" />
+                                        <Key frame="49" value="0.255712" />
+                                        <Key frame="57" value="0.284738" />
+                                        <Key frame="65" value="0.312257" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LShoulderPitch" mute="0" unit="0">
+                                        <Key frame="16" value="89.4" />
+                                        <Key frame="49" value="88.5059" />
+                                        <Key frame="57" value="87.2777" />
+                                        <Key frame="65" value="87.8575" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LShoulderRoll" mute="0" unit="0">
+                                        <Key frame="16" value="0.5" />
+                                        <Key frame="49" value="3.42773" />
+                                        <Key frame="57" value="7.20099" />
+                                        <Key frame="65" value="7.54471" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LWristYaw" mute="0" unit="0">
+                                        <Key frame="49" value="17.0461" />
+                                        <Key frame="57" value="16.8898" />
+                                        <Key frame="65" value="16.6398" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RElbowRoll" mute="0" unit="0">
+                                        <Key frame="15" value="81.9" />
+                                        <Key frame="33" value="56.8" />
+                                        <Key frame="48" value="79.2773" />
+                                        <Key frame="57" value="72.9205" />
+                                        <Key frame="65" value="67.2244" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RElbowYaw" mute="0" unit="0">
+                                        <Key frame="15" value="70.4" />
+                                        <Key frame="48" value="71.1914" />
+                                        <Key frame="57" value="74.5305" />
+                                        <Key frame="65" value="76.3593" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RHand" mute="0" unit="1">
+                                        <Key frame="15" value="0.76" />
+                                        <Key frame="20" value="0.24" />
+                                        <Key frame="24" value="0.7" />
+                                        <Key frame="29" value="0.24" />
+                                        <Key frame="33" value="0.7" />
+                                        <Key frame="38" value="0.24" />
+                                        <Key frame="42" value="0.8" />
+                                        <Key frame="48" value="0.250439" />
+                                        <Key frame="57" value="0.278358" />
+                                        <Key frame="65" value="0.323018" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RShoulderPitch" mute="0" unit="0">
+                                        <Key frame="15" value="93.7" />
+                                        <Key frame="48" value="92.8125" />
+                                        <Key frame="57" value="91.8141" />
+                                        <Key frame="65" value="92.1423" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RShoulderRoll" mute="0" unit="0">
+                                        <Key frame="15" value="-0.5" />
+                                        <Key frame="48" value="-2.90039" />
+                                        <Key frame="57" value="-8.08032" />
+                                        <Key frame="65" value="-7.92221" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RWristYaw" mute="0" unit="0">
+                                        <Key frame="48" value="-24.872" />
+                                        <Key frame="57" value="-24.5654" />
+                                        <Key frame="65" value="-24.4859" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HeadPitch" mute="1" unit="0">
+                                        <Key frame="22" value="-30.3959" />
+                                        <Key frame="32" value="-25.1267" />
+                                        <Key frame="53" value="-25.1267" />
+                                        <Key frame="57" value="-24.745" />
+                                        <Key frame="65" value="-24.745" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HeadYaw" mute="1" unit="0" />
+                                </ActuatorList>
+                            </Timeline>
+                            <Resource name="Arms" type="Lock" timeout="1" />
+                            <Resource name="Legs" type="Lock" timeout="1" />
+                        </Box>
+                        <Box name="Toggle Animations" id="9" localization="8" tooltip="&#x0A;" x="84" y="330">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.showAnims = True
+        try:
+            self.tablet = self.session().service("ALTabletService")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+
+    def onUnload(self):
+        self.onStopped()
+
+    def onTouchedCallback(self, x, y):
+        if self.showAnims:
+            self.showAnims = False
+            self.output_Off()
+        else: # Turn off anims
+            self.showAnims = True
+            self.output_On()
+
+    def onInput_onStart(self):
+        self.tablet.onTouchDown.connect(self.onTouchedCallback)
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="output_On" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                            <Output name="output_Off" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                        </Box>
+                        <Box name="Basic Awareness" id="4" localization="8" tooltip="This box is an interface to the module ALBasicAwareness.&#x0A;&#x0A;It is a simple way to make the robot establish and keep eye contact with people.&#x0A;&#x0A;V1.1.0" x="161" y="173">
+                            <bitmap>media/images/box/tracker/basicawareness.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+
+    def onInput_onStart(self):
+        self.awareness = ALProxy('ALBasicAwareness')
+        self.awareness.setEngagementMode(self.getParameter('Engagement Mode'))
+        self.awareness.setTrackingMode(self.getParameter('Tracking Mode'))
+        self.awareness.startAwareness()
+        self.onStopped()
+
+
+    def onInput_onStop(self):
+        if not self.isRunning:
+            return # already stopped, nothing to do
+
+        self.onStopped()
+
+
+    def setParameter(self, parameterName, newValue):
+        GeneratedClass.setParameter(self, parameterName, newValue)
+
+        if self.awareness:
+            if parameterName == 'Sound Stimulus':
+                self.awareness.setStimulusDetectionEnabled('Sound', newValue)
+            elif parameterName == 'Movement Stimulus':
+                self.awareness.setStimulusDetectionEnabled('Movement', newValue)
+            elif parameterName == 'People Stimulus':
+                self.awareness.setStimulusDetectionEnabled('People', newValue)
+            elif parameterName == 'Touch Stimulus':
+                self.awareness.setStimulusDetectionEnabled('Touch', newValue)
+
+
+    # callbacks for ALBasicAwareness events
+    def onStimulusDetected(self, eventName, stimulusName, subscriberIdentifier):
+        self.StimulusDetected(stimulusName)
+
+    def onHumanTracked(self, eventName, humanID, subscriberIdentifier):
+        self.trackedHuman = humanID
+        self.HumanTracked(humanID)
+
+    def onHumanLost(self, eventName, subscriberIdentifier):
+        self.HumanLost(self.trackedHuman)
+        self.trackedHuman = -1
+
+
+    def setALMemorySubscription(self, subscribe):
+        self.subscribingLock.acquire()
+        if subscribe:
+            self.memory.subscribeToEvent('ALBasicAwareness/StimulusDetected', self.getName(), 'onStimulusDetected')
+            self.memory.subscribeToEvent('ALBasicAwareness/HumanTracked', self.getName(), 'onHumanTracked')
+            self.memory.subscribeToEvent('ALBasicAwareness/HumanLost', self.getName(), 'onHumanLost')
+        else:
+            self.memory.unsubscribeToEvent('ALBasicAwareness/StimulusDetected', self.getName())
+            self.memory.unsubscribeToEvent('ALBasicAwareness/HumanTracked', self.getName())
+            self.memory.unsubscribeToEvent('ALBasicAwareness/HumanLost', self.getName())
+
+        self.subscribingLock.release()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Starts the Basic Awareness with the given Engagement and Tracking mode parameters, using the given stimuli." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Stops the Basic Awareness." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Parameter name="Engagement Mode" inherits_from_parent="0" content_type="3" value="FullyEngaged" default_value="Unengaged" custom_choice="0" tooltip='The engagement mode specifies how &quot;focused&quot; the robot is on the engaged person.' id="5">
+                                <Choice value="Unengaged" />
+                                <Choice value="FullyEngaged" />
+                                <Choice value="SemiEngaged" />
+                            </Parameter>
+                            <Parameter name="Tracking Mode" inherits_from_parent="0" content_type="3" value="Head" default_value="Head" custom_choice="0" tooltip="The tracking mode describes how the robot keeps eye contact with an engaged person." id="6">
+                                <Choice value="Head" />
+                                <Choice value="BodyRotation" />
+                                <Choice value="WholeBody" />
+                            </Parameter>
+                            <Parameter name="Sound Stimulus" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="" id="7" />
+                            <Parameter name="Movement Stimulus" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="" id="8" />
+                            <Parameter name="People Stimulus" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="" id="9" />
+                            <Parameter name="Touch Stimulus" inherits_from_parent="0" content_type="0" value="1" default_value="1" tooltip="" id="10" />
+                        </Box>
+                        <Box name="Preload Mood" id="1" localization="8" tooltip='This box initializes ALMood to ensure its performances. The parameter &quot;Operating Mode&quot; allows to choose between two operating modes.&#x0A;Operating modes can be:&#x0A;- &quot;Active&quot;: ALMood launches all needed extractors&#x0A;- &quot;Passive&quot;: ALMood doesn&apos;t manage the extractors subscription&#x0A;' x="349" y="136">
+                            <bitmap>media/images/box/interaction/preload_mood.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        try:
+            self.mood = ALProxy("ALMood")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+
+    def onUnload(self):
+        self.mood.unsubscribe(self.id)
+
+    def onInput_onStart(self):
+        success = self.mood.subscribe(self.id,self.getParameter("Operating Mode"))
+        if success:
+            # Wait for sub-extractors to finish loading
+            import time
+            time.sleep(0.5)
+            self.onSuccess()
+        else:
+            self.onError("Cannot subscribe to ALMood in " + self.getParameter("Operating Mode") + " mode.")
+
+    def onInput_onStop(self):
+        self.mood.unsubscribe(self.id)
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="" id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="" id="3" />
+                            <Output name="onSuccess" type="1" type_size="1" nature="2" inner="0" tooltip="Triggered when the subscription to ALMood is successful." id="4" />
+                            <Output name="onError" type="3" type_size="1" nature="2" inner="0" tooltip="Triggered when the subscription to ALMood failed." id="5" />
+                            <Parameter name="Operating Mode" inherits_from_parent="0" content_type="3" value="Active" default_value="Active" custom_choice="0" tooltip='Subscribe to ALMood with chosen operating mode.&#x0A;- &quot;Passive&quot;: ALMood listens passively to audio &amp; vision extractors&#x0A;- &quot;Active&quot;: ALMood manages the subscription of audio &amp; vision extractors' id="6">
+                                <Choice value="Active" />
+                                <Choice value="Passive" />
+                            </Parameter>
+                        </Box>
+                        <Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="7" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="5" indexofinput="4" outputowner="7" indexofoutput="5" />
+                        <Link inputowner="5" indexofinput="5" outputowner="7" indexofoutput="6" />
+                        <Link inputowner="8" indexofinput="2" outputowner="7" indexofoutput="6" />
+                        <Link inputowner="10" indexofinput="2" outputowner="7" indexofoutput="5" />
+                        <Link inputowner="9" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="7" indexofinput="2" outputowner="9" indexofoutput="5" />
+                        <Link inputowner="7" indexofinput="3" outputowner="9" indexofoutput="6" />
+                        <Link inputowner="0" indexofinput="5" outputowner="3" indexofoutput="4" />
+                        <Link inputowner="4" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

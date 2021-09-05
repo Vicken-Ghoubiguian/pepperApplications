@@ -1,0 +1,20 @@
+topic: ~collaborative_dialog_comehere()
+language: enu
+
+include:lexicon_enu.top
+
+concept:(come_here) 
+    ^first[
+        "$BatteryTrapIsOpen==true I can't move if my trap is open."
+        "^first[
+            "$ALRecharge/ConnectedToChargingStation==1 I can't move while I'm on my charging station."
+            "^switchFocus(come-here/interactive/come-here)"
+            ]"
+        ]
+
+u:([
+    "{please} {~can_you} [come walk] [here closer "{next} to me"]"
+    "{~can_you} [come walk] [here closer "{next} to me"] {please}"
+    "{~can_you} get [here closer]"
+]) 
+~come_here

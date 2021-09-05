@@ -1,0 +1,61 @@
+topic: ~interactive_dialog_feedbacks()
+language: enu
+
+concept:(comehere_cant_reach)
+        ^rand
+        [
+            "I can't reach you, sorry."
+            "Oh, I can't come any closer, sorry."
+        ]
+
+concept:(comehere_no_target)
+        ^rand
+        [
+            "I can't find you."
+            "I can't see you."
+            "Hey. Where are you?"
+        ]
+
+concept:(comehere_success)
+        ^first[
+            "Yes ^hasUserInfo(name) ^getUserInfo(name) ?"
+            "Here I am!"
+        ]
+        ^pCall(ALAutonomousLife.switchFocus(\"run_dialog_dev/.\", 256))
+
+concept:(comehere_stop)
+        ^rand
+        [
+            "Sorry, but I will have to stop here."
+            "I did my best, but I have to stop here."
+        ]
+
+concept:(comehere_detection)
+        ^rand
+        [
+            "Oh! Here you are."
+            "I can see you!"
+        ]
+
+concept:(comehere_trap_open)
+        ^rand
+        [
+            "I can't move if my trap is open."
+            "I can't come closer when my trap is open."
+        ]
+
+concept:(comehere_proxy_issue)
+        ^rand
+        [
+            "Sorry, I detected some internal problems."
+            "Oh, I have a communication issue."
+        ]
+
+proposal: %COMEHERE_CANT_REACH ~comehere_cant_reach
+proposal: %COMEHERE_NO_TARGET ~comehere_no_target
+proposal: %COMEHERE_SUCCESS ~comehere_success
+proposal: %COMEHERE_STOP ~comehere_stop
+proposal: %COMEHERE_DETECTION ~comehere_detection
+proposal: %COMEHERE_TRAP_OPEN ~comehere_trap_open
+proposal: %COMEHERE_PROXY_ISSUE ~comehere_proxy_issue
+

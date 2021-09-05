@@ -1,0 +1,6 @@
+topic: ~Emotes()
+language: jpj
+
+
+u:(e:onPositive) ^start(Stand/Emotions/Positive/Peaceful_1) ^play(["enu_ono_oohhh" "enu_ono_mmh_pleasure_02" "enu_ono_pleasure_15" "enu_ono_whistle_attention" "enu_ono_shy_07" "enu_ono_shy_04" "enu_ono_shy_06" "enu_ono_shy_09" "enu_ono_oh_01" "enu_ono_oh_05"]) ^wait(Stand/Emotions/Positive/Peaceful_1)
+u:(e:onNegative) ^start(Stand/Emotions/Negative/Shocked_1) ^play(["enu_ono_hesitation_long_01" "enu_ono_hesitation_short_01" "frf_ono_hesitation_long_02" "enu_ono_hesitation_short_05"]) ^wait(Stand/Emotions/Negative/Shocked_1)

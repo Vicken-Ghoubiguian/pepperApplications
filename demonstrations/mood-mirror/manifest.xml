@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="mood-mirror-82ba70" version="1.1.1">
+ <names>
+  <name lang="de_DE">Stimmung Spiegele</name>
+  <name lang="de_DE-x-scrald">Stimmung Spiegele</name>
+  <name lang="en_US">Mood Mirror</name>
+  <name lang="en_US-x-scrald">Mood Mirror</name>
+  <name lang="es_ES">Humor Espejo</name>
+  <name lang="es_ES-x-scrald">Humor Espejo</name>
+  <name lang="fr_FR">Mood Miroir</name>
+  <name lang="fr_FR-x-scrald">Mood Miroir</name>
+  <name lang="ja_JP">ムードミラー</name>
+  <name lang="ja_JP-x-scrald">ムードミラー</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">View the mood of the focused user.</description>
+  <description lang="en_US-x-scrald">View the mood of the focused user.</description>
+  <description lang="es_ES">Ver el humor del usuario enfocada.</description>
+  <description lang="es_ES-x-scrald">Ver el humor del usuario enfocada.</description>
+  <description lang="fr_FR">Voir l' humeur de l'utilisateur.</description>
+  <description lang="fr_FR-x-scrald">Voir l' humeur de l'utilisateur.</description>
+  <description lang="ja_JP">人間の感情を表示する。</description>
+  <description lang="ja_JP-x-scrald">人間の感情を表示する。</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>es_ES</language>
+  <language>de_DE</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ja_JP</language>
+  <language>es_ES</language>
+  <language>de_DE</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Mood Mirror</name>
+    <name lang="en_US-x-scrald">Mood Mirror</name>
+    <name lang="fr_FR">Mood Miroir</name>
+    <name lang="fr_FR-x-scrald">Mood Miroir</name>
+    <name lang="ja_JP">ムードミラー</name>
+    <name lang="ja_JP-x-scrald">ムードミラー</name>
+   </names>
+   <descriptions>
+    <description lang="en_US">View the mood of the focused user.</description>
+    <description lang="en_US-x-scrald">View the mood of the focused user.</description>
+    <description lang="fr_FR">Voir l' humeur de l'utilisateur.</description>
+    <description lang="fr_FR-x-scrald">Voir l' humeur de l'utilisateur.</description>
+    <description lang="ja_JP">人間の感情を表示する。</description>
+    <description lang="ja_JP-x-scrald">人間の感情を表示する。</description>
+   </descriptions>
+   <triggerSentences>
+    <sentence lang="de_DE">Spieglein Spieglein</sentence>
+    <sentence lang="de_DE">zeigen meine Stimmung</sentence>
+    <sentence lang="de_DE-x-scrald">Spieglein Spieglein</sentence>
+    <sentence lang="de_DE-x-scrald">zeigen meine Stimmung</sentence>
+    <sentence lang="en_US">mirror mirror</sentence>
+    <sentence lang="en_US">show my mood</sentence>
+    <sentence lang="en_US">show me my mood</sentence>
+    <sentence lang="en_US-x-scrald">mirror mirror</sentence>
+    <sentence lang="en_US-x-scrald">show my mood</sentence>
+    <sentence lang="en_US-x-scrald">show me my mood</sentence>
+    <sentence lang="es_ES">espejo espejo</sentence>
+    <sentence lang="es_ES">Analiza mis emociones</sentence>
+    <sentence lang="es_ES">humor espejo</sentence>
+    <sentence lang="es_ES-x-scrald">espejo espejo</sentence>
+    <sentence lang="es_ES-x-scrald">Analiza mis emociones</sentence>
+    <sentence lang="es_ES-x-scrald">humor espejo</sentence>
+    <sentence lang="fr_FR">montre moi mon humeur</sentence>
+    <sentence lang="fr_FR">miroir miroir</sentence>
+    <sentence lang="fr_FR-x-scrald">montre moi mon humeur</sentence>
+    <sentence lang="fr_FR-x-scrald">miroir miroir</sentence>
+    <sentence lang="ja_JP">ムードミラー</sentence>
+    <sentence lang="ja_JP-x-scrald">ムードミラー</sentence>
+   </triggerSentences>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.5"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+</package>

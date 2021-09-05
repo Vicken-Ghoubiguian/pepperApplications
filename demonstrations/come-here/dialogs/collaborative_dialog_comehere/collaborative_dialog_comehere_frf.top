@@ -1,0 +1,21 @@
+topic: ~collaborative_dialog_comehere()
+language: frf
+
+include:lexicon_frf.top
+
+concept:(come_here) 
+    ^first[
+        "$BatteryTrapIsOpen==true Je ne peux pas bouger si la trappe de ma batterie est ouverte."
+        "^first[
+            "$ALRecharge/ConnectedToChargingStation==1 Je ne peux pas bouger tant que je suis sur ma base de recharge."
+            "^switchFocus(come-here/interactive/come-here)"
+            ]"
+        ]
+
+concept:(here) [là "me voir" "plus près"]
+u:([
+    "~can_you venir ~here"
+    "viens ~here"
+    "~i_want que tu viennes ~here"
+])
+~come_here

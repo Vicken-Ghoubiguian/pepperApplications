@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="atelierparis_lacigaleetlafourmi" version="1.0.5">
+ <names>
+  <name lang="en_US">AtelierParis_TheGrasshopperAndTheAnt</name>
+  <name lang="fr_FR">AtelierParis_LaCigaleEtLaFourmi</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">NAO/Pepper tells you the fable of "The Grasshopper and the Ant" by Jean de la Fontaine.
+
+Text source:
+Fables de La Fontaine - Editions des Enfants de France (Paris) - 1938
+
+Full bibliographic record
+Title : Fables de La Fontaine
+Author : La Fontaine, Jean de (1621-1695) See only the results matching this author.
+Publisher : Editions des Enfants de France (Paris)
+Date of publication : 1938
+Subject : Livres pour enfants Search all documents with this subject
+Type : monographie imprimée
+Language :	French
+Format : 30 p. : ill. coul., couv. illustr. ; in-4
+Format : application/pdf
+Copyright : domaine public
+Identifier : ark:/12148/btv1b85565342
+Source : Bibliothèque nationale de France, département Estampes et photographie, Ka-169-4
+Relation : http://catalogue.bnf.fr/ark:/12148/cb33387493k
+
+Gallica online date :12/03/2013
+
+http://gallica.bnf.fr/ark:/12148/btv1b85565342/f9.zoom.r=La%20Fontaine,%20Jean%20de.langEN
+
+Image source: 
+  - Description: Illustration of the Aesop's Fable: The Ant and the Grasshopper from Fables of Æsop and others, translated into human nature
+  - 1857 by Charles Henry Bennett
+  - http://www.heritage-images.com/Preview/PreviewPage.aspx?id=1645447</description>
+  <description lang="fr_FR">NAO/Pepper raconte la fable "La Cigale et la Fourmi" de Jean de la Fontaine.
+
+Source du texte :
+Fables de La Fontaine - Editions des Enfants de France (Paris) - 1938
+
+Full bibliographic record
+Title : Fables de La Fontaine
+Author : La Fontaine, Jean de (1621-1695) See only the results matching this author.
+Publisher : Editions des Enfants de France (Paris)
+Date of publication : 1938
+Subject : Livres pour enfants Search all documents with this subject
+Type : monographie imprimée
+Language :	French
+Format : 30 p. : ill. coul., couv. illustr. ; in-4
+Format : application/pdf
+Copyright : domaine public
+Identifier : ark:/12148/btv1b85565342
+Source : Bibliothèque nationale de France, département Estampes et photographie, Ka-169-4
+Relation : http://catalogue.bnf.fr/ark:/12148/cb33387493k
+
+Gallica online date :12/03/2013
+
+http://gallica.bnf.fr/ark:/12148/btv1b85565342/f9.zoom.r=La%20Fontaine,%20Jean%20de.langEN
+
+Source de l'image :
+  - Description: Illustration of the Aesop's Fable: The Ant and the Grasshopper from Fables of Æsop and others, translated into human nature
+  - 1857 by Charles Henry Bennett
+  - http://www.heritage-images.com/Preview/PreviewPage.aspx?id=1645447</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>fr_FR</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <tags>
+    <tag lang="en_US">fable</tag>
+    <tag lang="fr_FR">fable</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="fr_FR">raconte une histoire</sentence>
+    <sentence lang="fr_FR">raconter une histoire</sentence>
+    <sentence lang="fr_FR">raconte moi une histoire</sentence>
+    <sentence lang="fr_FR">une histoire</sentence>
+    <sentence lang="fr_FR">cigale et la fourmi</sentence>
+    <sentence lang="fr_FR">la cigale et la fourmi</sentence>
+    <sentence lang="fr_FR">raconte une fable</sentence>
+    <sentence lang="fr_FR">raconter une fable</sentence>
+    <sentence lang="fr_FR">une fable</sentence>
+   </triggerSentences>
+   <loadingResponses>
+    <sentence lang="fr_FR">Oui bien sur, attends que je réflechisse</sentence>
+    <sentence lang="fr_FR">Absolument, attends quelques secondes que j'en choisisse une</sentence>
+   </loadingResponses>
+   <autonomous/>
+   <permissions/>
+  </behaviorContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.0"/>
+  <robotRequirement model="JULIETTE_Y20"/>
+  <robotRequirement model="JULIETTE_T14"/>
+  <robotRequirement model="NAO_T14"/>
+  <robotRequirement model="NAO_H25"/>
+  <robotRequirement model="NAO_H21"/>
+ </requirements>
+</package>

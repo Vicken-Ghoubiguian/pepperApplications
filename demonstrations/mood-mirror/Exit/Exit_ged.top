@@ -1,0 +1,6 @@
+topic: ~Exit()
+language: ged
+
+concept:(myexit)["fertig" "verlassen"]
+
+u:(~myexit) Ok. $onStopped=1

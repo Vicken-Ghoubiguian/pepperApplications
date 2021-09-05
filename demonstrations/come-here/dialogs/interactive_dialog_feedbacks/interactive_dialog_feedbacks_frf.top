@@ -1,0 +1,61 @@
+topic: ~interactive_dialog_feedbacks()
+language: frf
+
+concept:(comehere_cant_reach)
+        ^rand
+        [
+            "Je ne peux pas te rejoindre, désolé."
+            "Oh,  je ne peux pas venir plus proche, désolé."
+        ]
+
+concept:(comehere_no_target)
+        ^rand
+        [
+            "Je ne te trouve pas"
+            "Je ne te vois pas"
+            "Hey. Ou es-tu?"
+        ]
+
+concept:(comehere_success)
+        ^first[
+            "Oui ^hasUserInfo(name) ^getUserInfo(name) ?"
+            "Je suis là!"
+        ]
+        ^pCall(ALAutonomousLife.switchFocus(\"run_dialog_dev/.\", 256))
+
+concept:(comehere_stop)
+        ^rand
+        [
+            "Désolé, mais je dois m'arrêter là."
+            "J'ai fait de mon mieux, mais je ne peux pas avancer plusse."
+        ]
+
+concept:(comehere_detection)
+        ^rand
+        [
+            "Oh! Tu es là."
+            "Je t'ai vu."
+        ]
+
+concept:(comehere_trap_open)
+        ^rand
+        [
+            "Je ne peux pas bouger si la trappe de ma batterie est ouverte."
+            "Je ne peux pas m'approcher si la trappe de ma batterie est ouverte."
+        ]
+
+concept:(comehere_proxy_issue)
+        ^rand
+        [
+            "Désolé, j'ai quelque chose qui ne marche pas."
+            "Oh, J'ai une erreur de communication."
+        ]
+
+proposal: %COMEHERE_CANT_REACH ~comehere_cant_reach
+proposal: %COMEHERE_NO_TARGET ~comehere_no_target
+proposal: %COMEHERE_SUCCESS ~comehere_success
+proposal: %COMEHERE_STOP ~comehere_stop
+proposal: %COMEHERE_DETECTION ~comehere_detection
+proposal: %COMEHERE_TRAP_OPEN ~comehere_trap_open
+proposal: %COMEHERE_PROXY_ISSUE ~comehere_proxy_issue
+
