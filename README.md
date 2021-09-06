@@ -2,6 +2,8 @@
 
 This Git repos contains all the applications installed on Pepper and used by IMERIR during various events (trade fairs, open days, etc.)...
 
+## Contents
+
 <a name="introduction"></a>
 ## Introduction
 
@@ -15,3 +17,6 @@ This school has a humanoid robot known as Pepper. Initially manufactured and mar
 
 IMERIR uses the Pepper robot as the school mascot during various trade shows, meetings and professional forums focused on computer technologies and robotics as well as geek culture. 
 As shown in some photos below, the Pepper robot from IMERIR is emulated wherever it goes.
+
+<a name="conclusion"></a>
+## Conclusion
