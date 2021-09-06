@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LanguageInfo>
+    <Setting name="languageName" description="Name of the language shown in NAOqi API" value="French"/>
+    <Setting name="nativeLanguageName" description="Name of the language shown in its native language" value="Français"/>
+    <Setting name="englishLanguageName" description="Name of the language shown in english" value="French"/>
+    <Setting name="ISOCode" description="ISO code of the language" value="fr_FR"/>
+    <Setting name="ignoreWhiteSpaces" description="Set to 1 if the language does not use whitespaces (mostly asian languages)" value="0"/>
+    <TTSEngine name="Nuance">
+        <Setting name="code" description="Language code for Nuance's TTS" value="frf"/>
+        <Setting name="model" description="Nuance model for TTS" value="full_155mrf22"/>
+    </TTSEngine>
+    <ASREngine name="Nuance">
+        <Setting name="embeddedCode" description="Language code for Nuance's Embedded ASR" value="frf"/>
+        <Setting name="cloudDevDomainName" description="IP to access Remote ASR server" value="sandbox.nmdp.nuancemobility.net"/>
+	<Setting name="cloudDomainName" description="IP to access Remote ASR server" value="ev-nvc-frafra.nuancemobility.net"/>
+        <Setting name="cloudCode" description="Language code for Nuance's Embedded ASR" value="fr_FR"/>
+    </ASREngine>
+</LanguageInfo>
