@@ -27,6 +27,15 @@ As shown in some photos below, the Pepper robot from IMERIR is emulated wherever
 <a name="what_are_this_repos_components"></a>
 ## What are this repos' components ?
 
+<a name="how_to_install_an_application_on_the_robot"></a>
+## How to install an application (danse, demonstration or other) on the robot ?
+
+<a name="how_to_install_a_language_on_the_robot"></a>
+## How to install a language on the robot ?
+
+<a name="how_to_install_a_dialog_box_on_the_robot"></a>
+## How to install a dialog box on the robot ?
+
 <a name="useful_links"></a>
 ## Useful links
 
