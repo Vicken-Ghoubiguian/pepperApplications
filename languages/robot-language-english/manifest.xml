@@ -1,0 +1,25 @@
+<package version="1.3.4" uuid="robot-language-english" organization="Aldebaran Robotics">
+  <names>
+    <name lang="en_US">Language English</name>
+  </names>
+  <descriptions>
+    <description lang="en_US">An ACAPELA Text-To-Speech technology package</description>
+  </descriptions>
+  <categories>
+    <category>languages</category>
+  </categories>
+  <contents>
+    <languageContent path="share/tts/nuance/en_US">
+      <engine name="tts_nuance" version="1.0"/>
+      <locale>en_US</locale>
+    </languageContent>
+    <languageContent path="share/asr/nuance/enu">
+      <engine name="asr_nuance" version="1.0"/>
+      <locale>en_US</locale>
+    </languageContent>
+  </contents>
+  <requirements>
+    <naoqiRequirement minVersion="2.1.2.10"/>
+    <robotRequirement model="JULIETTE"/>
+  </requirements>
+</package>

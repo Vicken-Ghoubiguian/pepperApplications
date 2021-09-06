@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<VoiceSettings>
+    <Setting name="pitchShift" description="Ratio of the pitch shifting applied to the main voice" value="1.13"/>
+    <Setting name="doubleVoice" description="Ratio of the pitch shifting applied to the doubling voice" value="0.0"/>
+    <Setting name="doubleVoiceLevel" description="Level of the doubling voice" value="0.0"/>
+    <Setting name="doubleVoiceTimeShift" description="Delay (ms) between the double voice and the main voice" value="0.0"/>
+    <Setting name="voiceLevel" description="Voice level" value="1.0"/>
+    <Setting name="sourceVoice" description="Voice name" value="naoenu"/>
+    <Setting name="model" description="Voice model" value="full_155mrf22"/>
+</VoiceSettings>
