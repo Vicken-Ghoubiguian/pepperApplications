@@ -20,3 +20,5 @@ As shown in some photos below, the Pepper robot from IMERIR is emulated wherever
 
 <a name="conclusion"></a>
 ## Conclusion
+
+Despite the simplicity of this project, writing its documentation was complicated.
