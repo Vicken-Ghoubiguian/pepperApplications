@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="run_dialog_dev" version="2.6.20">
+  <names>
+    <name lang="ar_SA">The dialog</name>
+    <name lang="ar_SA-x-scrald">The dialog</name>
+    <name lang="cs_CZ">The dialog</name>
+    <name lang="cs_CZ-x-scrald">The dialog</name>
+    <name lang="da_DK">The dialog</name>
+    <name lang="da_DK-x-scrald">The dialog</name>
+    <name lang="de_DE">Gespräch</name>
+    <name lang="de_DE-x-scrald">Gespräch</name>
+    <name lang="el_GR">The dialog</name>
+    <name lang="el_GR-x-scrald">The dialog</name>
+    <name lang="en_US">The dialog</name>
+    <name lang="en_US-x-scrald">The dialog</name>
+    <name lang="es_ES">diálogo</name>
+    <name lang="es_ES-x-scrald">diálogo</name>
+    <name lang="fi_FI">dialogi</name>
+    <name lang="fi_FI-x-scrald">dialogi</name>
+    <name lang="fr_FR">Le dialogue</name>
+    <name lang="fr_FR-x-scrald">Le dialogue</name>
+    <name lang="it_IT">dialogo</name>
+    <name lang="it_IT-x-scrald">dialogo</name>
+    <name lang="ja_JP">対話</name>
+    <name lang="ja_JP-x-scrald">対話</name>
+    <name lang="ko_KR">The dialog</name>
+    <name lang="ko_KR-x-scrald">The dialog</name>
+    <name lang="nl_NL">dialoog</name>
+    <name lang="nl_NL-x-scrald">dialoog</name>
+    <name lang="nn_NO">The dialog</name>
+    <name lang="nn_NO-x-scrald">The dialog</name>
+    <name lang="pl_PL">The dialog</name>
+    <name lang="pl_PL-x-scrald">The dialog</name>
+    <name lang="pt_BR">The dialog</name>
+    <name lang="pt_BR-x-scrald">The dialog</name>
+    <name lang="pt_PT">The dialog</name>
+    <name lang="pt_PT-x-scrald">The dialog</name>
+    <name lang="ru_RU">The dialog</name>
+    <name lang="ru_RU-x-scrald">The dialog</name>
+    <name lang="sv_SE">The dialog</name>
+    <name lang="sv_SE-x-scrald">The dialog</name>
+    <name lang="tr_TR">The dialog</name>
+    <name lang="tr_TR-x-scrald">The dialog</name>
+    <name lang="zh_CN">對話</name>
+    <name lang="zh_CN-x-scrald">對話</name>
+    <name lang="zh_TW">The dialog</name>
+    <name lang="zh_TW-x-scrald">The dialog</name>
+  </names>
+  <descriptions>
+    <description lang="de_DE">Ist der launcher dialog kollaborativen Dialog</description>
+    <description lang="de_DE-x-scrald">Ist der launcher dialog kollaborativen Dialog</description>
+    <description lang="en_US">Utility application.
+
+It's the tool that launches dialog when the required conditions are met (user is in zone 1).</description>
+    <description lang="en_US-x-scrald">Utility application.
+
+It's the tool that launches dialog when the required conditions are met (user is in zone 1).</description>
+    <description lang="es_ES">run_dialog es lo que arranca el diálogo colaborativo.</description>
+    <description lang="es_ES-x-scrald">run_dialog es lo que arranca el diálogo colaborativo.</description>
+    <description lang="fr_FR">Cette application est un utilitaire.
+
+C'est l'outil permettant de lancer le dialogue une fois que les conditions requises sont réunies (l'utilisateur est en zone 1).</description>
+    <description lang="fr_FR-x-scrald">Cette application est un utilitaire.
+
+C'est l'outil permettant de lancer le dialogue une fois que les conditions requises sont réunies (l'utilisateur est en zone 1).</description>
+    <description lang="ja_JP">コラボレーションダイアログを再生するツール。</description>
+    <description lang="ja_JP-x-scrald">コラボレーションダイアログを再生するツール。</description>
+    <description lang="zh_CN">协同对话应用启动</description>
+    <description lang="zh_CN-x-scrald">协同对话应用启动</description>
+  </descriptions>
+  <supportedLanguages>
+    <language>zh_CN</language>
+    <language>en_US</language>
+    <language>fr_FR</language>
+    <language>de_DE</language>
+    <language>ja_JP</language>
+    <language>es_ES</language>
+    <language>it_IT</language>
+    <language>fi_FI</language>
+    <language>nl_NL</language>
+    <language>ar_SA</language>
+    <language>cs_CZ</language>
+    <language>da_DK</language>
+    <language>el_GR</language>
+    <language>ko_KR</language>
+    <language>nn_NO</language>
+    <language>pl_PL</language>
+    <language>pt_BR</language>
+    <language>pt_PT</language>
+    <language>ru_RU</language>
+    <language>sv_SE</language>
+    <language>tr_TR</language>
+    <language>zh_TW</language>
+  </supportedLanguages>
+  <descriptionLanguages>
+    <language>zh_CN</language>
+    <language>en_US</language>
+    <language>fr_FR</language>
+    <language>de_DE</language>
+    <language>ja_JP</language>
+    <language>es_ES</language>
+    <language>it_IT</language>
+    <language>fi_FI</language>
+    <language>nl_NL</language>
+    <language>ar_SA</language>
+    <language>cs_CZ</language>
+    <language>da_DK</language>
+    <language>el_GR</language>
+    <language>ko_KR</language>
+    <language>nn_NO</language>
+    <language>pl_PL</language>
+    <language>pt_BR</language>
+    <language>pt_PT</language>
+    <language>ru_RU</language>
+    <language>sv_SE</language>
+    <language>tr_TR</language>
+    <language>zh_TW</language>
+  </descriptionLanguages>
+  <contents>
+    <behaviorContent path=".">
+      <nature>interactive</nature>
+      <autonomous>
+        <condition purpose="launchTrigger"><![CDATA[(type('rundialogInstalled') == "Invalid" && ('Launchpad/ZoneOfTrackedHuman' == 1) && ('UserSession/FocusedUser' >= 0)) || (('Launchpad/ZoneOfTrackedHuman' == 1) && ('UserSession/FocusedUser' >= 0) && 'rundialogInstalled'==1)]]></condition>
+      </autonomous>
+      <permissions>
+        <canRunOnPod/>
+      </permissions>
+    </behaviorContent>
+    <behaviorContent path="init">
+      <nature></nature>
+      <permissions/>
+    </behaviorContent>
+  </contents>
+  <requirements>
+    <naoqiRequirement minVersion="2.5" maxVersion="2.5"/>
+    <robotRequirement model="JULIETTE"/>
+    <robotRequirement model="ROMEO"/>
+  </requirements>
+</package>
