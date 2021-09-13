@@ -42,19 +42,19 @@ Now is the time to get to the heart of the matter...
 
 This repos is composed of many elements which will be presented here:
 
-* **danses**:
+* **danses:**
 
-* **demonstrations**:
+* **demonstrations:**
 
-*
+* **dialogs:**
 
-*
+* **languages:**
 
-*
+* **images_to_display_in_github_repos:**
 
-*
+* **.gitattributes:**
 
-*
+* **README.md:**
 
 Now it's done. Simple ! No 🐱 ?
 
