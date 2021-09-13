@@ -31,6 +31,8 @@ As shown in some photos below, the Pepper robot from IMERIR is emulated wherever
 <a name="presentation_of_this_repos"></a>
 ## Presentation of this repos
 
+This repos contains all applications which may be installed on the IMERIR's Pepper robot. This applications are used by the school, in different events like trade shows, events, open houses, conferences and more.
+
 <a name="what_is_this_repos_structure"></a>
 ## What is this repos' structure ?
 
