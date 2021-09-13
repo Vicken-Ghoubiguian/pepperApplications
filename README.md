@@ -51,16 +51,16 @@ Just a piece of cake 🐱. No ?
 <a name="how_to_install_a_language_on_the_robot"></a>
 ## How to install a language on the robot ?
 
-To install a language on the robot is exactly the same thing that to install any Pepper applications. For more informations, you can check the corresponding section [just here](#how_to_install_an_application_on_the_robot). However, we will show the language installation process on Pepper by taking the french language example.
+To install a language on the robot is exactly the same thing that to install any Pepper applications. For more informations, you can check the corresponding section [just here](#how_to_install_an_application_on_the_robot). However, we will show the language installation process on Pepper by taking the french language example. So let's go...
 
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
 ## How to install a dialog box on the robot ?
 
-To install a dialog box on the robot, things get a little tough. To make a dialog box work, you must first of all install a particular application on Pepper. But don't panic. Everything will be explained in this section. We will now explain what is this particular and mentioned application to install on Pepper to make dialog boxes work, and how to install it.
+To install a dialog box on the robot, things get a little tough. To make a dialog box work, you must first of all install a particular application on Pepper. But don't panic. Everything will be explained in this section. We will now explain what is this particular and mentioned application to install on Pepper to make dialog boxes work, and how to install it. So let's go...
 
-It is now time to see how to install a dialog box on Pepper. And now, things became much easier...
+It is now time to see how to install a dialog box on Pepper. And now, things became much easier. So go...
 
 Just a piece of cake 🐱. No ?
 
