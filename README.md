@@ -60,7 +60,7 @@ Just a piece of cake 🐱. No ?
 
 To install a dialog box on the robot, things get a little tough. To make a dialog box work, you must first of all install a particular application on Pepper. But don't panic. Everything will be explained in this section. We will now explain what is this particular and mentioned application to install on Pepper to make dialog boxes work, and how to install it.
 
-
+It is now time to see how to install a dialog box on Pepper. And now, things became much easier...
 
 Just a piece of cake 🐱. No ?
 
