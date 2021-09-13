@@ -33,7 +33,7 @@ As shown in some photos below, the Pepper robot from IMERIR is emulated wherever
 
 This repos contains all applications which may be installed on the IMERIR's Pepper robot. This applications are used by the school, in different events like trade shows, open houses, conferences and more. As the mascot and ambassador of IMERIR, the robot can dance, make all kinds of demonstrations, as well as react to different words, to different emotions and gestures.
 
-
+__All of this apps are availables on the robot tablet's when they are installed on Pepper__
 
 <a name="what_is_this_repos_structure"></a>
 ## What is this repos' structure ?
