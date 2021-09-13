@@ -40,6 +40,24 @@ Now is the time to get to the heart of the matter...
 <a name="what_is_this_repos_structure"></a>
 ## What is this repos' structure ?
 
+This repos is composed of many elements which will be presented here:
+
+* **danses**:
+
+* **demonstrations**:
+
+*
+
+*
+
+*
+
+*
+
+*
+
+Now it's done. Simple ! No 🐱 ?
+
 <a name="what_are_this_repos_components"></a>
 ## What are this repos' components ?
 
