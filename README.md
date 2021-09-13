@@ -46,11 +46,19 @@ __All of this apps are availables on the robot tablet's when they are installed 
 
 In this section, we will show you how to install an app on the Pepper robot of IMERIR. The process is illustrated by the installation of the gangnam style dance application on the Pepper robot. So let's go...
 
+Just a piece of cake 🐱. No ?
+
 <a name="how_to_install_a_language_on_the_robot"></a>
 ## How to install a language on the robot ?
 
+To install a language on the robot is exactly the same thing that to install any Pepper applications. For more informations, you can check the corresponding section [just here](#how_to_install_an_application_on_the_robot). However, we will show the language installation process on Pepper by taking the french language example.
+
+Just a piece of cake 🐱. No ?
+
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
 ## How to install a dialog box on the robot ?
+
+Just a piece of cake 🐱. No ?
 
 <a name="useful_links"></a>
 ## Useful links
