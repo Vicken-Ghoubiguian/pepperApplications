@@ -44,6 +44,8 @@ __All of this apps are availables on the robot tablet's when they are installed 
 <a name="how_to_install_an_application_on_the_robot"></a>
 ## How to install an application (danse, demonstration or other) on the robot ?
 
+In this section, we will show you how to install an app on the Pepper robot of IMERIR. The process is illustrated by the installation of the gangnam style dance application on the Pepper robot. So let's go...
+
 <a name="how_to_install_a_language_on_the_robot"></a>
 ## How to install a language on the robot ?
 
