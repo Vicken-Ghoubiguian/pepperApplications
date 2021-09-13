@@ -43,6 +43,8 @@ Now is the time to get to the heart of the matter...
 <a name="what_are_this_repos_components"></a>
 ## What are this repos' components ?
 
+The repos' structure is explained [above](#what_is_this_repos_structure). We saw that all applications to be installed on Pepper are distributed into 4 directories which are __danses__ (for danses applications), __demonstrations__ (for many demonstrations to make do the robot), __dialogs__ (for dialog boxes to be installed on the robot) and __languages__ (for languages to be installed on Pepper). Each have their own 'README.md' file, to list and to explain all applications contained in the directory itself. So here we go...
+
 <a name="how_to_install_an_application_on_the_robot"></a>
 ## How to install an application (danse, demonstration or other) on the robot ?
 
