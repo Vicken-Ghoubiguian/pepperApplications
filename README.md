@@ -89,6 +89,13 @@ Just a piece of cake 🐱. No ?
 <a name="useful_links"></a>
 ## Useful links
 
+*
+*
+*
+*
+*
+*
+
 <a name="conclusion"></a>
 ## Conclusion
 
