@@ -42,19 +42,19 @@ Now is the time to get to the heart of the matter...
 
 This repos is composed of many elements which will be presented here:
 
-* **danses:**
+* **danses:** this directory contains all danses to be installed on the IMERIR Pepper robot (all details are available in directory's README.md file);
 
-* **demonstrations:**
+* **demonstrations:** this directory contains all demonstration applications to be installed on the IMERIR Pepper robot (all details are available in directory's README.md file);
 
-* **dialogs:**
+* **dialogs:** this directory contains all dialog boxes to be installed on the IMERIR Pepper robot (all details are available in directory's README.md file);
 
-* **languages:**
+* **languages:** this directory contains all languages to be installed on the IMERIR Pepper robot (all details are available in directory's README.md file);
 
-* **images_to_display_in_github_repos:**
+* **images_to_display_in_github_repos:** this directory contains all images to display in this git repos;
 
-* **.gitattributes:**
+* **.gitattributes:** 
 
-* **README.md:**
+* **README.md:** this file exposes all the overview and general documentation of this git repository.
 
 Now it's done. Simple ! No 🐱 ?
 
