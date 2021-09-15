@@ -11,8 +11,9 @@ This Git repos contains all the applications installed on Pepper and used by IME
 5. [How to install an application (danse, demonstration or other) on the robot ?](#how_to_install_an_application_on_the_robot),
 6. [How to install a language on the robot ?](#how_to_install_a_language_on_the_robot),
 7. [How to install a dialog box on the robot ?](#how_to_install_a_dialog_box_on_the_robot),
-8. [Useful links](#useful_links),
-9. [Conclusion](#conclusion),
+8. [How to clone this repos ?](#how_to_clone_this_repos),
+9. [Useful links](#useful_links),
+10. [Conclusion](#conclusion),
 
 <a name="introduction"></a>
 ## Introduction
@@ -85,6 +86,9 @@ To install a dialog box on the robot, things get a little tough. To make a dialo
 It is now time to see how to install a dialog box on Pepper. And now, things became much easier. So go...
 
 Just a piece of cake 🐱. No ?
+
+<a name="how_to_clone_this_repos"></a>
+## How to clone this repos ?
 
 <a name="useful_links"></a>
 ## Useful links
