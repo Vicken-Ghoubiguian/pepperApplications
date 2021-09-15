@@ -96,9 +96,10 @@ Just a piece of cake 🐱. No ?
 *
 *
 *
-*
+* 
 * [Git Large File Storage](https://git-lfs.github.com/),
 * [Configuring Git Large File Storage - GitHub](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage),
+* [Git LFS - Atlassian](https://www.atlassian.com/git/tutorials/git-lfs),
 * 
 
 <a name="conclusion"></a>
