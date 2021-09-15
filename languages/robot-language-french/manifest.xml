@@ -1,28 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package uuid="robot-language-french-aa91bf" version="1.4.8" organization="Aldebaran Robotics">
-  <names>
-    <name lang="en_US">Language French</name>
-    <name lang="en_US-x-scrald">Language French</name>
-  </names>
-  <descriptions>
-    <description lang="en_US">A Nuance Text-To-Speech technology package</description>
-    <description lang="en_US-x-scrald">A Nuance Text-To-Speech technology package</description>
-  </descriptions>
-  <descriptionLanguages>
-    <language>en_US</language>
-  </descriptionLanguages>
-  <contents>
-    <languageContent path="share/tts/nuance/fr_FR">
-      <engine name="tts_nuance" version="1.0"/>
-      <locale>fr_FR</locale>
-    </languageContent>
-    <languageContent path="share/asr/nuance/frf">
-      <engine name="asr_nuance" version="1.0"/>
-      <locale>fr_FR</locale>
-    </languageContent>
-  </contents>
-  <requirements>
-    <naoqiRequirement minVersion="2.5" maxVersion="2.5"/>
-    <robotRequirement model="JULIETTE"/>
-  </requirements>
+<package uuid="robot-language-french-eec33b" version="1.4.8" organization="Aldebaran Robotics">
+ <names>
+  <name lang="en_US">Language French</name>
+  <name lang="en_US-x-scrald">Language French</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">A Nuance Text-To-Speech technology package</description>
+  <description lang="en_US-x-scrald">A Nuance Text-To-Speech technology package</description>
+ </descriptions>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <languageContent path="share/tts/nuance/fr_FR">
+   <engine name="tts_nuance" version="1.0"/>
+   <locale>fr_FR</locale>
+  </languageContent>
+  <languageContent path="share/asr/nuance/frf">
+   <engine name="asr_nuance" version="1.0"/>
+   <locale>fr_FR</locale>
+  </languageContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.5" maxVersion="2.5"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
 </package>
