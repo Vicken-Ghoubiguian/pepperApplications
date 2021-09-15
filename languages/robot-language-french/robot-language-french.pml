@@ -27,6 +27,7 @@
         <File name="clc_ged_cfg3" src="share/tts/nuance/fr_FR/ged/speech/components/clc_ged_cfg3.dat" />
         <File name="clc_iti_cfg3" src="share/tts/nuance/fr_FR/iti/speech/components/clc_iti_cfg3.dat" />
         <File name="clc_spe_cfg3" src="share/tts/nuance/fr_FR/spe/speech/components/clc_spe_cfg3.dat" />
+        <File name="icon" src="icon.png" />
     </Resources>
     <Topics />
     <IgnoredPaths />
