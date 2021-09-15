@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package version="1.3.4" uuid="robot-language-french-0879c7" organization="Aldebaran Robotics">
+ <names>
+  <name lang="en_US">Language French</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">An ACAPELA Text-To-Speech technology package</description>
+ </descriptions>
+ <descriptionLanguages>
+  <language>en_US</language>
+ </descriptionLanguages>
+ <contents>
+  <languageContent path="share/tts/nuance/fr_FR">
+   <engine version="1.0" name="tts_nuance"/>
+   <locale>fr_FR</locale>
+  </languageContent>
+  <languageContent path="share/asr/nuance/frf">
+   <engine version="1.0" name="asr_nuance"/>
+   <locale>fr_FR</locale>
+  </languageContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.1.2.10"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+</package>
