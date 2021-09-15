@@ -53,7 +53,7 @@ This repos is composed of many elements which will be presented here:
 
 * **images_to_display_in_github_repos:** this directory contains all images to display in this git repos;
 
-* **.gitattributes:** 
+* **.gitattributes:** This file contains one instruction to do Git LFS (Git Large File Storage) get in charge of the defined files;
 
 * **README.md:** this file exposes all the overview and general documentation of this git repository.
 
