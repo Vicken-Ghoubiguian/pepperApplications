@@ -106,6 +106,10 @@ So please select the robot colored in green (or the one you want which is also c
 
 Let's go back to the interface shown above. In the table on the left, you must choose the robot you want to connect to Choregraphe. In the “status” column, there are several robots, each represented by a head of Nao robots. The dotted robot (opposite <img src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_1.png" width="73" height="73" align="center" />) corresponds to the virtual robot, a simulation of the Pepper robot installed by default with Chorégraphe and which is just as interfaceable, controllable and programmable as a physical robot. A real physical Pepper robot is full line and:
 
+* either it is colored green with the eyes open (opposite <img src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_2.png" width="73" height="73" align="center" />): you can connect to this robot because its NAOqi OS is running,
+
+* or it is colored red with closed eyes (opposite <img src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_3.png" width="73" height="73" align="center" />): you cannot connect to this robot because its NAOqi OS is stopped.
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
