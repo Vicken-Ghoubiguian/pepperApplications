@@ -138,6 +138,11 @@ Once at 100%, the following window appears showing that the application is insta
 
 <img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-sending_box-2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-sending_box-2.png" width="202" height="147" align="center" />
 
+Once this window disappears, the installation of the application is complete.
+The “robot-language-french” application under the name of “Language French” then appears in the applications menu of the Pepper robot as illustrated by the screenshot below...
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-5.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-5.png" width="158" height="512" align="center" />
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
