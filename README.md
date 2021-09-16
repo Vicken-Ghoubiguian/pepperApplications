@@ -99,6 +99,14 @@ Let's go back to the interface shown above. In the table on the left, you must c
 
 * or it is colored red with closed eyes (opposite <img src="images_to_display_in_github_repos/how_to_install_an_application/6_bis_3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/6_bis_3.png" width="73" height="73" align="center" />): you cannot connect to this robot because its NAOqi OS is stopped.
 
+4. Now is the time to install the applications on the Pepper robot. To do this, open the application you want in the Choregraphe software. To illustrate the procedure, the “display Karine Janet” application available in the current GitHub project, in the “demonstrations” folder, will be taken as an example. 
+
+This app simply displays the following image on the Pepper robot's digital tablet.
+
+<img src="images_to_display_in_github_repos/how_to_install_an_application/display_Karine_Janet.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/display_Karine_Janet.png" width="317" height="512" align="center" />
+
+This is a basic application but it perfectly illustrates the process of installing an application on the Pepper robot.
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_language_on_the_robot"></a>
