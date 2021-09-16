@@ -96,6 +96,14 @@ Then click on the button <img src="images_to_display_in_github_repos/how_to_inst
 
 <img src="images_to_display_in_github_repos/how_to_install_a_language/4.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/4.png" width="512" height="321" align="center" />
 
+The window shown in the screenshot below then opens.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/5.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/5.png" width="512" height="340" align="center" />
+
+So please select the robot colored in green (or the one you want which is also colored in green) and then press the “Select” button as shown below.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/6.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/6.png" width="512" height="340" align="center" />
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
