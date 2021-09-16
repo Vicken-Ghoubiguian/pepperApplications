@@ -143,6 +143,10 @@ The “robot-language-french” application under the name of “Language French
 
 <img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-5.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-5.png" width="158" height="512" align="center" />
 
+So all my congratulations: the “robot-language-french” application has been successfully installed on the robot and the French language is now available on the robot.
+
+
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
