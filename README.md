@@ -115,6 +115,14 @@ In this example and for illustration purposes, this project will be cloned to th
 
 Now open this application in the Choregraphe software. For this, the entire procedure is illustrated in the screenshots below.
 
+6. Congratulations, the application you wanted to install (“display_Karine_Janet” in our example) is finally. You can see this by checking in the right menu of the Choregraphe software as shown in the screenshot below.
+
+<img src="images_to_display_in_github_repos/how_to_install_an_application/end_1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/end_1.png" width="157" height="512" align="center" />
+
+You can also check it on the Pepper robot's digital tablet. The app icon and title should be displayed below the first above the second as shown in the following screenshot.
+
+<img src="images_to_display_in_github_repos/how_to_install_an_application/end_2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/end_2.png" width="512" height="384" align="center" />
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_language_on_the_robot"></a>
