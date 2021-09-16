@@ -76,6 +76,14 @@ Just a piece of cake 🐱. No ?
 
 To install a language on the robot is exactly the same thing that to install any Pepper applications. For more informations, you can check the corresponding section [just here](#how_to_install_an_application_on_the_robot). However, we will show the language installation process on Pepper by taking the french language example. So let's go...
 
+To install an additional language on the Pepper robot, you must follow the following instructions:
+
+1. please turn on the Pepper robot first;
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/1.png" width="636" height="273" align="center" />
+
+2. then please wait for the robot to pronounce “Ognak Gnuk” and check its environment, this means that the robot is now on;
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
