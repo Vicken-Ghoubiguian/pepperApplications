@@ -80,7 +80,7 @@ To install an additional language on the Pepper robot, you must follow the follo
 
 1. please turn on the Pepper robot first;
 
-<img src="images_to_display_in_github_repos/how_to_install_a_language/1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/1.png" width="636" height="273" align="center" />
+<img src="images_to_display_in_github_repos/how_to_install_a_language/1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/1.png" width="452" height="319" align="center" />
 
 2. then please wait for the robot to pronounce “Ognak Gnuk” and check its environment, this means that the robot is now on;
 
