@@ -96,7 +96,7 @@ Just a piece of cake 🐱. No ?
 *
 *
 *
-* 
+* [Manuel pour une prise en main rapide et efficiente du robot Pepper](https://docs.google.com/document/d/1ZAIgvsyCzpJZ3wD4W-0Gt4teEFrPybbgo8e2c1v9GA4),
 * [Git Large File Storage](https://git-lfs.github.com/),
 * [Configuring Git Large File Storage - GitHub](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage),
 * [Git LFS - Atlassian](https://www.atlassian.com/git/tutorials/git-lfs),
