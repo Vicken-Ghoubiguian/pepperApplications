@@ -92,7 +92,9 @@ Please now proceed to the next step.
 
 <img src="images_to_display_in_github_repos/how_to_install_a_language/3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/3.png" width="512" height="321" align="center" />
 
-Then click on the button <img src="images_to_display_in_github_repos/how_to_install_a_language/'3 bis'.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/'3 bis'.png" width="42" height="35" align="center" /> indicated on the screenshot below.
+Then click on the button <img src="images_to_display_in_github_repos/how_to_install_a_language/3_bis.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/3_bis.png" width="42" height="35" align="center" /> indicated on the screenshot below.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/4.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/4.png" width="512" height="321" align="center" />
 
 Just a piece of cake 🐱. No ?
 
