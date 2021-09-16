@@ -125,6 +125,8 @@ The first option is the default option for this button. So each time you click o
 
 Its position in the Choregraphe software interface is illustrated by the screenshot below.
 
+<img src="images_to_display_in_github_repos/how_to_install_an_application/mig_button_macro.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/mig_button_macro.png" width="228" height="1000" align="center" />
+
 Once you have pressed the button <img src="images_to_display_in_github_repos/how_to_install_an_application/mig_button.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/mig_button.png" width="55" height="38" align="center" /> therefore, the following window is displayed and indicates the percentage of the transfer of the application to be installed (“display_Karine_Janet” in our example) from your machine to the robot in percentage (%).
 
 <img src="images_to_display_in_github_repos/how_to_install_an_application/infinite-sending_box-1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/infinite-sending_box-1.png" width="202" height="147" align="center" />
