@@ -149,6 +149,10 @@ So all my congratulations: the “robot-language-french” application has been 
 
 <img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-6.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-6.png" width="512" height="277" align="center" />
 
+__Warning:__ if French does not appear in the language selection menu, then refresh the page. French should appear right after.
+
+As you can see, the parameters of the Pepper robot indicate that its language is French as shown in the screenshot below.
+
 <img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-7.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-7.png" width="512" height="277" align="center" />
 
 Just a piece of cake 🐱. No ?
