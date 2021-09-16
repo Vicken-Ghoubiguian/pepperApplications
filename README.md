@@ -123,6 +123,12 @@ You can also check it on the Pepper robot's digital tablet. The app icon and tit
 
 <img src="images_to_display_in_github_repos/how_to_install_an_application/end_2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/end_2.png" width="512" height="384" align="center" />
 
+You can also open (have it run) on the Pepper robot by clicking on it.
+
+<img src="images_to_display_in_github_repos/how_to_install_an_application/end_3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/end_3.png" width="512" height="384" align="center" />
+
+And here is the (good) job...
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_language_on_the_robot"></a>
