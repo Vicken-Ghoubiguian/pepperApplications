@@ -109,7 +109,7 @@ This is a basic application but it perfectly illustrates the process of installi
 
 Now please clone the current project wherever you want on your development machine with the following command:
 
-<img src="images_to_display_in_github_repos/how_to_install_an_application/git_command.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/git_command.png" width="470" height="19" align="center" />
+<img src="images_to_display_in_github_repos/how_to_install_an_application/git_command.PNG" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/git_command.PNG" width="470" height="19" align="center" />
 
 In this example and for illustration purposes, this project will be cloned to the computer's desktop.
 
