@@ -88,6 +88,12 @@ To install an additional language on the Pepper robot, you must follow the follo
 
 Please now proceed to the next step.
 
+3. please connect the Pepper robot to the Choregraphe software now. To do this, you must open the Choregraphe software;
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/3.png" width="512" height="321" align="center" />
+
+Then click on the button <img src="images_to_display_in_github_repos/how_to_install_a_language/'3 bis'.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/'3 bis'.png" width="42" height="35" align="center" /> indicated on the screenshot below.
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
