@@ -120,7 +120,23 @@ The following interface will then appear.
 
 <img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-2.png" width="502" height="219" align="center" />
 
+Now click on the “OK” button, then the interface below will appear.
 
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-3.png" width="512" height="275" align="center" />
+
+The peculiarity of applications like this is that there is no “behavior” or “.xar” file (named after the corresponding file extension), i.e. the type of file that can be executed in the Chorégraphe software.
+
+You must now install the “robot-language-french” application on the Pepper robot. To do this please click on the button <img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-3_bis.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-3_bis.png" width="54" height="37" align="center" />, which is also shown in the following screenshot.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-4.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-4.png" width="512" height="275" align="center" />
+
+The following window is then displayed and indicates the percentage of the transfer of the "robot-language-french" application from your machine to the robot in percentage (%).
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-sending_box-1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-sending_box-1.png" width="202" height="147" align="center" />
+
+Once at 100%, the following window appears showing that the application is installed on the Pepper robot.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-sending_box-2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-sending_box-2.png" width="202" height="147" align="center" />
 
 Just a piece of cake 🐱. No ?
 
