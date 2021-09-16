@@ -115,6 +115,26 @@ In this example and for illustration purposes, this project will be cloned to th
 
 Now open this application in the Choregraphe software. For this, the entire procedure is illustrated in the screenshots below.
 
+5. Now that the application in question is open in Chorégraphe, it's time to install it on the Pepper robot. To do this, please click on the button <img src="images_to_display_in_github_repos/how_to_install_an_application/mig_button.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/mig_button.png" width="55" height="38" align="center" />. This button has 2 options:
+
+    1. “Package and install current project to the robot”: packages and installs the open application in the Choregraphe software on the Pepper robot,
+
+    2. “Install a package to the robot ...”: installs a packaged application on the Pepper robot.
+
+The first option is the default option for this button. So each time you click on it, the Choregraphe software packages the open application and then installs it on the Pepper robot.
+
+Its position in the Choregraphe software interface is illustrated by the screenshot below.
+
+Once you have pressed the button <img src="images_to_display_in_github_repos/how_to_install_an_application/mig_button.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/mig_button.png" width="55" height="38" align="center" /> therefore, the following window is displayed and indicates the percentage of the transfer of the application to be installed (“display_Karine_Janet” in our example) from your machine to the robot in percentage (%).
+
+<img src="images_to_display_in_github_repos/how_to_install_an_application/infinite-sending_box-1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/infinite-sending_box-1.png" width="202" height="147" align="center" />
+
+Once at 100%, the following window appears showing that the application is installed on the Pepper robot.
+
+<img src="images_to_display_in_github_repos/how_to_install_an_application/infinite-sending_box-2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/infinite-sending_box-2.png" width="202" height="147" align="center" />
+
+Once this window disappears, the installation of the application is complete.
+
 6. Congratulations, the application you wanted to install (“display_Karine_Janet” in our example) is finally. You can see this by checking in the right menu of the Choregraphe software as shown in the screenshot below.
 
 <img src="images_to_display_in_github_repos/how_to_install_an_application/end_1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_an_application/end_1.png" width="157" height="512" align="center" />
