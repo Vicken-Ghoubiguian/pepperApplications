@@ -110,6 +110,18 @@ Let's go back to the interface shown above. In the table on the left, you must c
 
 * or it is colored red with closed eyes (opposite <img src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_3.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/6_bis_3.png" width="73" height="73" align="center" />): you cannot connect to this robot because its NAOqi OS is stopped.
 
+4. 
+
+5. Now is the time to install the language(s) you want on the Pepper robot. To do this, nothing could be simpler because it(they) can be installed or reinstalled like any Choreographer application on the Pepper robot. In the context of this tutorial, a reinstallation will be carried out. So do “File”> “Import project from former project directory…” as shown in the screenshot below.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-1.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-1.png" width="416" height="512" align="center" />
+
+The following interface will then appear.
+
+<img src="images_to_display_in_github_repos/how_to_install_a_language/infinite-2.png" data-canonical-src="images_to_display_in_github_repos/how_to_install_a_language/infinite-2.png" width="502" height="219" align="center" />
+
+
+
 Just a piece of cake 🐱. No ?
 
 <a name="how_to_install_a_dialog_box_on_the_robot"></a>
