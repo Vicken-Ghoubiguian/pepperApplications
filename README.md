@@ -4,16 +4,16 @@ This Git repos contains all the applications installed on Pepper and used by IME
 
 ## Contents
 
-1. [Introduction](#introduction),
-2. [Presentation of this repos](#presentation_of_this_repos),
-3. [What is this repos' structure ?](#what_is_this_repos_structure),
-4. [What are this repos' components ?](#what_are_this_repos_components),
-5. [How to install an application (danse, demonstration or other) on the robot ?](#how_to_install_an_application_on_the_robot),
-6. [How to install a language on the robot ?](#how_to_install_a_language_on_the_robot),
-7. [How to install a dialog box on the robot ?](#how_to_install_a_dialog_box_on_the_robot),
-8. [How to clone this repos ?](#how_to_clone_this_repos),
-9. [Useful links](#useful_links),
-10. [Conclusion](#conclusion),
+1. [Introduction](#introduction)
+2. [Presentation of this repos](#presentation_of_this_repos)
+3. [What is this repos' structure ?](#what_is_this_repos_structure)
+4. [What are this repos' components ?](#what_are_this_repos_components)
+5. [How to install an application (danse, demonstration or other) on the robot ?](#how_to_install_an_application_on_the_robot)
+6. [How to install a language on the robot ?](#how_to_install_a_language_on_the_robot)
+7. [How to install a dialog box on the robot ?](#how_to_install_a_dialog_box_on_the_robot)
+8. [How to clone this repos ?](#how_to_clone_this_repos)
+9. [Useful links](#useful_links)
+10. [Conclusion](#conclusion)
 
 <a name="introduction"></a>
 ## Introduction
