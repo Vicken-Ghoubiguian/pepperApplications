@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package uuid="robot-language-french-0879c7" version="1.3.4" organization="Aldebaran Robotics">
+<package organization="Aldebaran Robotics" uuid="robot-language-french-325b3a" version="1.3.4">
  <names>
   <name lang="en_US">Language French</name>
  </names>
