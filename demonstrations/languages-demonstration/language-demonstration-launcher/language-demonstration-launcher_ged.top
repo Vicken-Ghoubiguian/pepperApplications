@@ -1,0 +1,4 @@
+topic: ~language-demonstration-launcher()
+language: ged
+
+u:(* "Sprache Demonstration") ^switchFocus(languages-demonstration/.)

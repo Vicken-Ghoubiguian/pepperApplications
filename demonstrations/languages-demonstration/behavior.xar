@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram>
+                        <Box name="list languages" id="3" localization="8" tooltip="" x="294" y="128">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.tts = ALProxy("ALTextToSpeech")
+        self.defaultLanguage = self.tts.getLanguage()
+        self.availableLanguages = self.tts.getAvailableLanguages()
+        self.currentIndex = self.availableLanguages.index(self.defaultLanguage)
+        self.started = False
+
+    def onUnload(self):
+        self.setLanguage(self.defaultLanguage)
+
+    def onInput_onStart(self):
+        newLanguage = self.availableLanguages[self.currentIndex]
+
+        if self.started and newLanguage == self.defaultLanguage:
+            self.onFinished()
+            return
+
+        self.started=True
+        self.setLanguage(newLanguage)
+        self.onStopped(newLanguage)
+
+        self.currentIndex = self.currentIndex + 1
+        if(self.currentIndex >= len(self.availableLanguages)):
+            self.currentIndex = 0
+
+    def setLanguage(self, lang):
+        self.tts.setLanguage(lang)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                            <Output name="onFinished" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+                        </Box>
+                        <Box name="get text" id="1" localization="8" tooltip="" x="445" y="48">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.textLoaded = False
+
+    def loadText(self):
+        import csv
+        framemanager = ALProxy("ALFrameManager")
+        bhpath = framemanager.getBehaviorPath(self.behaviorId) + "/html/text.csv"
+        with open(bhpath, 'rb') as f:
+            reader = csv.reader(f)
+            rawsentences = list(reader)
+
+        self.sentences = {}
+        for sentence in rawsentences:
+            if sentence[0]=="TITLE":
+                continue
+            else:
+                lang = sentence[0]
+                text = sentence[1]
+                self.sentences[lang]=text
+
+        self.log(self.sentences)
+        self.textLoaded = True
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self, lang):
+        if not self.textLoaded:
+            self.loadText()
+        text = ""
+        try:
+            text = self.sentences[lang]
+        except:
+            pass
+        self.onStopped(text)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="3" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                        </Box>
+                        <Box name="Show Image" id="13" localization="8" tooltip="display an image on the screen&#x0A;&#x0A;V1.0.0&#x0A;" x="639" y="136">
+                            <bitmap>media/images/box/interaction/rec_movie.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[
+
+class MyClass(GeneratedClass):
+
+    def onLoad(self):
+        self.frameManager = None
+        try:
+            self.frameManager = ALProxy("ALFrameManager")
+        except Exception as e:
+            self.logger.error(e)
+
+    def onUnload(self):
+        self.onInput_onHideImage()
+
+    def _getTabletService(self):
+        tabletService = None
+        try:
+            tabletService = self.session().service("ALTabletService")
+        except Exception as e:
+            self.logger.error(e)
+        return tabletService
+
+    def _getAppName(self):
+        import os
+        if self.frameManager:
+            behaviorPath = os.path.normpath(self.frameManager.getBehaviorPath(self.behaviorId))
+            appsFolderFragment = os.path.join("PackageManager", "apps")
+            if not (appsFolderFragment in behaviorPath):
+                self.logger.error("appsFolderFragment is not in behaviorPath")
+            fragment = behaviorPath.split(appsFolderFragment, 1)[1]
+            return fragment.lstrip("\\/").split("/")[0]
+        else:
+            self.logger.warning("No ALFrameManager")
+
+    def _getAbsoluteUrl(self, partial_url):
+        import os
+        subPath = os.path.join(self._getAppName(), os.path.normpath(partial_url).lstrip("\\/"))
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        return "http://%s/apps/%s" %(self._getTabletService().robotIp(), subPath.replace(os.path.sep, "/"))
+
+    def onInput_onStart(self):
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        tabletService = self._getTabletService()
+        if tabletService:
+            try:
+                url = "flags/"+self.getParameter("ImageUrl")+".jpg"
+                if url == '':
+                    self.logger.error("URL of the image is empty")
+                if not url.startswith('http'):
+                    url = self._getAbsoluteUrl(url)
+                self.log(url)
+                tabletService.showImage(url)
+            except Exception as err:
+                self.logger.error("Error during ShowImage : %s " % err)
+                self.onStopped()
+        else:
+            self.logger.warning("No ALTabletService, can't display the image.")
+            self.onStopped()
+
+    def onInput_onHideImage(self):
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        tabletService = self._getTabletService()
+        if tabletService:
+            try:
+                tabletService.hideImage()
+            except Exception as err:
+                self.logger.error("Error during HideImage : %s " % err)
+                self.onStopped()
+        else:
+            self.logger.warning("No ALTabletService, can't hide the image.")
+            self.onStopped()
+
+    def onInput_onPreLoadImage(self):
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        tabletService = self._getTabletService()
+        if tabletService:
+            try:
+                partialUrl = self.getParameter("ImageUrl")
+                fullUrl = self._getAbsoluteUrl(partialUrl)
+                tabletService.preLoadImage(fullUrl)
+            except Exception as err:
+                self.logger.warning("Error during preLoadImage : %s " % err)
+                self.onStopped()
+        else:
+            self.logger.warning("No ALTabletService, can't preload the image.")
+            self.onStopped()
+
+    def onInput_onStop(self):
+        self.onUnload()
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Input name="onHideImage" type="1" type_size="1" nature="1" inner="0" tooltip="Hide the image when a signal is received on this input." id="4" />
+                            <Input name="onPreLoadImage" type="1" type_size="1" nature="1" inner="0" tooltip="Preload the image when a signal is received on this input." id="5" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="6" />
+                            <Parameter name="ImageUrl" inherits_from_parent="0" content_type="3" value="" default_value="" custom_choice="0" tooltip='path of the image inside the &quot;html&quot; folder (e.g. &quot;/images/myimage.png&quot;' id="7" />
+                        </Box>
+                        <Box name="Animated Say Text" id="8" localization="8" tooltip="Say the text received on its input and move during its speech." x="635" y="27">
+                            <bitmap>media/images/box/interaction/say.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.animSpeech = ALProxy('ALAnimatedSpeech')
+        self.bMustStop = False
+
+    def onUnload(self):
+        self.bMustStop = True
+
+    def onInput_onStart(self, p):
+        try:
+            sentence = "\RSPD="+ str( self.getParameter("Speed (%)") ) + "\ "
+            sentence += "\VCT="+ str( self.getParameter("Voice shaping (%)") ) + "\ "
+            sentence += str(p)
+            sentence +=  "\RST\ "
+            configuration =\
+            {"bodyLanguageMode":self.getParameter("Body language mode")}
+            id = self.animSpeech.post.say(str(sentence), configuration)
+            bNotFinished = True
+            while (bNotFinished) and (not self.bMustStop):
+                if self.bMustStop:
+                    self.animSpeech.stop(id)
+                bNotFinished = self.animSpeech.wait(id, 500)
+        finally:
+            self.onStopped() # activate output of the box
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+                            <Parameter name="Voice shaping (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="50" max="150" tooltip='Used to modify at runtime the voice feature (tone, speed). In a slighty&#x0A;different way than pitch and speed, it gives a kind of &quot;gender or age&#x0A;modification&quot; effect.&#x0A;&#x0A;For instance, a quite good male derivation of female voice can be&#x0A;obtained setting this parameter to 78%.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the&#x0A;speed parameter. For example, if you want to decrease by 20% the voice&#x0A;shaping, you will have to increase by 20% the speed to keep a constant&#x0A;average speed.' id="5" />
+                            <Parameter name="Speed (%)" inherits_from_parent="1" content_type="1" value="90" default_value="100" min="50" max="200" tooltip="Changes the speed of the voice.&#x0A;&#x0A;Note: For a better effect, you can compensate this parameter with the voice&#x0A;shaping parameter. For example, if you want to increase by 20% the speed, you&#x0A;will have to decrease by 20% the voice shaping to keep a constant average&#x0A;speed." id="6" />
+                            <Parameter name="Body language mode" inherits_from_parent="1" content_type="3" value="contextual" default_value="contextual" custom_choice="0" tooltip="Change the body language mode during the speech.&#x0A;disabled: The robot will only play the animations given by the user. ex: ^start(...) or ^tag(...)&#x0A;random: During time the robot has no animation to play, he will launch random neutral animations.&#x0A;contextual: During time the robot has no animation to play, he will try to launch a new one accordingly to the saying text. Every time the robot can&apos;t find a contextual animation he will launch a random neutral animation." id="7">
+                                <Choice value="disabled" />
+                                <Choice value="random" />
+                                <Choice value="contextual" />
+                            </Parameter>
+                        </Box>
+                        <Box name="Get Mood" id="4" localization="8" tooltip='This box returns the focused user&apos;s emotional reaction during the next few seconds after this call.&#x0A;Values can be:&#x0A;- &quot;positive&quot;&#x0A;- &quot;neutral&quot;&#x0A;- &quot;negative&quot;&#x0A;- &quot;unknown&quot;&#x0A;&#x0A;The parameter &quot;Event label&quot; is the name of the event you want to analyse with user&apos;s mood information.&#x0A;For example: &quot;joke/toto&quot;&#x0A;&#x0A;If the parameter &quot;Send to cloud&quot; is checked, this box will automatically send the output to cloud, tagged with the label given above.&#x0A;&#x0A;[WARNING] It is recommended to connect the &quot;Preload Mood&quot; box before using this one to ensure its recognition performance' x="640" y="283">
+                            <bitmap>media/images/box/interaction/mood.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        try:
+            self.mood = ALProxy("ALMood")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+        try:
+            self.appsAnalytics = ALProxy("ALAppsAnalytics")
+            self.appsAnalyticsPresent = True
+        except:
+            self.appsAnalyticsPresent = False
+
+    def onUnload(self):
+        pass
+
+    def onInput_onStart(self):
+        reaction = self.mood.getEmotionalReaction()
+        self.onStopped(reaction)
+        if self.getParameter("Send to cloud"):
+            if self.appsAnalyticsPresent:
+                self.appsAnalytics.push_mood(self.getParameter("Event label"),reaction)
+            else:
+                print "ALAppsAnalytics is not present on the robot."
+        moodSubscribers = self.mood.getSubscribersInfo()
+        if reaction == "unknown":
+            if not any(['Active' in sub for sub in moodSubscribers]):
+                    self.logger.warning("ALMood is not in Active mode. The emotional data may not be sufficient. Use the Preload Mood box for best performance.")
+
+    def onInput_onStop(self):
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="A mood scope starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="" id="3" />
+                            <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip='Returns the emotional reaction found after a few seconds.&#x0A;Values can be:&#x0A;- &quot;positive&quot;&#x0A;- &quot;neutral&quot;&#x0A;- &quot;negative&quot;&#x0A;- &quot;unknown&quot;&#x0A;&#x0A;' id="4" />
+                            <Parameter name="Event label" inherits_from_parent="0" content_type="3" value="joke_1" default_value="joke_1" custom_choice="0" tooltip="Label of the event you want to analyse with user mood information." id="5" />
+                            <Parameter name="Send to cloud" inherits_from_parent="0" content_type="0" value="1" default_value="0" tooltip="If checked, this box will automatically send the output to cloud, tagged with the label given above." id="6" />
+                        </Box>
+                        <Box name="Preload Mood" id="5" localization="8" tooltip='This box initializes ALMood to ensure its performances. The parameter &quot;Operating Mode&quot; allows to choose between two operating modes.&#x0A;Operating modes can be:&#x0A;- &quot;Active&quot;: ALMood launches all needed extractors&#x0A;- &quot;Passive&quot;: ALMood doesn&apos;t manage the extractors subscription&#x0A;' x="85" y="179">
+                            <bitmap>media/images/box/interaction/preload_mood.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        try:
+            self.mood = ALProxy("ALMood")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+
+    def onUnload(self):
+        self.mood.unsubscribe(self.id)
+
+    def onInput_onStart(self):
+        success = self.mood.subscribe(self.id,self.getParameter("Operating Mode"))
+        if success:
+            # Wait for sub-extractors to finish loading
+            import time
+            time.sleep(0.5)
+            self.onSuccess()
+        else:
+            self.onError("Cannot subscribe to ALMood in " + self.getParameter("Operating Mode") + " mode.")
+
+    def onInput_onStop(self):
+        self.mood.unsubscribe(self.id)
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="" id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="" id="3" />
+                            <Output name="onSuccess" type="1" type_size="1" nature="2" inner="0" tooltip="Triggered when the subscription to ALMood is successful." id="4" />
+                            <Output name="onError" type="3" type_size="1" nature="2" inner="0" tooltip="Triggered when the subscription to ALMood failed." id="5" />
+                            <Parameter name="Operating Mode" inherits_from_parent="0" content_type="3" value="Active" default_value="Active" custom_choice="0" tooltip='Subscribe to ALMood with chosen operating mode.&#x0A;- &quot;Passive&quot;: ALMood listens passively to audio &amp; vision extractors&#x0A;- &quot;Active&quot;: ALMood manages the subscription of audio &amp; vision extractors' id="6">
+                                <Choice value="Active" />
+                                <Choice value="Passive" />
+                            </Parameter>
+                        </Box>
+                        <Link inputowner="1" indexofinput="2" outputowner="3" indexofoutput="3" />
+                        <Link inputowner="8" indexofinput="2" outputowner="1" indexofoutput="3" />
+                        <Link inputowner="3" indexofinput="2" outputowner="8" indexofoutput="4" />
+                        <Link inputowner="13" indexofinput="7" outputowner="3" indexofoutput="3" />
+                        <Link inputowner="13" indexofinput="2" outputowner="1" indexofoutput="3" />
+                        <Link inputowner="4" indexofinput="5" outputowner="3" indexofoutput="3" />
+                        <Link inputowner="4" indexofinput="2" outputowner="1" indexofoutput="3" />
+                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="0" indexofinput="4" outputowner="3" indexofoutput="4" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>

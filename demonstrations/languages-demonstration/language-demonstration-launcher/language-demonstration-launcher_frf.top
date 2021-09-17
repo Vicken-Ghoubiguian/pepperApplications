@@ -1,0 +1,4 @@
+topic: ~language-demonstration-launcher()
+language: frf
+
+u:(* [démo démonstration] {de des} langues ) ^switchFocus(languages-demonstration/.)

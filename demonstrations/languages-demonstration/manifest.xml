@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="languages-demonstration-c94ba9" version="1.1.1">
+ <names>
+  <name lang="en_US">Language Demonstration</name>
+  <name lang="en_US-x-scrald">Language Demonstration</name>
+  <name lang="fr_FR">Démonstration des langues</name>
+  <name lang="fr_FR-x-scrald">Démonstration des langues</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Pepper speaks different languages (loop).</description>
+  <description lang="en_US-x-scrald">Pepper speaks different languages (loop).</description>
+  <description lang="fr_FR">Pepper parle plusieurs langues (en boucle).</description>
+  <description lang="fr_FR-x-scrald">Pepper parle plusieurs langues (en boucle).</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ar_SA</language>
+  <language>pt_BR</language>
+  <language>zh_CN</language>
+  <language>cs_CZ</language>
+  <language>da_DK</language>
+  <language>nl_NL</language>
+  <language>de_DE</language>
+  <language>it_IT</language>
+  <language>ru_RU</language>
+  <language>es_ES</language>
+  <language>el_GR</language>
+  <language>fi_FI</language>
+  <language>ja_JP</language>
+  <language>ko_KR</language>
+  <language>nn_NO</language>
+  <language>pl_PL</language>
+  <language>pt_PT</language>
+  <language>sv_SE</language>
+  <language>tr_TR</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>ar_SA</language>
+  <language>pt_PT</language>
+  <language>pt_BR</language>
+  <language>zh_CN</language>
+  <language>cs_CZ</language>
+  <language>da_DK</language>
+  <language>nl_NL</language>
+  <language>fi_FI</language>
+  <language>de_DE</language>
+  <language>it_IT</language>
+  <language>ru_RU</language>
+  <language>es_ES</language>
+  <language>el_GR</language>
+  <language>ja_JP</language>
+  <language>ko_KR</language>
+  <language>nn_NO</language>
+  <language>pl_PL</language>
+  <language>sv_SE</language>
+  <language>tr_TR</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="de_DE">Sprache Demonstration</name>
+    <name lang="de_DE-x-scrald">Sprache Demonstration</name>
+    <name lang="en_US">Language Demonstration</name>
+    <name lang="en_US-x-scrald">Language Demonstration</name>
+    <name lang="es_ES">Muestra idioma</name>
+    <name lang="es_ES-x-scrald">Muestra idioma</name>
+    <name lang="fr_FR">Démonstration des langues</name>
+    <name lang="fr_FR-x-scrald">Démonstration des langues</name>
+   </names>
+   <triggerSentences>
+    <sentence lang="de_DE">Sprache Demonstration</sentence>
+    <sentence lang="de_DE">Sprache Demo</sentence>
+    <sentence lang="de_DE-x-scrald">Sprache Demonstration</sentence>
+    <sentence lang="de_DE-x-scrald">Sprache Demo</sentence>
+    <sentence lang="en_US">Language demo</sentence>
+    <sentence lang="en_US">Language demonstration</sentence>
+    <sentence lang="en_US-x-scrald">Language demo</sentence>
+    <sentence lang="en_US-x-scrald">Language demonstration</sentence>
+    <sentence lang="es_ES">Demostración idioma</sentence>
+    <sentence lang="es_ES">Muestra idioma</sentence>
+    <sentence lang="es_ES-x-scrald">Demostración idioma</sentence>
+    <sentence lang="es_ES-x-scrald">Muestra idioma</sentence>
+    <sentence lang="fr_FR">Démo des langues</sentence>
+    <sentence lang="fr_FR">Démonstration des langues</sentence>
+    <sentence lang="fr_FR-x-scrald">Démo des langues</sentence>
+    <sentence lang="fr_FR-x-scrald">Démonstration des langues</sentence>
+   </triggerSentences>
+   <permissions>
+    <canRunOnPod/>
+   </permissions>
+  </behaviorContent>
+  <dialogContent topicName="language-demonstration-launcher" typeVersion="1.0">
+   <topic path="language-demonstration-launcher/language-demonstration-launcher_ged.top" language="de_DE"/>
+   <topic path="language-demonstration-launcher/language-demonstration-launcher_enu.top" language="en_US"/>
+   <topic path="language-demonstration-launcher/language-demonstration-launcher_spe.top" language="es_ES"/>
+   <topic path="language-demonstration-launcher/language-demonstration-launcher_frf.top" language="fr_FR"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="1.22"/>
+  <robotRequirement model="JULIETTE"/>
+  <robotRequirement model="NAO"/>
+  <robotRequirement model="ROMEO"/>
+ </requirements>
+</package>
