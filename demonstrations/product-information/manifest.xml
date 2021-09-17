@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="product-information-b925e0" version="2.0.3">
+ <names>
+  <name lang="en_US">Product Information</name>
+  <name lang="en_US-x-scrald">Product Information</name>
+  <name lang="es_ES">Información del producto</name>
+  <name lang="es_ES-x-scrald">Información del producto</name>
+  <name lang="fr_FR">Informations Produits</name>
+  <name lang="fr_FR-x-scrald">Informations Produits</name>
+ </names>
+ <descriptions>
+  <description lang="en_US">Pepper gives information about known products.
+--NOT TO BE RELEASED as prices are shown...--
+Known codes:
+3760067310005: Chocolate muffin
+3760067310012: Red dress
+7057070070429: Super phone
+Any other code will show info about NAO.
+Swipe tablet to right to edit product information.</description>
+  <description lang="en_US-x-scrald">Pepper gives information about known products.
+--NOT TO BE RELEASED as prices are shown...--
+Known codes:
+3760067310005: Chocolate muffin
+3760067310012: Red dress
+7057070070429: Super phone
+Any other code will show info about NAO.
+Swipe tablet to right to edit product information.</description>
+  <description lang="es_ES">Pepper da información acerca de los productos conocidos.
+--NOT TO BE RELEASED as prices are shown...--
+Productos conocidos:
+3760067310005: Magdalena de chocolate
+3760067310012: Vestido rojo
+7057070070429: Súper teléfono
+Cualquier otro código muestra información sobre NAO.
+Pase para la tableta derecho a editar la información del producto.</description>
+  <description lang="es_ES-x-scrald">Pepper da información acerca de los productos conocidos.
+--NOT TO BE RELEASED as prices are shown...--
+Productos conocidos:
+3760067310005: Magdalena de chocolate
+3760067310012: Vestido rojo
+7057070070429: Súper teléfono
+Cualquier otro código muestra información sobre NAO.
+Pase para la tableta derecho a editar la información del producto.</description>
+  <description lang="fr_FR">Pepper donne les infos sur divers produits
+--NOT TO BE RELEASED as prices are shown...--
+Produits connus :
+3760067310005: Muffin au chocolat
+3760067310012: Robe rouge
+7057070070429: Super téléphone
+N'importe quel autre code donnera des informations sur NAO.
+Glisser sur la tablette vers la droite permettra d'éditer les informations d'un produit.</description>
+  <description lang="fr_FR-x-scrald">Pepper donne les infos sur divers produits
+--NOT TO BE RELEASED as prices are shown...--
+Produits connus :
+3760067310005: Muffin au chocolat
+3760067310012: Robe rouge
+7057070070429: Super téléphone
+N'importe quel autre code donnera des informations sur NAO.
+Glisser sur la tablette vers la droite permettra d'éditer les informations d'un produit.</description>
+ </descriptions>
+ <supportedLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>es_ES</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>en_US</language>
+  <language>fr_FR</language>
+  <language>es_ES</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path=".">
+   <userRequestable/>
+   <nature>interactive</nature>
+   <names>
+    <name lang="en_US">Product Information</name>
+    <name lang="en_US-x-scrald">Product Information</name>
+    <name lang="es_ES">Información del producto</name>
+    <name lang="es_ES-x-scrald">Información del producto</name>
+    <name lang="fr_FR">Information produits</name>
+    <name lang="fr_FR-x-scrald">Information produits</name>
+   </names>
+   <tags>
+    <tag lang="en_US">launcher</tag>
+   </tags>
+   <triggerSentences>
+    <sentence lang="en_US">Product Information</sentence>
+    <sentence lang="en_US-x-scrald">Product Information</sentence>
+    <sentence lang="es_ES">Información del producto</sentence>
+    <sentence lang="es_ES-x-scrald">Información del producto</sentence>
+    <sentence lang="fr_FR">Information produit</sentence>
+    <sentence lang="fr_FR-x-scrald">Information produit</sentence>
+   </triggerSentences>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent typeVersion="1.0" topicName="product-information-launcher">
+   <topic language="en_US" path="product-information-launcher/product-information-launcher_enu.top"/>
+   <topic language="es_ES" path="product-information-launcher/product-information-launcher_spe.top"/>
+   <topic language="fr_FR" path="product-information-launcher/product-information-launcher_frf.top"/>
+  </dialogContent>
+ </contents>
+ <requirements>
+  <naoqiRequirement minVersion="2.3"/>
+  <robotRequirement model="JULIETTE"/>
+ </requirements>
+ <services>
+  <service name="BarcodeReader" autorun="false" execStart="/usr/bin/python2 lib/barcodereader.py"/>
+ </services>
+</package>

@@ -1,0 +1,10 @@
+topic: ~product-information-launcher()
+language: enu
+
+include:lexicon_enu.top
+
+u:(* product [information info]) ^switchFocus(product-information/.)
+u:(* {"["I would like" "I'd like" need] {some}" "can ["you give {me us}" "[I we] [have get]"] {some}"} ["product information" "[info information] {for about regarding} {this that these} [product products]"]) Sure! Let me load the catalog! ^switchFocus(product-information/.)
+u:(* {~can_you} scan [this a these] {bar "Q R"} [code codes products]) ^switchFocus(product-information/.)
+
+u:("search a product") ^switchFocus(product-information/.)

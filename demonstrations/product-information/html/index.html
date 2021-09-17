@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale = 1">
+
+	<!-- application css -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link media="screen" href="css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+	<div class="pull-right main_menu">
+		<button type="button" class="btn btn-default btn-lg" id="btn_quit">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+
+	<div class="container-fluid" role="main" id="launcher">
+		<div class="main_menu" style="display: none;">
+			<div class="row">
+				<div class="col-sm-7" id="product-description">
+					<div class="jumbotron" id="product-detail">
+						<div id="product-title"></div>
+						<img id="product-image-1" src=""></img>
+						<img id="product-image-2" src="" style="display: none;"></img>
+						<div id="product-blabla"></div>
+						<div id="product-price"></div>
+					</div>
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-4 center" id="camera-background">
+					<div class="jumbotron" id="camera-detail">
+						<p align="center">
+							<span id="facecamera" class="totranslate"></span>
+						</p>
+						<div id="preview_canvas" class="previewCamera" >
+							<canvas id="videoBuffer"  class="videoBorder">Video player</canvas>
+						</div>
+					</div>
+
+					<ul class="list-group" id="productsList">
+						<li class="list-group-item active">
+							<div class="input-group input-group-lg">
+								<span class="input-group-addon" >
+									<span id="barcode" class="totranslate"></span>
+								</span>
+								<input id="input_barcode" type="tel" class="form-control" autofocus />
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" id="send_barcode">Go!</button>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="loading_menu" class="text-center" style="display: none;">
+			<div class="row">
+				<img src="loading.gif" />
+			</div>
+		</div>
+	</div>
+
+	<div id="left-panel">
+		<form id="nao_modif_form" role="form">
+			<div class="form-group">
+				<label for="input_nao_title">
+					<span id="title" class="totranslate"></span>
+				</label>
+				<input type="text" class="form-control input-lg" id="input_nao_title" required />
+			</div>
+			<div class="form-group">
+				<label>
+					<span id="images" class="totranslate"></span>
+				</label>
+				<br/>
+				<div id="input_nao_image1" ></div>
+				<div id="input_nao_image2"></div>
+			</div>
+			<div class="form-group">
+				<label for="input_nao_blabla">
+					<span id="text" class="totranslate"></span>
+				</label>
+				<textarea id="input_nao_blabla" class="form-control input-lg" required ></textarea>
+			</div>
+			<div class="form-group">
+				<label for="input_nao_speech">
+					<span id="speech" class="totranslate"></span>
+				</label>
+				<textarea id="input_nao_speech" class="form-control input-lg" required ></textarea>
+			</div>
+			<div class="form-group">
+				<label for="input_nao_price">
+					<span id="price" class="totranslate"></span>
+				</label>
+				<input type="text" class="form-control input-lg" id="input_nao_price" required />
+			</div>
+			<div align="right">
+				<button type="submit" class="btn btn-lg btn-primary">
+					<span id="save" class="totranslate"></span>
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/robotutils.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/videoutils.js"></script>
+	<script src="js/jquery.mobile.custom.min.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script src="js/main.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(e){
+            FastClick.attach(document.body);
+            var app = application();
+        })
+ 	</script>
+
+</body>
+</html>

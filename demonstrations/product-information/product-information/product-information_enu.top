@@ -1,0 +1,16 @@
+topic: ~product-information()
+language: enu
+
+include: lexicon_enu.top
+
+dynamic:product_description
+
+u:(e:onStart) Hello I am Pepper! I know all our products! show me the code so I can give you more information! $scan=1
+
+u:(e:product) ^runSound(Aldebaran/enu_ono_hesitation_long_02) ~product_description $scan=1
+
+u:([~stop_application e:Dialog/NoOneSpeak20]) no one? \PAU=150\ Do you want to show me another code? 
+    u1:(~yes) Cool! $scan=1
+    u1:([~no e:Dialog/NoOneSpeak20]) Ok, see you later! $onStopped=1
+    
+

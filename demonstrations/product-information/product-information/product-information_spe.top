@@ -1,0 +1,12 @@
+topic: ~product-information()
+language: spe
+
+dynamic:product_description
+
+u:(e:onStart) ¡Hola soy Pepper! ¡Conozco todos nuestros productos! ¡Muéstrame el código que puedo darle más información! $scan=1
+
+u:(e:product) ^runSound(Aldebaran/enu_ono_hesitation_long_02) ~product_description $scan=1
+
+u:(e:Dialog/NoOneSpeak20) ¿Nadie? \PAU=150\ ¿Quieres mostrarme un otro código?
+    u1:(si) ¡Genial! $scan=1
+    u1:([no e:Dialog/NoOneSpeak20]) Ok, ¡nos vemos más tarde! $onStopped=1

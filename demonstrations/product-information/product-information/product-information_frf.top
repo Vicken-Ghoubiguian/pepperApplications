@@ -1,0 +1,14 @@
+topic: ~product-information()
+language: frf
+
+include: lexicon_frf.top
+
+dynamic:product_description
+
+u:(e:onStart) Bonjour ! je suis Pepper ! tu cherches des informations sur un produit ? je peux peut-être t'aider ? Je les connais tousse! Montre moi le code sur l'emballage! $scan=1
+
+u:(e:product) ^runSound(Aldebaran/enu_ono_hesitation_long_02) ~product_description $scan=1
+
+u:([~stop_application e:Dialog/NoOneSpeak20]) non ? personne ? \PAU=150\ Veux-tu me montrer un autre code ? 
+    u1:(~yes) Cool ! $scan=1
+    u1:([~no e:Dialog/NoOneSpeak20]) Ok, c'est pas grave ! au revoir ! $onStopped=1

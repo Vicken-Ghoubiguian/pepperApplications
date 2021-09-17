@@ -1,0 +1,9 @@
+topic: ~product-information-launcher()
+language: spe
+
+u:(* Información [del sobre] {un} producto) ^switchFocus(product-information/.)
+u:(* Busque un producto) ^switchFocus(product-information/.)
+u:(* ¿Dónde está el producto?) ^switchFocus(product-information/.)
+u:(* Tengo el producto) ^switchFocus(product-information/.)
+u:(* Estoy buscando un producto) ^switchFocus(product-information/.)
+

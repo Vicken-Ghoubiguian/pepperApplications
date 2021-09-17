@@ -1,0 +1,123 @@
+#launcher {
+    margin:0 100px;
+}
+
+.badge {
+    font-size:35px;
+    border-radius:25px;
+}
+
+.list-group-item {
+    font-size: 37px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: white;
+    background-image:none;
+    background-size: contain;
+    background-position: 0% 100%;
+    min-height: 100%;
+    background-repeat: no-repeat;
+    color : #3557a5;
+    font-size:40px;
+}
+
+#productsList {
+    margin-top: 20px;
+}
+#productsList li {
+    transition-duration: 0.3s;
+}
+
+.highlight {
+    background-color: lightgray;
+}
+
+#preview_canvas {
+    width:320px;
+    height:320px;
+    margin: auto;
+    border-radius: 6px;
+    overflow: hidden;
+    /*border: 10px solid white;*/
+    /*box-shadow: 0 10px 6px -6px #777;*/
+}
+
+#camera-background {
+    margin-top:100px;
+}
+
+.videoBorder{
+    min-width: 100%;
+    min-height: 140%;
+    margin-left: -65px;
+    margin-top: -20px;
+}
+
+#product-description {
+    margin-top:100px;
+}
+
+#product-image-1 {
+    height: 100%;
+}
+#product-image-2 {
+    height: 100%;
+}
+#product-blabla {
+    font-size:22px;
+    margin-top:20px;
+}
+#product-price {
+    text-align:right;
+}
+#product-detail {
+    display: none;
+}
+#left-panel {
+    font-size: 25px;
+    position: absolute;
+    width: 600px;
+    top:0;
+    padding: 30px;
+    height: 1000px;
+    overflow: scroll;
+    left: -700px;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 15px 0 10px 0 #2E2E2E;
+}
+#nao_modif_form {
+    height: 2000px;
+}
+#left-panel input {
+    font-size: 25px;
+    height:35px;
+}
+#left-panel textarea {
+    font-size: 25px;
+}
+#left-panel img {
+    max-width:240px;
+}
+#input_nao_image1 {
+    background-image:none;
+    background-size: contain;
+    width:250px;
+    height:160px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    margin:5px;
+}
+#input_nao_image2 {
+    background-image:none;
+    background-size: contain;
+    width:250px;
+    height:160px;
+    margin:5px;
+    display: inline-block;
+    background-repeat: no-repeat;
+}

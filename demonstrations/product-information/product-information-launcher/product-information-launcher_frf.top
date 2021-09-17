@@ -1,0 +1,6 @@
+topic: ~product-information-launcher()
+language: frf
+
+u:(* [information info] produit) ^switchFocus(product-information/.)
+u:(* {"puis-je" "est-ce que je [peux pourrais]"} {avoir} {des} [information infos] {sur} {ce ces un des les} produit) Pas de problème, je charge le catalogue!  ^switchFocus(product-information/.)
+u:("scanner un produit") ^switchFocus(product-information/.)

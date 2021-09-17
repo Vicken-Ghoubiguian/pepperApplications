@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3">
+    <Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0">
+        <bitmap>media/images/box/root.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+        <Input name="BarcodeReader/exit" type="0" type_size="1" nature="4" stm_value_name="BarcodeReader/exit" inner="1" tooltip="BarcodeReader/exit desc" id="4" />
+        <Input name="BarcodeReader/WebpageReady" type="0" type_size="1" nature="4" stm_value_name="BarcodeReader/WebpageReady" inner="1" tooltip="BarcodeReader/WebpageReady desc" id="5" />
+        <Input name="BarcodeReader/BarcodeDetected" type="0" type_size="1" nature="4" stm_value_name="BarcodeReader/BarcodeDetected" inner="1" tooltip="BarcodeReader/BarcodeDetected desc" id="6" />
+        <Input name="BarcodeReader/Barcode" type="0" type_size="1" nature="4" stm_value_name="BarcodeReader/Barcode" inner="1" tooltip="BarcodeReader/Barcode desc" id="7" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="ボックスBehaviorの終了時に信号を送る。" id="8" />
+        <Timeline enable="0">
+            <BehaviorLayer name="behavior_layer1">
+                <BehaviorKeyframe name="keyframe1" index="1">
+                    <Diagram scale="84.0896">
+                        <Box name="start service" id="1" localization="8" tooltip="" x="125" y="420">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import qi
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        self.serv = self.session().service("ALServiceManager")
+        self.sdir = self.session().service("ServiceDirectory")
+        self.connection = self.sdir.serviceAdded.connect(self.onServiceStarted)
+        self.serviceName = "BarcodeReader"
+
+    def onUnload(self):
+        self.serv.stopService(self.serviceName)
+        if self.connection:
+            self.sdir.serviceAdded.disconnect(self.connection)
+            self.connection = 0
+
+    def onServiceStarted(self, serviceId, serviceName):
+        if serviceName == self.serviceName or serviceName == self.packageUid()+"."+self.serviceName:
+            self.sdir.serviceAdded.disconnect(self.connection)
+            self.connection = 0
+            self.onConnected()
+
+    def onInput_onStart(self):
+        self.serv.startService(self.serviceName)
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="onConnected" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                        </Box>
+                        <Box name="get barcodes" id="4" localization="8" tooltip="" x="269" y="378">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.ean = None
+        self.subscription = 0
+        self.lastTime = time.time()
+        self.lastCode = ""
+
+    def onUnload(self):
+        if self.ean is not None:
+            if self.subscription > 0:
+                try:
+                    self.ean.onBarcodeDetected.disconnect(self.subscription)
+                except Exception, e:
+                    self.logger.warn("Problem disconnecting: "+str(e))
+            try:
+                self.ean.stop()
+            except Exception, e:
+                self.logger.warn("Problem stoping: "+str(e))
+
+
+    def onInput_onStart(self):
+        self.ean = self.session().service("BarcodeReader")
+        self.subscription = self.ean.onBarcodeDetected.connect(self.barcodeDetectFilter)
+        self.ean.start()
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box
+
+    def barcodeDetectFilter(self, type, code):
+        timeNow = time.time()
+        if timeNow - self.lastTime > 1.0:
+            self.lastTime = timeNow
+            if code == self.lastCode:
+                self.lastCode = "" # Double delay in case same article
+            else:
+                self.lastCode = code
+                self.onBarcode(code)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="onBarcode" type="0" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                        </Box>
+                        <Box name="Play Sound" id="3" localization="8" tooltip="Play a sound file. Select the file in parameters. The format of the file can be wav or ogg (on virtual robot) and also mp3 (on a real robot).&#x0A;&#x0A;Note: There can be some delay to play ogg or mp3 (on a robot) files. We advise you to use wav if&#x0A;you want a fast play of the file." x="420" y="166">
+                            <bitmap>media/images/box/interaction/play_music.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.bIsRunning = False
+
+    def onUnload(self):
+        self.bIsRunning = False
+
+    def onInput_onStart(self):
+        self.bIsRunning = True
+
+    def onInput_onStop(self):
+        if( self.bIsRunning ):
+            self.onUnload()
+            self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Starts the music." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Stops the music." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished or stopped." id="4" />
+                            <Parameter name="File name" inherits_from_parent="0" content_type="4" value="/bip.ogg" default_value="" tooltip="Name of the file you want to play.&#x0A;&#x0A;Note: You can click on the folder icon to browse the project content or import&#x0A;new files to the project." id="5" />
+                            <Parameter name="Begin position (s)" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="0" max="600" tooltip="Position in seconds where the playing must start." id="6" />
+                            <Parameter name="Volume (%)" inherits_from_parent="0" content_type="1" value="100" default_value="100" min="0" max="100" tooltip="Volume the file is played with." id="7" />
+                            <Parameter name="Balance L/R" inherits_from_parent="0" content_type="2" value="0" default_value="0" min="-1" max="1" tooltip="Value which determines if the sound is played more on the robot&apos;s left or right.&#x0A;You can particularly set it to:&#x0A;- -1 to play only on the left loudspeaker.&#x0A;- 0 to play on both loudspeakers.&#x0A;- 1 to play only on the right loudspeaker." id="8" />
+                            <Parameter name="Play in loop" inherits_from_parent="0" content_type="0" value="0" default_value="0" tooltip="This parameter allows to play the file in loop. The playing will start each time at&#x0A;the beginning of the file." id="9" />
+                            <Timeline enable="0">
+                                <BehaviorLayer name="behavior_layer1">
+                                    <BehaviorKeyframe name="keyframe1" index="1">
+                                        <Diagram>
+                                            <Box name="Play Sound File" id="2" localization="8" tooltip="Play the sound." x="442" y="70">
+                                                <bitmap>media/images/box/interaction/play_music.png</bitmap>
+                                                <script language="4">
+                                                    <content>
+                                                        <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.player = ALProxy('ALAudioPlayer')
+        self.playerStop = ALProxy('ALAudioPlayer', True) #Create another proxy as wait is blocking if audioout is remote
+
+    def onLoad(self):
+        self.bIsRunning = False
+        self.ids = []
+
+    def onUnload(self):
+        for id in self.ids:
+            try:
+                self.playerStop.stop(id)
+            except:
+                pass
+        while( self.bIsRunning ):
+            time.sleep( 0.2 )
+
+    def onInput_onStart(self, p):
+        self.bIsRunning = True
+        try:
+            if (self.getParameter("Play in loop")) :
+               id = self.player.post.playFileInLoop(p,self.getParameter("Volume (%)")/100.,self.getParameter("Balance L/R"))
+            else :
+               id = self.player.post.playFileFromPosition(p,self.getParameter("Begin position (s)"),self.getParameter("Volume (%)")/100.,self.getParameter("Balance L/R"))
+            self.ids.append(id)
+            self.player.wait(id, 0)
+        finally:
+            try:
+                self.ids.remove(id)
+            except:
+                pass
+            if( self.ids == [] ):
+                self.onStopped() # activate output of the box
+                self.bIsRunning = False
+
+    def onInput_onStop(self):
+        self.onUnload()]]>
+</content>
+                                                </script>
+                                                <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                                                <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this Input." id="2" />
+                                                <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this Input." id="3" />
+                                                <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when Box behavior is finished." id="4" />
+                                                <Parameter name="Begin position (s)" inherits_from_parent="1" content_type="2" value="0" default_value="0" min="0" max="600" tooltip="Position in seconds where the playing must start." id="5" />
+                                                <Parameter name="Volume (%)" inherits_from_parent="1" content_type="1" value="100" default_value="100" min="0" max="100" tooltip="Volume the file is played with." id="6" />
+                                                <Parameter name="Balance L/R" inherits_from_parent="1" content_type="2" value="0" default_value="0" min="-1" max="1" tooltip="Value which determines if the sound is played more on the robot&apos;s left or right.&#x0A;You can particularly set it to:&#x0A;- -1 to play only on the left loudspeaker.&#x0A;- 0 to play on both loudspeakers.&#x0A;- 1 to play only on the right loudspeaker." id="7" />
+                                                <Parameter name="Play in loop" inherits_from_parent="1" content_type="0" value="0" default_value="0" tooltip="This parameter allows to play the file in loop. The playing will start each time at&#x0A;the beginning of the file." id="8" />
+                                            </Box>
+                                            <Box name="Get Attached File" id="1" localization="8" tooltip="Use this box to choose an attached file in its parameters. The filename will be sent on&#x0A;the output when the input is stimulated." x="216" y="71">
+                                                <bitmap>media/images/box/folder.png</bitmap>
+                                                <script language="4">
+                                                    <content>
+                                                        <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.framemanager = ALProxy("ALFrameManager")
+
+    def onInput_onStart(self):
+        self.onStopped(self.framemanager.getBehaviorPath(self.behaviorId) + self.getParameter("File name"))]]>
+</content>
+                                                </script>
+                                                <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                                                <Input name="onStart" type="1" type_size="1" nature="1" inner="0" tooltip="To send the filepath on the output." id="2" />
+                                                <Output name="onStopped" type="3" type_size="1" nature="2" inner="0" tooltip="The filepath of the selected resource file." id="3" />
+                                                <Parameter name="File name" inherits_from_parent="1" content_type="4" value="" default_value="" tooltip="Name of the file which is going to be sent on the box output.&#x0A;&#x0A;Note: You can click on the folder icon to browse the project content or import&#x0A;new files to the project." id="4" />
+                                            </Box>
+                                            <Link inputowner="0" indexofinput="4" outputowner="2" indexofoutput="4" />
+                                            <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" />
+                                            <Link inputowner="2" indexofinput="2" outputowner="1" indexofoutput="3" />
+                                        </Diagram>
+                                    </BehaviorKeyframe>
+                                </BehaviorLayer>
+                            </Timeline>
+                            <Resource name="Audio player" type="Lock" timeout="0" />
+                        </Box>
+                        <Box name="Show App" id="5" localization="8" tooltip="Loads the application on the tablet, if it exists, and displays the webview.&#x0A;&#x0A;V1.0.0&#x0A;" x="247" y="0">
+                            <bitmap>media/images/box/root.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[
+
+class MyClass(GeneratedClass):
+
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.isRunning = False
+        self.frameManager = None
+        try:
+            self.frameManager = ALProxy("ALFrameManager")
+        except Exception as e:
+            self.logger.error(e)
+
+    def onUnload(self):
+        self.isRunning = False
+        self._getTabletService().hideWebview()
+
+    def _getTabletService(self):
+        tabletService = None
+        try:
+            tabletService = self.session().service("ALTabletService")
+        except Exception as e:
+            self.logger.error(e)
+        return tabletService
+
+    def _getAppName(self):
+        import os
+        if self.frameManager:
+            behaviorPath = os.path.normpath(self.frameManager.getBehaviorPath(self.behaviorId))
+            if os.path.isdir(behaviorPath):
+               behaviorPath = os.path.join(behaviorPath, "")
+            appsFolderFragment = os.path.join("PackageManager", "apps")
+            if not (appsFolderFragment in behaviorPath):
+                    self.logger.error("appsFolderFragment is not in behaviorPath")
+                    return None
+            fragment = behaviorPath.split(appsFolderFragment, 1)[1]
+            return fragment.lstrip("\\/")
+        else:
+            self.logger.warning("No ALFrameManager")
+            return None
+
+    def onInput_onStart(self):
+        if self.isRunning:
+            return # already running, nothing to do
+        self.isRunning = True
+        # We create TabletService here in order to avoid
+        # problems with connections and disconnections of the tablet during the life of the application
+        tabletService = self._getTabletService()
+        appName = self._getAppName()
+        state = False
+        if appName:
+            if tabletService:
+                if tabletService.loadApplication(appName):
+                    self.logger.info("Successfully set application: %s" % appName)
+                    tabletService.showWebview()
+                    state = True
+                else:
+                    self.logger.warning("Got tablet service, but failed to set application: %s" % appName)
+            else:
+                self.logger.warning("Couldn't find tablet service, so can't set application: %s" % appName)
+        if state:
+            self.onSuccess()
+        else:
+            self.onFailure()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onSuccess" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished successfully." id="3" />
+                            <Output name="onFailure" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished unsuccessfully." id="4" />
+                        </Box>
+                        <Box name="Raise Event" id="6" localization="8" tooltip="Stores in NAOqi&apos;s shared memory the given value at the given key, and spreads the event to all its subscribers." x="422" y="318">
+                            <bitmap>media/images/box/sensors/STM.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        self.memory = ALProxy("ALMemory")
+
+    def onUnload(self):
+        self.memory = None
+
+    def onInput_onStart(self, p):
+        self.memory.raiseEvent(self.getParameter("key"), p)
+        self.onStopped(p)
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is recommended to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Receives the value to be inserted as an event in ALMemory." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished. It contains the inserted value in ALMemory." id="4" />
+                            <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="Output when error is raised by the behavior. Contains the error message." id="5" />
+                            <Parameter name="key" inherits_from_parent="0" content_type="3" value="BarcodeReader/Barcode" default_value="MyApplication/MyData" custom_choice="0" tooltip="" id="6" />
+                        </Box>
+                        <Box name="Raise Event (1)" id="7" localization="8" tooltip="Stores in NAOqi&apos;s shared memory the given value at the given key, and spreads the event to all its subscribers." x="439" y="475">
+                            <bitmap>media/images/box/sensors/STM.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        self.memory = ALProxy("ALMemory")
+
+    def onUnload(self):
+        self.memory = None
+
+    def onInput_onStart(self, p):
+        self.memory.raiseEvent(self.getParameter("key"), p)
+        self.onStopped(p)
+
+    def onInput_onStop(self):
+        self.onUnload() #~ it is recommended to call onUnload of this box in a onStop method, as the code written in onUnload is used to stop the box as well
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Receives the value to be inserted as an event in ALMemory." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished. It contains the inserted value in ALMemory." id="4" />
+                            <Output name="onError" type="3" type_size="1" nature="1" inner="0" tooltip="Output when error is raised by the behavior. Contains the error message." id="5" />
+                            <Parameter name="key" inherits_from_parent="0" content_type="3" value="BarcodeReader/Ready" default_value="MyApplication/MyData" custom_choice="0" tooltip="" id="6" />
+                        </Box>
+                        <Box name="Wait For Signals" id="9" localization="8" tooltip="Wait for both inputs to be stimulated before stimulating its output." x="272" y="491">
+                            <bitmap>media/images/box/wait.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+
+    def onLoad(self):
+        self.ok = [False]*2
+
+    def onUnload(self):
+        #puts code for box cleanup here
+        ""
+
+    def onStart(self, nInput):
+        self.ok[nInput-1] = True
+        bOutput = True
+        for bOk in self.ok:
+            bOutput = bOutput and bOk
+        if( bOutput ):
+            self.ok = [False]*2
+            self.signalsReceived()
+
+    def onInput_signal1(self):
+        self.onStart(1)
+
+    def onInput_signal2(self):
+        self.onStart(2)]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when Diagram is loaded." id="1" />
+                            <Input name="signal1" type="1" type_size="1" nature="1" inner="0" tooltip="First signal to wait." id="2" />
+                            <Input name="signal2" type="1" type_size="1" nature="1" inner="0" tooltip="Second signal to wait." id="3" />
+                            <Output name="signalsReceived" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when both inputs have been stimulated." id="4" />
+                        </Box>
+                        <Box name="01 Init (1)" id="8" localization="8" tooltip="This box is empty (contains a single motion layer with no motor position&#x0A;defined in it) and should be used to create any animation you would like." x="1007" y="34">
+                            <bitmap>media/images/box/movement/move.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Timeline enable="1" fps="25" start_frame="1" end_frame="65" size="65">
+                                <BehaviorLayer name="behavior_layer1">
+                                    <BehaviorKeyframe name="keyframe1" index="1">
+                                        <Diagram />
+                                    </BehaviorKeyframe>
+                                </BehaviorLayer>
+                                <ActuatorList model="">
+                                    <ActuatorCurve name="value" actuator="HeadPitch" mute="0" unit="0">
+                                        <Key frame="26" value="-12.8738" />
+                                        <Key frame="36" value="-24.4477" />
+                                        <Key frame="46" value="-15.8984" />
+                                        <Key frame="53" value="-14.4" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HeadYaw" mute="0" unit="0">
+                                        <Key frame="22" value="4.41694e-05" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HipPitch" mute="1" unit="0">
+                                        <Key frame="22" value="-1.34928" />
+                                        <Key frame="46" value="-28.8012" />
+                                        <Key frame="53" value="-31.5963" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="HipRoll" mute="1" unit="0">
+                                        <Key frame="22" value="-7.46522e-05" />
+                                        <Key frame="46" value="-7.46522e-05" />
+                                        <Key frame="53" value="-7.46522e-05" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="KneePitch" mute="1" unit="0">
+                                        <Key frame="22" value="-3.28368" />
+                                        <Key frame="46" value="12.7842" />
+                                        <Key frame="53" value="14.4039" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LElbowRoll" mute="0" unit="0">
+                                        <Key frame="24" value="-27.3785" />
+                                        <Key frame="38" value="-12.6" />
+                                        <Key frame="48" value="-48.6" />
+                                        <Key frame="55" value="-61.2" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LElbowYaw" mute="0" unit="0">
+                                        <Key frame="24" value="-74.4297" />
+                                        <Key frame="38" value="-99.9" />
+                                        <Key frame="48" value="-56.4925" />
+                                        <Key frame="55" value="-41.3" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LHand" mute="0" unit="1">
+                                        <Key frame="24" value="0.128321" />
+                                        <Key frame="38" value="1" />
+                                        <Key frame="48" value="0.871843" />
+                                        <Key frame="55" value="0.78" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LShoulderPitch" mute="0" unit="0">
+                                        <Key frame="24" value="84.323" />
+                                        <Key frame="38" value="3.66893" />
+                                        <Key frame="48" value="-25.5388" />
+                                        <Key frame="55" value="-28.8" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LShoulderRoll" mute="0" unit="0">
+                                        <Key frame="24" value="13.3046" />
+                                        <Key frame="38" value="45.8" />
+                                        <Key frame="48" value="25.4297" />
+                                        <Key frame="55" value="18.3" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="LWristYaw" mute="0" unit="0">
+                                        <Key frame="24" value="-8.03265e-05" />
+                                        <Key frame="48" value="-8.03265e-05" />
+                                        <Key frame="55" value="-8.03265e-05" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RElbowRoll" mute="0" unit="0">
+                                        <Key frame="22" value="27.3785" />
+                                        <Key frame="36" value="12.6" />
+                                        <Key frame="46" value="48.6" />
+                                        <Key frame="53" value="61.2" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RElbowYaw" mute="0" unit="0">
+                                        <Key frame="22" value="74.4297" />
+                                        <Key frame="36" value="99.9" />
+                                        <Key frame="46" value="56.4925" />
+                                        <Key frame="53" value="41.3" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RHand" mute="0" unit="1">
+                                        <Key frame="22" value="0.128321" />
+                                        <Key frame="36" value="1" />
+                                        <Key frame="46" value="0.871843" />
+                                        <Key frame="53" value="0.78" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RShoulderPitch" mute="0" unit="0">
+                                        <Key frame="22" value="84.323" />
+                                        <Key frame="36" value="3.66893" />
+                                        <Key frame="46" value="-25.5388" />
+                                        <Key frame="53" value="-28.8" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RShoulderRoll" mute="0" unit="0">
+                                        <Key frame="22" value="-13.3046" />
+                                        <Key frame="36" value="-45.8" />
+                                        <Key frame="46" value="-25.4297" />
+                                        <Key frame="53" value="-18.3" />
+                                    </ActuatorCurve>
+                                    <ActuatorCurve name="value" actuator="RWristYaw" mute="0" unit="0">
+                                        <Key frame="22" value="8.41623e-05" />
+                                        <Key frame="46" value="8.41623e-05" />
+                                        <Key frame="53" value="8.41623e-05" />
+                                    </ActuatorCurve>
+                                </ActuatorList>
+                            </Timeline>
+                        </Box>
+                        <Box name="stop Breathing" id="12" localization="8" tooltip="" x="717" y="59">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        #put initialization code here
+        self.mo = ALProxy("ALMotion")
+        self.am = ALProxy("ALAutonomousMoves")
+        self.ba = ALProxy("ALBasicAwareness")
+
+        self.bLArmBreath = None
+        self.bRArmBreath = None
+        self.bExpressive = None
+        self.bBAwareness = None
+        self.bLArmIdlePs = None
+        self.bRArmIdlePs = None
+
+    def onUnload(self):
+        #put clean-up code here
+        self.restoreBreath()
+        pass
+
+    def onInput_onStart(self):
+        #self.onStopped() #activate the output of the box
+        self.saveStopBreath()
+        #self.onStopped()
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box
+
+    def saveStopBreath(self):
+        self.bBAwareness = self.ba.isAwarenessRunning()
+        self.ba.stopAwareness()
+
+        self.bLArmBreath = self.mo.getBreathEnabled("LArm")
+        self.bRArmBreath = self.mo.getBreathEnabled("RArm")
+        self.mo.setBreathEnabled("Arms", False)
+
+        self.bExpressive = self.am.getExpressiveListeningEnabled()
+        self.am.setExpressiveListeningEnabled(False)
+
+        self.bLArmIdlePs = self.mo.getIdlePostureEnabled("LArm")
+        self.bRArmIdlePs = self.mo.getIdlePostureEnabled("RArm")
+        self.mo.setIdlePostureEnabled("Arms", False)
+
+        self.onReady()
+
+    def restoreBreath(self):
+        if self.bLArmBreath is not None:
+            self.bLArmBreath = self.mo.setBreathEnabled("LArm", self.bLArmBreath)
+        if self.bRArmBreath is not None:
+            self.bRArmBreath = self.mo.setBreathEnabled("RArm", self.bRArmBreath)
+        if self.bLArmIdlePs is not None:
+            self.mo.setIdlePostureEnabled("LArm", self.bLArmIdlePs)
+        if self.bRArmIdlePs is not None:
+            self.mo.setIdlePostureEnabled("RArm", self.bRArmIdlePs)
+        if self.bExpressive is not None:
+            self.bExpressive = self.am.setExpressiveListeningEnabled(self.bExpressive)
+        if self.bBAwareness is not None:
+            if self.bBAwareness:
+                self.ba.startAwareness()
+            else:
+                self.ba.stopAwareness()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                            <Output name="onReady" type="1" type_size="1" nature="2" inner="0" tooltip="" id="5" />
+                        </Box>
+                        <Box name="product-information" id="2" localization="8" tooltip="" x="468" y="19">
+                            <dialogFile>product-information/product-information.dlg</dialogFile>
+                            <bitmap>media/images/box/box-dialog.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Input name="product" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="5" />
+                            <Output name="scan" type="1" type_size="1" nature="2" inner="0" tooltip="" id="6" />
+                        </Box>
+                        <Box name="get QR code content" id="10" localization="8" tooltip="" x="262" y="272">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.lastTime = time.time()
+        self.lastCode = ""
+
+    def onInput_onStart(self, p):
+        if len(p)>0:
+            CodeData = p[0]
+            code = CodeData[0]
+            timeNow = time.time()
+            if timeNow - self.lastTime > 1.0:
+                self.lastTime = timeNow
+                if code == self.lastCode:
+                    self.lastCode = "" # Double delay in case same article
+                else:
+                    self.lastCode = code
+                    self.onStopped(code)
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                        </Box>
+                        <Box name="init reader" id="11" localization="8" tooltip="" x="113" y="46">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.vid = self.session().service("ALVideoDevice")
+        subscribers = self.vid.getSubscribers()
+        for sub in subscribers:
+            if "videoBuffer" in sub:
+                self.vid.unsubscribe(sub)
+
+    def onUnload(self):
+        subscribers = self.vid.getSubscribers()
+        for sub in subscribers:
+            if "videoBuffer" in sub:
+                self.vid.unsubscribe(sub)
+
+    def onInput_onStart(self):
+        barcode = ALProxy("ALBarcodeReader")
+        barcode.setActiveCamera(0)
+        barcode.setResolution(3)
+        barcode.setFrameRate(1)
+
+    def onInput_onStop(self):
+        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
+        self.onStopped() #activate the output of the box]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
+                        </Box>
+                        <Box name="find product infos" id="15" localization="8" tooltip="" x="273" y="115">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        self.dlg = ALProxy('ALDialog')
+        self.mem = ALProxy('ALMemory')
+        self.products = {
+            "3760067310005": {
+                "image1": "figurineblue1.jpg",
+                "image2": "figurineblue2.jpg",
+                "French": {
+                    "title": "Figurine NAO Bleue",
+                    "textweb": "La figurine qui sait (presque) tout faire. <br><strong>Réplique de NAO à l'échelle 1/4</strong>, d'une hauteur 15 cm, ce petit NAO articulé est le compagnon idéal de vos aventures et de votre imagination. <br>Objet de collection pour les fans, cadeau pour les jeunes, cette figurine vous ouvre les portes de l'univers unique de SoftBank Robotics... ",
+                    "speech": "C'est un mini NAO bleu! une petite figurine qui représente mon copain NAO. Même si elle ne peut pas en faire autant que lui, elle peut bouger comme tu veux car elle a 20 articulations!",
+                    "price": "39,00 €"
+                    },
+                "English": {
+                    "title": "Blue NAO action figure",
+                    "textweb": "<strong>The figurine is a 1/4 scale replica of NAO </strong> (15 cm high). <br>This articulated 'little NAO' is the perfect companion for every adventure you can imagine! Collectible for fans or as a gift for youngsters, this action figure is a great way to start exploring SoftBank Robotics' unique universe.    ",
+                    "speech": "a blue mini NAO! a small action figure very similar to my buddy NAO. you can move its limbs and play with it for hours!",
+                    "price": "39.00€"
+                    },
+                "Spanish": {
+                    "title": "NAO figurilla azul",
+                    "textweb": "La figurilla que sabe hacer (casi) todo. Reproducción de NAO a escala 1/4, altura 15 cm, este pequeño NAO articulado es el compañero perfecto para todas las aventuras de su imaginación. Pieza de colección para los fans, regalo para los jovenes, este modelo abre la puerta del mundo único de SoftBank Robotics...",
+                    "speech": "¡un pequeño NAO azul! \PAU=100\ una pequeña figurilla de acción, \PAU=50\ muy similar a mi amigo NAO. Puede mover sus extremidades, y jugar con él durante horas!",
+                    "price": "39.00€"
+                    }
+            },
+            "3760067310012": {
+                "image1": "figurinered1.jpg",
+                "image2": "figurinered2.jpg",
+                "French": {
+                    "title": "Figurine NAO Rouge",
+                    "textweb": "La figurine qui sait (presque) tout faire. <br><strong>Réplique de NAO à l'échelle 1/4</strong>, d'une hauteur 15 cm, ce petit NAO articulé est le compagnon idéal de vos aventures et de votre imagination. <br>Objet de collection pour les fans, cadeau pour les jeunes, cette figurine vous ouvre les portes de l'univers unique de SoftBank Robotics... ",
+                    "speech": "C'est un mini NAO rouge! une petite figurine qui représente mon copain NAO. Même si elle ne peut pas en faire autant que lui, elle peut bouger comme tu veux car elle a 20 articulations!",
+                    "price": "39,00 €"
+                    },
+                "English": {
+                    "title": "Red NAO action figure",
+                    "textweb": "<strong>The figurine is a 1/4 scale replica of NAO </strong> (15 cm high). <br>This articulated 'little NAO' is the perfect companion for every adventure you can imagine! Collectible for fans or as a gift for youngsters, this action figure is a great way to start exploring SoftBank Robotics' unique universe.",
+                    "speech": "a mini red NAO! a small action figure very similar to my buddy NAO. you can move its limbs and play with it for hours!",
+                    "price": "39.00€"
+                    },
+                "Spanish": {
+                    "title": "NAO figurita roja",
+                    "textweb": "La figurilla que sabe hacer (casi) todo. Reproducción de NAO a escala 1/4, altura 15 cm, este pequeño NAO articulado es el compañero perfecto para todas las aventuras de su imaginación. Pieza de colección para los fans, regalo para los jovenes, este modelo abre la puerta del mundo único de SoftBank Robotics...",
+                    "speech": "¡un pequeño NAO rojo! \PAU=100\ una pequeña figurilla de acción, \PAU=50\ muy similar a mi amigo NAO. Puede mover sus extremidades, y jugar con él durante horas!",
+                    "price": "39.00€"
+                    }
+            },
+            "3228881033338": {
+                "image1": "muffin1.jpg",
+                "image2": "muffin2.jpg",
+                "French": {
+                    "title": "Muffin au chocolat",
+                    "textweb": "Succulent et savouereux muffin, vanille aux pépites de chocolat. Disponible en: chocolat, myrtille.",
+                    "speech": "C'est un délicieux meuffine ! Mon préféré lorsque j'ai besoin de faire une pause. Plein de pépites de chocolat, il est frais et aromatisé naturellement ! Miam ! Ils sont si légers que tu ne pourras pas t'arrêter... Si tu le shouaites, il y a d'autres saveurs.",
+                    "price": "3,00 €"
+                    },
+                "English": {
+                    "title": "Chocolate muffin",
+                    "textweb": "Sweet and tasty muffin, vanilla with cholocate chips. Available in: all chocolate, blueberries.",
+                    "speech": " This is a super tasty muffin! my favourite when I need a break. Full of chocolate chips, it is fresh and natural-flavoured! delicious! they are so light that you won't be able to stop! If you want, there are other flavours.",
+                    "price": "3.00€"
+                    },
+                "Spanish": {
+                    "title": "Magdalena de chocolate",
+                    "textweb": "Magdalena dulce y sabrosa, de vainilla con gotas de chocolate. Disponible en: chocolates, frutos del bosque. ",
+                    "speech": "¡Es una magdalena riquísima! Mi favorita cuando necesito un descanso. Llena de gotas de chocolate, fresca ¡y de sabor natural! ¡Deliciosa! ¡Son tan ligeras que no podrá comer solo una! Si lo desea, hay otros sabores.",
+                    "price": "3.00€"
+                    }
+            },
+            "3298960804005": {
+                "image1": "dress1.jpg",
+                "image2": "dress2.png",
+                "French": {
+                    "title": "Robe rouge",
+                    "textweb": "Un corsage de tricot extensible équilibre la jupe swing plissée de cette robe fantaisiste de sporée, finie avec un arc surdimensionné à la taille. Fermeture éclair sur le côté, col bateau, manches au coude, nettoyage à sec. Disponible dans toutes les tailles et en rouge ou noire.",
+                    "speech": "C'est une robe rouge ! Je l'adore ! Tu sais, rien ne rend une femme aussi énergique et assurée qu'une robe rouge ! En plus, celle là met très bien en valeur et se porte dans toutes les occasions spéciales !",
+                    "price": "139,00 €"
+                    },
+                "English": {
+                    "title": "Red dress",
+                    "textweb": "A stretchy sweater-knit bodice balances the playfully pleated swing skirt of this fanciful party dress finished with an oversized bow at the waist. Side zip closure, Bateau neck, Elbow sleeves, Dry clean. Available in all sizes and in red or black.",
+                    "speech": "This is a red dress! I love it! You know, nothing makes a woman feel more powerful and confident than a red dress!  plus, this one is really really flattering and can be used in all special occasions!",
+                    "price": "139.00€"
+                    },
+                "Spanish": {
+                    "title": "Vestido rojo",
+                    "textweb": "Un corpiño elástico de tela de camiseta equilibra la divertida falda plisada de este original vestido de fiesta acabado con un lazo gigante en la cintura. Cremallera lateral, cuello de barco, medias mangas, limpieza en seco. Disponible en todas las tallas y en rojo o negro.",
+                    "speech": "¡Es un vestido rojo! ¡Me encanta! Ya sabes, ¡nada hace sentirse más poderosa y confiada a una mujer que un vestido rojo!  además, este realmente favorecedor ¡y se puede usar en todas las ocasiones especiales!",
+                    "price": "139.00€"
+                    }
+            },
+            "7057070070429": {
+                "image1": "phone1.jpg",
+                "image2": "phone2.jpg",
+                "French": {
+                    "title": "Super téléphone",
+                    "textweb": "Le dernier des smartphones pour vous permettre de rester connecté à votre famille, amis et travail. L'écran mesure 5,3 pouces. Plus puissant en consommant moins. Il supporte la charge rapide 3.0 en USB-C. Incroyables nouvelles fonctionnalités, comme un processeur extrêmement rapide et un écran d'une qualité jamais vue. Il a une nouvelle lentille vidéo pour réaliser des clips Incroyables, et sa batterie dure plus de 2 jours. Et vous savez le meilleur ? Il résiste à l'eau ! Disponible en 32Gb ou 64Gb.",
+                    "speech": "un super téléphone ! je le veux pour appeler mon ami NAO ! il y a toutes les options dont tu peux rêver! de quoi passer des heures au téléphone et ne jamais perdre le contact avec tous tes amis!",
+                    "price": "220,00 €"
+                    },
+                "English": {
+                    "title": "Super phone",
+                    "textweb": "The last smartphone to keep you always connected with you family, friends and business. Screen measures 5.3 inches. More powerful and energy-efficient. It supports the Quick Charge 3.0 over USB-C. Available with 32GB or 64GB memory.  exciting new features like an wicked-fast processor and an incredibly good-looking screen. It has a new wide lens for fun videos and the battery lasts over 2 days. And you know the best? it is waterproof! You can choose the memory between 32 or 64 gigabytes.",
+                    "speech": "Wow, a super phone! With this one, you will be able to talk with your friends for hours, never get out of the grid and play whenever, wherever you want to!",
+                    "price": "220.00€"
+                    },
+                "Spanish": {
+                    "title": "Súper teléfono",
+                    "textweb": "El último Smartphone para estar siempre conectado con su familia, amigos y empresa. Pantalla de 5,3 pulgadas. Más potente y de bajo consumo. Admite Quick Charge 3.0 con USB-C. Disponible con memoria de 32GB o 64GB.  Nuevas y fabulosas características como un procesador mucho más rápido y una pantalla de aspecto increíble. Tiene una nueva lente amplia para hacer vídeos divertidos y la batería dura más de 2 días. ¿Y sabe lo mejor? ¡Es impermeable! Puede elegir la memoria entre 32 o 64 gigabytes.",
+                    "speech": "¡Un súper teléfono! Con eso puedes hablar con tus amigos durante todo el dia!",
+                    "price": "220.00€"
+                    }
+            },
+            "generic": {
+                "image1": "nao1.jpg",
+                "image2": "nao2.jpg",
+                "French": {
+                    "title": "Robot NAO Evolution",
+                    "textweb": "NAO est un robot humanoïde de 58 cm, un véritable compagnon qui peut interagir avec vous, marcher, danser, chanter... NAO est programmable et des développeurs du monde entier participent à la création d'applications pour que ses capacités s'enrichissent de jour en jour.",
+                    "speech": "NAO est un petit robot humanoïde super mignon et entièrement programmable. Il est principalement destiné au monde éducatif, et est utilisé du primaire jusqu'à l'université, en passant par l'éducation spécialisée! Il est aussi super pour animer les maisons de retraites et aider les personnes agées à rester en forme!",
+                    "price": "5990,00 €"
+                    },
+                "English": {
+                    "title": "NAO Evolution robot",
+                    "textweb": "<b>NAO</b>&nbsp;is a 58-cm tall humanoid robot. He is small, cute and round. You can't help but love him! NAO is intended to be a friendly companion around the house.&nbsp;<b>He moves, recognises you, hears you and even talks to you!</b>",
+                    "speech": "Nao, is a small and cute humanoid, designed to be a true daily companion and an innovative educational platform. It is a fully programmable robot which is now a standard in research and education for primary, \PAU=100\ secondary, \PAU=100\ and special education.",
+                    "price": "5990.00€"
+                    },
+                "Spanish": {
+                    "title": "Robot NAO Evolution",
+                    "textweb": "NAO es un robot humanoide de 58 cm de alto.  NAO es la mejor herramienta para aprender programación en el colegio. Es totalmente programable ¡y se utiliza en todo el mundo!  Disponible en azul o rojo.",
+                    "speech": "Este es un robot Nao, ¡mi mejor amigo! Es pequeño, adorable y redondo. ¡No podrás evitar adorarlo! ¡Se mueve, te reconoce, te escucha e incluso te habla! ¡Disponible en azul o rojo!”,",
+                    "price": "5990.00€"
+                    }
+            }
+
+        }
+        langLong = self.dlg.getLanguage()
+        self.mem.insertData("product-information/generic-product/image1", self.products["generic"]["image1"] )
+        self.mem.insertData("product-information/generic-product/image2", self.products["generic"]["image2"] )
+        self.mem.insertData("product-information/generic-product/title",  self.products["generic"][langLong]["title"] )
+        self.mem.insertData("product-information/generic-product/speech", self.products["generic"][langLong]["speech"] )
+        self.mem.insertData("product-information/generic-product/textweb", self.products["generic"][langLong]["textweb"] )
+        self.mem.insertData("product-information/generic-product/price", self.products["generic"][langLong]["price"] )
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        langLong = self.dlg.getLanguage()
+        langNU = self.dlg.convertLongToNU(langLong)
+        code = self.getParameter("code")
+
+        speech = ""
+        title  = "MISSING"
+        textweb  = "MISSING"
+        price  = "MISSING"
+        image1 = ""
+        image2 = ""
+
+        if code not in self.products.keys():
+            speech = self.mem.getData("product-information/generic-product/speech")
+            title  = self.mem.getData("product-information/generic-product/title")
+            textweb= self.mem.getData("product-information/generic-product/textweb")
+            price  = self.mem.getData("product-information/generic-product/price")
+            image1 = self.mem.getData("product-information/generic-product/image1")
+            image2 = self.mem.getData("product-information/generic-product/image2")
+
+        else:
+            if langLong in self.products[code].keys():
+                speech = self.products[code][langLong]["speech"]
+                title  = self.products[code][langLong]["title"]
+                textweb= self.products[code][langLong]["textweb"]
+                price  = self.products[code][langLong]["price"]
+                image1 = self.products[code]["image1"]
+                image2 = self.products[code]["image2"]
+
+        self.dlg.setConcept("product_description", langNU, [speech])
+
+        self.mem.insertData("product-information/image1", image1 )
+        self.mem.insertData("product-information/image2", image2 )
+        self.mem.insertData("product-information/title",  title )
+        self.mem.insertData("product-information/textweb", textweb )
+        self.mem.insertData("product-information/price", price )
+
+        self.mem.raiseEvent("product-information/product-data-available", 1)
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                            <Parameter name="code" inherits_from_parent="0" content_type="3" value="" default_value="" custom_choice="0" tooltip="" id="4" />
+                        </Box>
+                        <Box name="appanalytics" id="13" localization="8" tooltip="" x="586" y="344">
+                            <bitmap>media/images/box/box-python-script.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+
+    def onInput_onStart(self, p):
+        aa = ALProxy("ALAppsAnalytics")
+        aa.push_event(p)
+        self.onStopped()]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="0" type_size="1" nature="1" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                            <Output name="onStopped" type="1" type_size="1" nature="2" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+                            <Output name="onError" type="3" type_size="1" nature="2" inner="0" tooltip="" id="4" />
+                        </Box>
+                        <Box name="Preload Mood" id="14" localization="8" tooltip='This box initializes ALMood to ensure its performances. The parameter &quot;Operating Mode&quot; allows to choose between two operating modes.&#x0A;Operating modes can be:&#x0A;- &quot;Active&quot;: ALMood launches all needed extractors&#x0A;- &quot;Passive&quot;: ALMood doesn&apos;t manage the extractors subscription&#x0A;' x="571" y="197">
+                            <bitmap>media/images/box/interaction/preload_mood.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        try:
+            self.mood = ALProxy("ALMood")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+
+    def onUnload(self):
+        self.mood.unsubscribe(self.id)
+
+    def onInput_onStart(self):
+        success = self.mood.subscribe(self.id,self.getParameter("Operating Mode"))
+        if success:
+            # Wait for sub-extractors to finish loading
+            import time
+            time.sleep(0.5)
+            self.onSuccess()
+        else:
+            self.onError("Cannot subscribe to ALMood in " + self.getParameter("Operating Mode") + " mode.")
+
+    def onInput_onStop(self):
+        self.mood.unsubscribe(self.id)
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="" id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="" id="3" />
+                            <Output name="onSuccess" type="1" type_size="1" nature="2" inner="0" tooltip="Triggered when the subscription to ALMood is successful." id="4" />
+                            <Output name="onError" type="3" type_size="1" nature="2" inner="0" tooltip="Triggered when the subscription to ALMood failed." id="5" />
+                            <Parameter name="Operating Mode" inherits_from_parent="0" content_type="3" value="Active" default_value="Active" custom_choice="0" tooltip='Subscribe to ALMood with chosen operating mode.&#x0A;- &quot;Passive&quot;: ALMood listens passively to audio &amp; vision extractors&#x0A;- &quot;Active&quot;: ALMood manages the subscription of audio &amp; vision extractors' id="6">
+                                <Choice value="Active" />
+                                <Choice value="Passive" />
+                            </Parameter>
+                        </Box>
+                        <Box name="Get Mood" id="16" localization="8" tooltip='This box returns the focused user&apos;s emotional reaction during the next few seconds after this call.&#x0A;Values can be:&#x0A;- &quot;positive&quot;&#x0A;- &quot;neutral&quot;&#x0A;- &quot;negative&quot;&#x0A;- &quot;unknown&quot;&#x0A;&#x0A;The parameter &quot;Event label&quot; is the name of the event you want to analyse with user&apos;s mood information.&#x0A;For example: &quot;joke/toto&quot;&#x0A;&#x0A;If the parameter &quot;Send to cloud&quot; is checked, this box will automatically send the output to cloud, tagged with the label given above.&#x0A;&#x0A;[WARNING] It is recommended to connect the &quot;Preload Mood&quot; box before using this one to ensure its recognition performance' x="791" y="176">
+                            <bitmap>media/images/box/interaction/mood.png</bitmap>
+                            <script language="4">
+                                <content>
+                                    <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+
+    def onLoad(self):
+        try:
+            self.mood = ALProxy("ALMood")
+        except Exception as e:
+            raise RuntimeError(str(e) + "Make sure you're not connected to a virtual robot." )
+        try:
+            self.appsAnalytics = ALProxy("ALAppsAnalytics")
+            self.appsAnalyticsPresent = True
+        except:
+            self.appsAnalyticsPresent = False
+
+    def onUnload(self):
+        pass
+
+    def onInput_onStart(self):
+        reaction = self.mood.getEmotionalReaction()
+        self.onStopped(reaction)
+        if self.getParameter("Send to cloud"):
+            if self.appsAnalyticsPresent:
+                self.appsAnalytics.push_mood(self.getParameter("Event label"),reaction)
+            else:
+                print "ALAppsAnalytics is not present on the robot."
+        moodSubscribers = self.mood.getSubscribersInfo()
+        if reaction == "unknown":
+            if not any(['Active' in sub for sub in moodSubscribers]):
+                    self.logger.warning("ALMood is not in Active mode. The emotional data may not be sufficient. Use the Preload Mood box for best performance.")
+
+    def onInput_onStop(self):
+        pass]]>
+</content>
+                            </script>
+                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+                            <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="A mood scope starts when a signal is received on this input." id="2" />
+                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="" id="3" />
+                            <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip='Returns the emotional reaction found after a few seconds.&#x0A;Values can be:&#x0A;- &quot;positive&quot;&#x0A;- &quot;neutral&quot;&#x0A;- &quot;negative&quot;&#x0A;- &quot;unknown&quot;&#x0A;&#x0A;' id="4" />
+                            <Parameter name="Event label" inherits_from_parent="0" content_type="3" value="joke_1" default_value="joke_1" custom_choice="0" tooltip="Label of the event you want to analyse with user mood information." id="5" />
+                            <Parameter name="Send to cloud" inherits_from_parent="0" content_type="0" value="1" default_value="0" tooltip="If checked, this box will automatically send the output to cloud, tagged with the label given above." id="6" />
+                        </Box>
+                        <Link inputowner="1" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="4" indexofinput="2" outputowner="1" indexofoutput="5" />
+                        <Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="6" indexofinput="2" outputowner="4" indexofoutput="5" />
+                        <Link inputowner="9" indexofinput="3" outputowner="0" indexofoutput="5" />
+                        <Link inputowner="9" indexofinput="2" outputowner="1" indexofoutput="5" />
+                        <Link inputowner="7" indexofinput="2" outputowner="9" indexofoutput="4" />
+                        <Link inputowner="8" indexofinput="2" outputowner="12" indexofoutput="5" />
+                        <Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="12" indexofinput="2" outputowner="2" indexofoutput="6" />
+                        <Link inputowner="10" indexofinput="2" outputowner="0" indexofoutput="6" />
+                        <Link inputowner="6" indexofinput="2" outputowner="10" indexofoutput="3" />
+                        <Link inputowner="12" indexofinput="3" outputowner="3" indexofoutput="4" />
+                        <Link inputowner="11" indexofinput="2" outputowner="0" indexofoutput="2" />
+                        <Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="7" />
+                        <Link inputowner="15" indexofinput="2" outputowner="12" indexofoutput="4" />
+                        <Link inputowner="2" indexofinput="4" outputowner="15" indexofoutput="3" />
+                        <Link inputowner="15" indexofinput="4" outputowner="0" indexofoutput="7" />
+                        <Link inputowner="0" indexofinput="8" outputowner="0" indexofoutput="4" />
+                        <Link inputowner="13" indexofinput="2" outputowner="6" indexofoutput="4" />
+                        <Link inputowner="16" indexofinput="5" outputowner="6" indexofoutput="4" />
+                        <Link inputowner="14" indexofinput="2" outputowner="6" indexofoutput="4" />
+                        <Link inputowner="16" indexofinput="2" outputowner="15" indexofoutput="3" />
+                        <Link inputowner="0" indexofinput="8" outputowner="2" indexofoutput="5" />
+                    </Diagram>
+                </BehaviorKeyframe>
+            </BehaviorLayer>
+        </Timeline>
+    </Box>
+</ChoregrapheProject>
