@@ -256,11 +256,14 @@ Just a piece of cake 🐱. No ?
 
 *
 *
-*
+* 
 * [Manuel pour une prise en main rapide et efficiente du robot Pepper (written in french)](https://docs.google.com/document/d/1ZAIgvsyCzpJZ3wD4W-0Gt4teEFrPybbgo8e2c1v9GA4),
 * [Git Large File Storage](https://git-lfs.github.com/),
 * [Configuring Git Large File Storage - GitHub](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage),
 * [Git LFS - Atlassian](https://www.atlassian.com/git/tutorials/git-lfs),
+* [Windows git "warning: LF will be replaced by CRLF", is that warning tail backward ? - Stack overflow](https://stackoverflow.com/questions/17628305/windows-git-warning-lf-will-be-replaced-by-crlf-is-that-warning-tail-backwar/38112001),
+* [What is the best git config set up when you are using Linux and Windows ? - Stack overflow](https://stackoverflow.com/questions/6081607/what-is-the-best-git-config-set-up-when-you-are-using-linux-and-windows/6081812#6081812),
+* [Customizing Git - Git Configuration](https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration),
 * 
 
 <a name="conclusion"></a>
