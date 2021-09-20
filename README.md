@@ -259,6 +259,8 @@ Just a piece of cake 🐱. No ?
 ## Useful links
 
 * 
+* 
+*  
 * [Daniel Schofield's YouTube playlists to learn Chorégraphe - YouTube](https://www.youtube.com/channel/UC4hZnfn8PiB-mNf7lXhJFaA/playlists);
 * [NAOqi Documentation Center (from the version 1.14 to the 2.8) - SoftBank Robotics](http://doc.aldebaran.com/index.html);
 * [Link to download Chorégraphe - Softbank robotics](https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares);
