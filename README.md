@@ -36,7 +36,9 @@ This repos contains all applications which may be installed on the IMERIR's Pepp
 
 __All of this apps are availables on the robot tablet's when they are installed on Pepper (customized app-launcher for IMERIR, available here: https://github.com/Vicken-Ghoubiguian/app-launcher)__
 
+<img src="./images_to_display_in_github_repos/robot_s_tablet_images/1.png" data-canonical-src="./images_to_display_in_github_repos/robot_s_tablet_images/1.png" width="4160" height="3120" align="center" />
 
+<img src="./images_to_display_in_github_repos/robot_s_tablet_images/2.png" data-canonical-src="./images_to_display_in_github_repos/robot_s_tablet_images/2.png" width="3120" height="4160" align="center" />
 
 Now is the time to get to the heart of the matter...
 
