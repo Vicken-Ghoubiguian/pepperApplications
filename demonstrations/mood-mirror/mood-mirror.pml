@@ -362,6 +362,11 @@
         <File name="translation_en_US" src="translations/translation_en_US.qm" />
         <File name="translation_fr_FR" src="translations/translation_fr_FR.qm" />
         <File name="translation_ja_JP" src="translations/translation_ja_JP.qm" />
+        <File name=".translation_de_DE.ts.15784" src="translations/.translation_de_DE.ts.15784.csp" />
+        <File name=".translation_en_US.ts.15784" src="translations/.translation_en_US.ts.15784.csp" />
+        <File name=".translation_es_ES.ts.15784" src="translations/.translation_es_ES.ts.15784.csp" />
+        <File name=".translation_fr_FR.ts.15784" src="translations/.translation_fr_FR.ts.15784.csp" />
+        <File name=".translation_ja_JP.ts.15784" src="translations/.translation_ja_JP.ts.15784.csp" />
     </Resources>
     <Topics>
         <Topic name="Emotes_enu" src="Emotes/Emotes_enu.top" topicName="Emotes" language="en_US" />
@@ -376,4 +381,11 @@
         <Topic name="Exit_spe" src="Exit/Exit_spe.top" topicName="Exit" language="es_ES" />
     </Topics>
     <IgnoredPaths />
+    <Translations auto-fill="en_US">
+        <Translation name="translation_de_DE" src="translations/translation_de_DE.ts" language="de_DE" />
+        <Translation name="translation_en_US" src="translations/translation_en_US.ts" language="en_US" />
+        <Translation name="translation_es_ES" src="translations/translation_es_ES.ts" language="es_ES" />
+        <Translation name="translation_fr_FR" src="translations/translation_fr_FR.ts" language="fr_FR" />
+        <Translation name="translation_ja_JP" src="translations/translation_ja_JP.ts" language="ja_JP" />
+    </Translations>
 </Package>
