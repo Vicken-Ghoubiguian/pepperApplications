@@ -258,9 +258,10 @@ Just a piece of cake 🐱. No ?
 <a name="useful_links"></a>
 ## Useful links
 
-*
-*
 * 
+* [Daniel Schofield's YouTube playlists to learn Chorégraphe - YouTube](https://www.youtube.com/channel/UC4hZnfn8PiB-mNf7lXhJFaA/playlists);
+* [NAOqi Documentation Center (from the version 1.14 to the 2.8) - SoftBank Robotics](http://doc.aldebaran.com/index.html);
+* [Link to download Chorégraphe - Softbank robotics](https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares);
 * [Manuel pour une prise en main rapide et efficiente du robot Pepper (written in french)](https://docs.google.com/document/d/1ZAIgvsyCzpJZ3wD4W-0Gt4teEFrPybbgo8e2c1v9GA4),
 * [Git Large File Storage](https://git-lfs.github.com/),
 * [Configuring Git Large File Storage - GitHub](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage),
