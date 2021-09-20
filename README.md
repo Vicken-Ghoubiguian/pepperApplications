@@ -38,7 +38,7 @@ __All of this apps are availables on the robot tablet's when they are installed 
 
 <img src="./images_to_display_in_github_repos/robot_s_tablet_images/1.png" data-canonical-src="./images_to_display_in_github_repos/robot_s_tablet_images/1.png" width="4160" height="3120" align="center" />
 
-<img src="./images_to_display_in_github_repos/robot_s_tablet_images/2.png" data-canonical-src="./images_to_display_in_github_repos/robot_s_tablet_images/2.png" width="384" height="512" align="center" />
+<img src="./images_to_display_in_github_repos/robot_s_tablet_images/2.png" data-canonical-src="./images_to_display_in_github_repos/robot_s_tablet_images/2.png" width="576" height="768" align="center" />
 
 Now is the time to get to the heart of the matter...
 
