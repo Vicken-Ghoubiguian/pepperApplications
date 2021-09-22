@@ -255,6 +255,8 @@ Just a piece of cake 🐱. No ?
 <a name="how_to_clone_this_repos"></a>
 ## How to clone this repos ?
 
+This repository contains a number of very large files.
+
 <a name="useful_links"></a>
 ## Useful links
 
