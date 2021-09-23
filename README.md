@@ -260,8 +260,6 @@ This repository contains a number of very large files, especially concerning lan
 <a name="useful_links"></a>
 ## Useful links
 
-* 
-* 
 *  
 * [Daniel Schofield's YouTube playlists to learn Chorégraphe - YouTube](https://www.youtube.com/channel/UC4hZnfn8PiB-mNf7lXhJFaA/playlists);
 * [NAOqi Documentation Center (from the version 1.14 to the 2.8) - SoftBank Robotics](http://doc.aldebaran.com/index.html);
@@ -273,8 +271,6 @@ This repository contains a number of very large files, especially concerning lan
 * [Windows git "warning: LF will be replaced by CRLF", is that warning tail backward ? - Stack overflow](https://stackoverflow.com/questions/17628305/windows-git-warning-lf-will-be-replaced-by-crlf-is-that-warning-tail-backwar/38112001),
 * [What is the best git config set up when you are using Linux and Windows ? - Stack overflow](https://stackoverflow.com/questions/6081607/what-is-the-best-git-config-set-up-when-you-are-using-linux-and-windows/6081812#6081812),
 * [Customizing Git - Git Configuration](https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration),
-* 
-* 
 * 
 
 <a name="conclusion"></a>
