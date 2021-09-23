@@ -266,7 +266,7 @@ This repository contains a number of very large files, especially concerning lan
 * [Daniel Schofield's YouTube playlists to learn Chorégraphe - YouTube](https://www.youtube.com/channel/UC4hZnfn8PiB-mNf7lXhJFaA/playlists);
 * [NAOqi Documentation Center (from the version 1.14 to the 2.8) - SoftBank Robotics](http://doc.aldebaran.com/index.html);
 * [Link to download Chorégraphe - Softbank robotics](https://www.softbankrobotics.com/emea/en/support/pepper-naoqi-2-9/downloads-softwares);
-* [Manuel pour une prise en main rapide et efficiente du robot Pepper (written in french)](https://docs.google.com/document/d/1ZAIgvsyCzpJZ3wD4W-0Gt4teEFrPybbgo8e2c1v9GA4),
+* [Manuel pour une prise en main rapide et efficiente du robot Pepper (written in french)]https://github.com/Vicken-Ghoubiguian/pepperApplications/blob/main/Manuel%20pour%20une%20prise%20en%20main%20rapide%20et%20efficiente%20du%20robot%20Pepper.pdf),
 * [Git Large File Storage](https://git-lfs.github.com/),
 * [Configuring Git Large File Storage - GitHub](https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage),
 * [Git LFS - Atlassian](https://www.atlassian.com/git/tutorials/git-lfs),
