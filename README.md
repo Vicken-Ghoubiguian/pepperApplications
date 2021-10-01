@@ -271,7 +271,9 @@ This repository contains a number of very large files, especially concerning lan
 * [Windows git "warning: LF will be replaced by CRLF", is that warning tail backward ? - Stack overflow](https://stackoverflow.com/questions/17628305/windows-git-warning-lf-will-be-replaced-by-crlf-is-that-warning-tail-backwar/38112001),
 * [What is the best git config set up when you are using Linux and Windows ? - Stack overflow](https://stackoverflow.com/questions/6081607/what-is-the-best-git-config-set-up-when-you-are-using-linux-and-windows/6081812#6081812),
 * [Customizing Git - Git Configuration](https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration),
-* 
+* [Documentation about the Choregraphe software](http://www.lirmm.fr/~seriai/uploads/Enseignement/CHOREGRAPHE.pdf),
+* [Learn Choregraphe (for Pepper) - Level 1 - Introduction](https://www.youtube.com/watch?v=wSoGO1iL_v4&list=PLmXbV-2dNm40-19AfOc_0Ie_3hR-7nwMo),
+* [Learn Choregraphe (for Pepper) - Level 2 - Special Topics](https://www.youtube.com/watch?v=tqVbX5NWFdU&list=PLmXbV-2dNm43SH6HG88LALwFPs2TQIGpa).
 
 <a name="conclusion"></a>
 ## Conclusion
