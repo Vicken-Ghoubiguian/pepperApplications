@@ -29,6 +29,24 @@ This school has a humanoid robot known as Pepper. Initially manufactured and mar
 IMERIR uses the Pepper robot as the school mascot during various trade shows, meetings and professional forums focused on computer technologies and robotics as well as geek culture. 
 As shown in some photos below, the Pepper robot from IMERIR is emulated wherever it goes.
 
+<img src="./images_to_display_in_github_repos/introduction/1.jpeg" data-canonical-src="./images_to_display_in_github_repos/introduction/1.jpeg" width="600" height="338" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/2.jpeg" data-canonical-src="./images_to_display_in_github_repos/introduction/2.jpeg" width="338" height="600" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/3.jpg" data-canonical-src="./images_to_display_in_github_repos/introduction/3.jpg" width="338" height="600" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/4.jpeg" data-canonical-src="./images_to_display_in_github_repos/introduction/4.jpeg" width="768" height="1024" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/5.jpg" data-canonical-src="./images_to_display_in_github_repos/introduction/5.jpg" width="951" height="646" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/6.jpg" data-canonical-src="./images_to_display_in_github_repos/introduction/6.jpg" width="1024" height="768" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/7.jpg" data-canonical-src="./images_to_display_in_github_repos/introduction/7.jpg" width="213" height="319" align="center" />
+
+<img src="./images_to_display_in_github_repos/introduction/8.jpg" data-canonical-src="./images_to_display_in_github_repos/introduction/8.jpg" width="600" height="783" align="center" />
+
+[![Watch the video](https://raw.githubusercontent.com/Vicken-Ghoubiguian/app-launcher/main/images_to_display_in_github_repos/introduction/video_display_image.png)](https://raw.githubusercontent.com/Vicken-Ghoubiguian/app-launcher/main/images_to_display_in_github_repos/introduction/mika_video.mp4)
+
 <a name="presentation_of_this_repos"></a>
 ## Presentation of this repos
 
